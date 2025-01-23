@@ -1,166 +1,178 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 
-import PlanPage from '@/pages/plan/PlanList.vue';
-import CreatePlanPage from '@/pages/plan/PlanCreateList.vue';
-import MenuPage from '@/pages/setting/NavigationList.vue';
-import RolePage from '@/pages/setting/RoleList.vue';
-import PrivilegePage from '@/pages/setting/PrivilegeList.vue';
-import SettingPage from '@/pages/setting/SettingList.vue';
-import WorkflowPage from '@/pages/setting/WorkflowList.vue';
-import SamplingProcedurePage from '@/pages/setting/SamplingProcedureList.vue';
-import SignDocumentPage from '@/pages/setting/SignDocumentList.vue';
-import StatusPage from '@/pages/setting/StatusList.vue';
-import ActionPage from '@/pages/function/ActionList.vue';
-import SamplePage from '@/pages/function/SampleList.vue';
-import WorkshopPage from '@/pages/function/WorkshopList.vue';
-import LaboratoryPage from '@/pages/function/LaboratoryList.vue';
-import TestingMethodPage from '@/pages/function/TestingMethodList.vue';
-import SampleNamePage from '@/pages/function/SampleNameList.vue';
-import PurposePage from '@/pages/function/PurposeList.vue';
-import SamplingPointPage from '@/pages/function/SamplingPointList.vue';
-import ControlCriteriaPage from '@/pages/function/ControlCriteriaList.vue';
-import CriticalPage from '@/pages/function/CriticalList.vue';
-import PlanCreateList from '@/pages/plan/PlanCreateList.vue';
-import CreateWorkflowList from '@/pages/setting/CreateWorkflowList.vue';
+import PlanPage from "@/pages/plan/PlanList.vue";
+import CreatePlanPage from "@/pages/plan/PlanCreateList.vue";
+import MenuPage from "@/pages/setting/NavigationList.vue";
+import RolePage from "@/pages/setting/RoleList.vue";
+import PrivilegePage from "@/pages/setting/PrivilegeList.vue";
+import SettingPage from "@/pages/setting/SettingList.vue";
+import WorkflowPage from "@/pages/setting/WorkflowList.vue";
+import SamplingProcedurePage from "@/pages/setting/SamplingProcedureList.vue";
+import SignDocumentPage from "@/pages/setting/SignDocumentList.vue";
+import StatusPage from "@/pages/setting/StatusList.vue";
+import ActionPage from "@/pages/function/ActionList.vue";
+import SamplePage from "@/pages/function/SampleList.vue";
+import WorkshopPage from "@/pages/function/WorkshopList.vue";
+import LaboratoryPage from "@/pages/function/LaboratoryList.vue";
+import TestingMethodPage from "@/pages/function/TestingMethodList.vue";
+import SampleNamePage from "@/pages/function/SampleNameList.vue";
+import PurposePage from "@/pages/function/PurposeList.vue";
+import SamplingPointPage from "@/pages/function/SamplingPointList.vue";
+import ControlCriteriaPage from "@/pages/function/ControlCriteriaList.vue";
+import CriticalPage from "@/pages/function/CriticalList.vue";
+import PlanCreateList from "@/pages/plan/PlanCreateList.vue";
+import CreateWorkflowList from "@/pages/setting/CreateWorkflowList.vue";
+import PlanCreateStepTwo from "@/pages/plan/PlanCreateStepTwo.vue";
+import PlanCreateStepThree from "@/pages/plan/PlanCreateStepThree.vue";
 
 Vue.use(Router);
 
 const routes = [
   {
-    path: '/',
-    name: 'Plan',
-    component: PlanPage
+    path: "/",
+    name: "Plan",
+    component: PlanPage,
   },
   {
-    path: '/create-plan',
-    name: '/Create_Plan',
-    component: PlanCreateList
+    path: "/create-plan",
+    name: "/Create_Plan",
+    component: PlanCreateList,
   },
   {
-    path: '/waiting_approval',
-    name: 'Waiting_Approval',
-    component: PlanPage
+    path: "/waiting_approval",
+    name: "Waiting_Approval",
+    component: PlanPage,
   },
   {
-    path: '/in_progress',
-    name: 'In_Progress',
-    component: PlanPage
+    path: "/in_progress",
+    name: "In_Progress",
+    component: PlanPage,
   },
   {
-    path: '/drafting',
-    name: 'Drafting',
-    component: PlanPage
+    path: "/drafting",
+    name: "Drafting",
+    component: PlanPage,
   },
   {
-    path: '/all_plans',
-    name: 'All_Plans',
-    component: PlanPage
+    path: "/all_plans",
+    name: "All_Plans",
+    component: PlanPage,
   },
   {
-    path: '/create_plan',
-    name: 'Create_Plan',
-    component: CreatePlanPage
+    path: "/create_plan",
+    name: "Create_Plan",
+    component: CreatePlanPage,
   },
   {
-    path: '/menu',
-    name: 'Menu',
-    component: MenuPage
+    path: "/create_plan_step_two",
+    name: "Step_Two",
+    component: PlanCreateStepTwo,
   },
   {
-    path: '/role',
-    name: 'Role',
-    component: RolePage
+    path: "/create_plan_step_three",
+    name: "Step_Three",
+    component: PlanCreateStepThree,
   },
   {
-    path: '/privilege',
-    name: 'Privilege',
-    component: PrivilegePage
+    path: "/menu",
+    name: "Menu",
+    component: MenuPage,
   },
   {
-    path: '/setting',
-    name: 'Setting',
-    component: SettingPage
+    path: "/role",
+    name: "Role",
+    component: RolePage,
   },
   {
-    path: '/workflow',
-    name: 'Workflow',
-    component: WorkflowPage
+    path: "/privilege",
+    name: "Privilege",
+    component: PrivilegePage,
   },
   {
-    path: '/create_workflow',
-    name: 'Create_Workflow',
-    component: CreateWorkflowList
+    path: "/setting",
+    name: "Setting",
+    component: SettingPage,
   },
   {
-    path: '/sign_document',
-    name: 'Sign_Document',
-    component: SignDocumentPage
+    path: "/workflow",
+    name: "Workflow",
+    component: WorkflowPage,
   },
   {
-    path: '/status',
-    name: 'Status',
-    component: StatusPage
+    path: "/create_workflow",
+    name: "Create_Workflow",
+    component: CreateWorkflowList,
   },
   {
-    path: '/action',
-    name: 'Action',
-    component: ActionPage
+    path: "/sign_document",
+    name: "Sign_Document",
+    component: SignDocumentPage,
   },
   {
-    path: '/sample',
-    name: 'sample',
-    component: SamplePage
+    path: "/status",
+    name: "Status",
+    component: StatusPage,
   },
   {
-    path: '/workshop',
-    name: 'Workshop',
-    component: WorkshopPage
+    path: "/action",
+    name: "Action",
+    component: ActionPage,
   },
   {
-    path: '/laboratory',
-    name: 'Laboratory',
-    component: LaboratoryPage
+    path: "/sample",
+    name: "sample",
+    component: SamplePage,
   },
   {
-    path: '/testing_method',
-    name: 'Testing_Method',
-    component: TestingMethodPage
+    path: "/workshop",
+    name: "Workshop",
+    component: WorkshopPage,
   },
   {
-    path: '/sample_name',
-    name: 'Sample_Name',
-    component: SampleNamePage
+    path: "/laboratory",
+    name: "Laboratory",
+    component: LaboratoryPage,
   },
   {
-    path: '/purpose',
-    name: 'Purpose',
-    component: PurposePage
+    path: "/testing_method",
+    name: "Testing_Method",
+    component: TestingMethodPage,
   },
   {
-    path: '/sampling_procedure',
-    name: 'Sampling_Procedure',
-    component: SamplingProcedurePage
+    path: "/sample_name",
+    name: "Sample_Name",
+    component: SampleNamePage,
   },
   {
-    path: '/sampling_point',
-    name: 'Sampling_Point',
-    component: SamplingPointPage
+    path: "/purpose",
+    name: "Purpose",
+    component: PurposePage,
   },
   {
-    path: '/control_criteria',
-    name: 'Control_Criteria',
-    component: ControlCriteriaPage
+    path: "/sampling_procedure",
+    name: "Sampling_Procedure",
+    component: SamplingProcedurePage,
   },
   {
-    path: '/critical',
-    name: 'Critical',
-    component: CriticalPage
+    path: "/sampling_point",
+    name: "Sampling_Point",
+    component: SamplingPointPage,
+  },
+  {
+    path: "/control_criteria",
+    name: "Control_Criteria",
+    component: ControlCriteriaPage,
+  },
+  {
+    path: "/critical",
+    name: "Critical",
+    component: CriticalPage,
   },
 ];
 
 const router = new Router({
-  routes
+  routes,
 });
 
 export default router;

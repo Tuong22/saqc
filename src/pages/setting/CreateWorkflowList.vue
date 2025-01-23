@@ -64,7 +64,7 @@
       <base-spinner />
     </div>
     <!-- Sử dụng component LeftMenu -->
-    <div v-else>
+    <div v-else style="flex: 1">
       <header-component />
       <div
         style="

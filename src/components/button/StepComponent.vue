@@ -3,7 +3,11 @@
     <div class="circle-text">
       <span
         class="circle"
-        style="background-color: white; color: black; border: 1px solid black"
+        :style="{
+          backgroundColor: `${step.bgdColor}`,
+          color: `${step.color}`,
+          border: `1px solid ${step.color}`,
+        }"
         >{{ step.count }}</span
       >
       {{ step.name }}
@@ -15,11 +19,18 @@
 export default {
   name: "StepComponent",
   props: {
-    // Khai báo một prop tên là 'message'
     step: {
-      count: String,
-      name: String,
+      type: Object, // Xác định kiểu dữ liệu là Object
       required: true, // Prop này là bắt buộc
+      validator(value) {
+        // Xác thực rằng 'step' có các trường cần thiết
+        return (
+          typeof value.count === "string" &&
+          typeof value.name === "string" &&
+          typeof value.color === "string" &&
+          typeof value.bgdColor === "string"
+        );
+      },
     },
   },
 };

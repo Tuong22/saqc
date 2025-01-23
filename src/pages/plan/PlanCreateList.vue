@@ -347,7 +347,27 @@
               "
             >
               <step-component
-                :step="{ count: '1', name: 'THÔNG TIN KẾ HOẠCH' }"
+                :step="{
+                  count: '1',
+                  name: 'THÔNG TIN KẾ HOẠCH',
+                  color: ' #60afff',
+                  bgdColor: '#FFFFFF',
+                }"
+                style="
+                  padding-bottom: 8px;
+                  border-bottom: 1px solid black;
+                  width: 32%;
+                  border-color: #60afff;
+                  color: #60afff;
+                "
+              />
+              <step-component
+                :step="{
+                  count: '2',
+                  name: 'QUY TRÌNH',
+                  color: '#000000',
+                  bgdColor: '#FFFFFF',
+                }"
                 style="
                   padding-bottom: 8px;
                   border-bottom: 1px solid black;
@@ -355,15 +375,12 @@
                 "
               />
               <step-component
-                :step="{ count: '2', name: 'QUY TRÌNH' }"
-                style="
-                  padding-bottom: 8px;
-                  border-bottom: 1px solid black;
-                  width: 32%;
-                "
-              />
-              <step-component
-                :step="{ count: '3', name: 'CHỌN VÙNG KÝ' }"
+                :step="{
+                  count: '3',
+                  name: 'CHỌN VÙNG KÝ',
+                  color: '#000000',
+                  bgdColor: '#FFFFFF',
+                }"
                 style="
                   padding-bottom: 8px;
                   border-bottom: 1px solid black;
@@ -581,7 +598,11 @@
                 </div>
                 <div style="width: 100%; display: flex; padding-top: 30px">
                   <div>
-                    <DxButton text="Tiếp theo" icon="arrowright" />
+                    <DxButton
+                      text="Tiếp theo"
+                      icon="arrowright"
+                      @click="navigateStepTwo"
+                    />
                   </div>
                   <div
                     style="display: flex; flex: 1; justify-content: flex-end"
@@ -630,7 +651,7 @@ import { DxPopup } from "devextreme-vue/popup";
 import { DxCheckBox } from "devextreme-vue";
 
 export default {
-  name: "PlanList",
+  name: "PlanCreateList",
   components: {
     LeftMenu,
     StepComponent,
@@ -720,6 +741,9 @@ export default {
   methods: {
     togglePopup() {
       this.isPopupVisible = !this.isPopupVisible;
+    },
+    navigateStepTwo() {
+      this.$router.push("/create_plan_step_two");
     },
     // Lưu instance của DxSelectBox khi nó được khởi tạo
     saveSelectBoxInstance(e) {
