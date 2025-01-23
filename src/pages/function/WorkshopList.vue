@@ -1,0 +1,67 @@
+<!-- Tình trạng -->
+<template>
+  <div style="display: flex; justify-content: space-between">
+    <div v-if="loading" class="overlay">
+      <base-spinner />
+    </div>
+    <!-- Sử dụng component LeftMenu -->
+    <div v-else>
+      <header-component />
+      <div
+        class="mb-5"
+        style="
+          display: flex;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+        "
+      >
+        <left-menu />
+        <div style="flex: 1; margin-left: 12px">
+          <h3 style="text-align: center; font-weight: bold">PHÂN XƯỞNG</h3>
+          <function-layout style="padding-left: 8px" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// Import component LeftMenu và LeftMenuItem
+import FunctionLayout from "@/components/FunctionLayout.vue";
+import LeftMenu from "@/components/layout/LeftMenu.vue";
+import HeaderComponent from "@/components/header/HeaderComponent.vue";
+
+export default {
+  name: "WorkshopList", // Tên component chính
+  components: {
+    LeftMenu, // Khai báo sử dụng LeftMenu
+    FunctionLayout,
+    HeaderComponent,
+  },
+  data() {
+    return {
+      loading: false,
+    };
+  },
+};
+</script>
+
+<style scoped>
+input {
+  margin: 5px;
+  padding: 5px;
+}
+.content {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+.input {
+  flex: 1;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+}
+</style>

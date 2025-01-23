@@ -1,0 +1,5 @@
+- Cần chỉnh sửa để đồng bộ hóa các tiêu đề khi navigate các trang với nhau
+- Chưa viết axios để kết nối API
+- Dùng bảng trong component D:\BTEC\eOffice\Web\BTEC.WebHost\Areas\HSE\InOutMgmt
+- Dùng component input "D:\BTEC\eOffice\Web\BTEC.WebHost\Areas\STI\src\pages\InnovationPage.vue"s
+- Chọn màu thì dùng thẻ DxColorBox

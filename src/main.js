@@ -1,8 +1,16 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import DxTreeView from 'devextreme-vue/tree-view';
+import store from './store/store';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'devextreme/dist/css/dx.light.css';
 
-Vue.config.productionTip = false
+Vue.component('DxTreeView', DxTreeView);
+Vue.config.productionTip = false;
 
 new Vue({
   render: h => h(App),
-}).$mount('#app')
+  store,
+  router
+}).$mount('#app');
