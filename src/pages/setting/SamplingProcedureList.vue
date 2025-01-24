@@ -16,7 +16,7 @@
         "
       >
         <left-menu />
-        <div style="flex: 1; margin-left: 12px">
+        <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8">
           <h3 style="text-align: center; font-weight: bold">
             QUY TRÌNH LẤY MẪU
           </h3>

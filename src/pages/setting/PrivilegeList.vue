@@ -57,7 +57,7 @@
         "
       >
         <left-menu />
-        <div style="flex: 1; margin-left: 12px">
+        <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8">
           <div>
             <h3 style="text-align: center; font-weight: bold">PHÂN QUYỀN</h3>
             <department-tree />

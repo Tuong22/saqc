@@ -20,8 +20,15 @@
         "
       >
         <left-menu />
-        <div style="flex: 1; width: 100%; height: 100%">
-          <div style="width: 98%; height: 100%">
+        <div
+          style="
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border-left: 1px solid #e8e8e8;
+          "
+        >
+          <div style="width: 98%; height: 100%;">
             <div
               style="
                 flex: 1;

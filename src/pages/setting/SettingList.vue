@@ -16,7 +16,13 @@
         "
       >
         <left-menu />
-        <div style="flex: 1; background-color: transparent">
+        <div
+          style="
+            flex: 1;
+            background-color: transparent;
+            border-left: 1px solid #e8e8e8;
+          "
+        >
           <div style="flex: 1">
             <div
               style="

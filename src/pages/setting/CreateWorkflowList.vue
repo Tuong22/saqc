@@ -75,7 +75,7 @@
         "
       >
         <left-menu />
-        <div style="flex: 1; margin-left: 12px">
+        <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8; padding-left: 12px; padding-right: 12px">
           <h3 style="text-align: center; font-weight: bold">
             THÊM MỚI QUY TRÌNH
           </h3>

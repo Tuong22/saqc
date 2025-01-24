@@ -6,6 +6,206 @@
       background-color: #f5f5f5;
     "
   >
+    <!-- Popup Tần suất -->
+    <DxPopup
+      :visible="isPopupFrequencyVisible"
+      title="Tần suất"
+      :hide-on-outside-click="true"
+      :show-title="true"
+      :show-close-button="true"
+      position="center"
+      height="auto"
+    >
+      <template>
+        <div style="flex: 1; width: 100%; height: 100%; border: 1px solid #ccc">
+          <div style="width: 100%; background-color: #f7f7f7">
+            <DxButtonGroup
+              :items="buttonItems"
+              :styling-mode="'text'"
+              :keyExpr="'id'"
+              :textExpr="'text'"
+              :selectedItemKeys="selectedKeys"
+              selection-mode="single"
+              @selection-changed="onSelectionChanged"
+              style="background-color: white; border: none"
+            />
+          </div>
+          <div v-if="frequencyComponent" style="flex: 1; padding: 0 12px 8px">
+            <table style="padding-top: 12px; width: 100%">
+              <thead>
+                <tr>
+                  <th>Loại tần suất</th>
+                  <th>Chi tiết</th>
+                  <th>Ghi chú (nếu có)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 100px; height: 100%; padding-top: 8px">
+                    <DxCheckBox text="Tuần" style="padding-bottom: 24px" />
+                    <DxCheckBox text="Tháng" style="padding-bottom: 20px" />
+                    <DxCheckBox text="Ngày" style="padding-bottom: 28px" />
+                    <DxCheckBox text="Năm" style="padding-bottom: 28px" />
+                    <DxCheckBox text="Request" style="padding-bottom: 20px" />
+                    <DxCheckBox text="Khác" />
+                  </td>
+                  <td style="width: 400px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-evenly;
+                        padding-top: 20px;
+                      "
+                    >
+                      <DxCheckBox text="Hai" />
+                      <DxCheckBox text="Ba" />
+                      <DxCheckBox text="Tư" />
+                      <DxCheckBox text="Năm" />
+                      <DxCheckBox text="Sáu" />
+                      <DxCheckBox text="Bảy" />
+                      <DxCheckBox text="CN" />
+                    </div>
+                    <div style="padding-top: 8px">
+                      <DxTagBox
+                        :dataSource="MonthsItems"
+                        :valueExpr="'id'"
+                        :displayExpr="'text'"
+                        placeholder="Tháng"
+                        label="Tháng"
+                        label-mode="floating"
+                        show-clear-button="true"
+                        show-drop-down-button="true"
+                        show-selection-controls="true"
+                        height="40px"
+                      />
+                    </div>
+                    <div>
+                      <DxNumberBox
+                        label="Lần/Ngày"
+                        label-mode="floating"
+                        placeholder="Lần/Ngày"
+                        :showSpinButtons="isShownSpinButtons"
+                        labelMode="floating"
+                        :show-clear-button="true"
+                        height="40px"
+                      ></DxNumberBox>
+                    </div>
+                    <div>
+                      <DxNumberBox
+                        label="Lần/Năm"
+                        label-mode="floating"
+                        placeholder="Lần/Năm"
+                        :showSpinButtons="isShownSpinButtons"
+                        labelMode="floating"
+                        :show-clear-button="true"
+                        height="40px"
+                      ></DxNumberBox>
+                    </div>
+                    <div style="height: 40px"></div>
+                    <div style="padding-top: 8px">
+                      <DxAutocomplete
+                        label="Khác"
+                        label-mode="floating"
+                        placeholder="Khác"
+                        height="40px"
+                      />
+                    </div>
+                  </td>
+                  <td style="flex: 1; padding-left: 12px">
+                    <DxAutocomplete
+                      label="Ghi chú (nếu có)"
+                      label-mode="floating"
+                      placeholder="Ghi chú (nếu có)"
+                      height="40px"
+                    />
+                    <DxAutocomplete
+                      label="Ghi chú (nếu có)"
+                      label-mode="floating"
+                      placeholder="Ghi chú (nếu có)"
+                      height="40px"
+                    />
+                    <DxAutocomplete
+                      label="Ghi chú (nếu có)"
+                      label-mode="floating"
+                      placeholder="Ghi chú (nếu có)"
+                      height="40px"
+                    />
+                    <DxAutocomplete
+                      label="Ghi chú (nếu có)"
+                      label-mode="floating"
+                      placeholder="Ghi chú (nếu có)"
+                      height="40px"
+                    />
+                    <DxAutocomplete
+                      label="Ghi chú (nếu có)"
+                      label-mode="floating"
+                      height="40px"
+                      placeholder="Ghi chú (nếu có)"
+                    />
+                    <DxAutocomplete
+                      label="Ghi chú (nếu có)"
+                      label-mode="floating"
+                      placeholder="Ghi chú (nếu có)"
+                      height="40px"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="padding-top: 12px; padding-bottom: 12px">
+              <DxSelectBox
+                label="Mức độ thay đổi"
+                labelMode="floating"
+                placeholder=""
+                show-clear-button="true"
+                :data-source="limitationType"
+              >
+                <DxList :data-source="limitationType"> </DxList>
+              </DxSelectBox>
+            </div>
+            <div>
+              <div>
+                <DxAutocomplete
+                  label="Nội dung diễn giải (nếu có thay đổi)"
+                  label-mode="floating"
+                  placeholder="Nội dung diễn giải (nếu có thay đổi)"
+                  height="80px"
+                />
+              </div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  padding-top: 12px;
+                "
+              >
+                <DxButton text="Lưu" icon="save" />
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <DxDataGrid
+              id="dataGrid"
+              :allow-column-reordering="true"
+              :data-source="gridData"
+              :show-borders="isShownBorders"
+              :row-alternation-enabled="rowAlternationEnabled"
+              @selection-changed="selectEmployee"
+              :show-row-lines="isShownRowLines"
+              :show-column-lines="isShownColumnLines"
+            >
+              <DxColumn data-field="# "> </DxColumn>
+              <DxColumn data-field="Năm"> </DxColumn>
+              <DxColumn data-field="Trước thay đổi"> </DxColumn>
+              <DxColumn data-field="Sau thay đổi"> </DxColumn>
+              <DxColumn data-field="Mức độ"> </DxColumn>
+              <DxColumn data-field="Ghi chú"> </DxColumn>
+            </DxDataGrid>
+          </div>
+        </div>
+      </template>
+    </DxPopup>
     <!-- Popup - Thêm dòng -->
     <DxPopup
       :visible="isPopupVisible"
@@ -282,7 +482,7 @@
                   label="Tần suất VHBT"
                   :buttons="addButtons"
                   labelMode="floating"
-                  @initialized="saveSelectBoxInstance"
+                  @click="addFrequency"
                 />
               </div>
               <div style="width: 580px">
@@ -649,6 +849,8 @@ import DxList from "devextreme-vue/list";
 import { createStore } from "devextreme-aspnet-data-nojquery";
 import { DxPopup } from "devextreme-vue/popup";
 import { DxCheckBox } from "devextreme-vue";
+import { DxButtonGroup } from "devextreme-vue/button-group";
+import { DxTagBox } from "devextreme-vue/tag-box";
 
 export default {
   name: "PlanCreateList",
@@ -669,6 +871,8 @@ export default {
     DxPopup,
     DxCheckBox,
     HeaderComponent,
+    DxButtonGroup,
+    DxTagBox,
   },
 
   data() {
@@ -705,6 +909,7 @@ export default {
       },
       gridData: [],
       isPopupVisible: false,
+      isPopupFrequencyVisible: false,
       customButtons: [
         {
           name: "refresh", // Tên của button
@@ -730,15 +935,44 @@ export default {
           options: {
             icon: "add", // Icon hiển thị
             hint: "Add", // Gợi ý tooltip
-            // onClick: () => {
-            //   alert("Refresh Clicked!");
-            // },
+            onClick: () => {
+              this.isPopupFrequencyVisible = !this.isPopupFrequencyVisible;
+            },
           },
         },
+      ],
+      limitationType: ["Không đổi", "Tăng", "Giảm", "Đổi loại"],
+      buttonItems: [
+        { id: 1, text: "Tần suất" },
+        { id: 2, text: "Lịch sử thay đổi" },
+      ],
+      selectedKeys: [1], // Mặc định chọn nút đầu tiên
+      frequencyComponent: true,
+      MonthsItems: [
+        { id: 1, text: "Tháng 1" },
+        { id: 2, text: "Tháng 2" },
+        { id: 3, text: "Tháng 3" },
+        { id: 4, text: "Tháng 4" },
+        { id: 5, text: "Tháng 5" },
+        { id: 6, text: "Tháng 6" },
+        { id: 7, text: "Tháng 7" },
+        { id: 8, text: "Tháng 8" },
+        { id: 9, text: "Tháng 9" },
+        { id: 10, text: "Tháng 10" },
+        { id: 11, text: "Tháng 11" },
+        { id: 12, text: "Tháng 12" },
       ],
     };
   },
   methods: {
+    onSelectionChanged(e) {
+      const selectedButton = e.addedItems[0];
+      if (selectedButton.id === 1) {
+        this.frequencyComponent = true;
+      } else {
+        this.frequencyComponent = false;
+      }
+    },
     togglePopup() {
       this.isPopupVisible = !this.isPopupVisible;
     },

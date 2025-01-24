@@ -187,7 +187,7 @@
       >
         <!-- Sử dụng component LeftMenu -->
         <left-menu />
-        <div class="content">
+        <div class="content" style="border-left: 1px solid #e8e8e8">
           <div class="title">
             <h3 style="text-align: center; font-weight: bold">DẪN HƯỚNG</h3>
           </div>

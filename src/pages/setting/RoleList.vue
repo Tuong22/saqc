@@ -22,7 +22,7 @@
       >
         <!-- Sử dụng component LeftMenu -->
         <left-menu />
-        <div class="content" style="flex: 1">
+        <div class="content" style="flex: 1; border-left: 1px solid #e8e8e8">
           <div style="flex: 1; margin-left: 12px">
             <div class="title">
               <h3 style="text-align: center; font-weight: bold">VAI TRÒ</h3>
