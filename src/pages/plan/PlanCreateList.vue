@@ -226,7 +226,6 @@
                   placeholder=""
                   width="390px"
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                 >
                   <DxList
                     :data-source="dataSource"
@@ -242,7 +241,6 @@
                   placeholder=""
                   width="390px"
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                 >
                   <DxList
                     :data-source="dataSource"
@@ -258,7 +256,6 @@
                   placeholder=""
                   width="390px"
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                 >
                   <DxList
                     :data-source="dataSource"
@@ -274,7 +271,6 @@
                 labelMode="floating"
                 placeholder=""
                 :data-source="dataSource"
-                @initialized="saveSelectBoxInstance"
               >
                 <DxList
                   :data-source="dataSource"
@@ -289,7 +285,6 @@
                 labelMode="floating"
                 placeholder=""
                 :data-source="dataSource"
-                @initialized="saveSelectBoxInstance"
               >
                 <DxList
                   :data-source="dataSource"
@@ -304,7 +299,6 @@
                 labelMode="floating"
                 placeholder=""
                 :data-source="dataSource"
-                @initialized="saveSelectBoxInstance"
               >
                 <DxList
                   :data-source="dataSource"
@@ -321,7 +315,6 @@
                   placeholder=""
                   width="390px"
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                 >
                   <DxList
                     :data-source="dataSource"
@@ -337,7 +330,6 @@
                   placeholder=""
                   width="390px"
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                 >
                   <DxList
                     :data-source="dataSource"
@@ -353,7 +345,6 @@
                   placeholder=""
                   width="390px"
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                 >
                   <DxList
                     :data-source="dataSource"
@@ -378,7 +369,6 @@
                   width="390px"
                   placeholder=""
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                 >
                   <DxList
                     :data-source="dataSource"
@@ -404,7 +394,7 @@
                     Step At 5%
                   </p>
                 </div>
-                <div><DxCheckBox :value="null" /> Step at 5%</div>
+                <div><DxCheckBox /> Step at 5%</div>
               </div>
               <div style="width: 180px">
                 <div>
@@ -419,8 +409,8 @@
                   </p>
                 </div>
                 <div style="display: flex; justify-content: space-between">
-                  <div><DxCheckBox :value="null" /> 5:00</div>
-                  <div><DxCheckBox :value="null" /> 20:00</div>
+                  <div><DxCheckBox /> 5:00</div>
+                  <div><DxCheckBox /> 20:00</div>
                 </div>
               </div>
               <div style="width: 180px">
@@ -436,8 +426,8 @@
                   </p>
                 </div>
                 <div style="display: flex; justify-content: space-between">
-                  <div><DxCheckBox :value="null" /> 5:00</div>
-                  <div><DxCheckBox :value="null" /> 20:00</div>
+                  <div><DxCheckBox /> 5:00</div>
+                  <div><DxCheckBox /> 20:00</div>
                 </div>
               </div>
               <div style="width: 180px">
@@ -453,8 +443,8 @@
                   </p>
                 </div>
                 <div style="display: flex; justify-content: space-between">
-                  <div><DxCheckBox :value="null" /> 5:00</div>
-                  <div><DxCheckBox :value="null" /> 20:00</div>
+                  <div><DxCheckBox /> 5:00</div>
+                  <div><DxCheckBox /> 20:00</div>
                 </div>
               </div>
               <div style="width: 180px">
@@ -470,8 +460,8 @@
                   </p>
                 </div>
                 <div style="display: flex; justify-content: space-between">
-                  <div><DxCheckBox :value="null" /> 5:00</div>
-                  <div><DxCheckBox :value="null" /> 20:00</div>
+                  <div><DxCheckBox /> 5:00</div>
+                  <div><DxCheckBox /> 20:00</div>
                 </div>
               </div>
             </div>
@@ -491,7 +481,6 @@
                   label="Tần suất các dịp lễ tết (>3 ngày)"
                   :buttons="addButtons"
                   labelMode="floating"
-                  @initialized="saveSelectBoxInstance"
                 />
               </div>
             </div>
@@ -555,7 +544,7 @@
                 }"
                 style="
                   padding-bottom: 8px;
-                  border-bottom: 1px solid black;
+                  border-bottom: 4px solid #b5b5c3;
                   width: 32%;
                   border-color: #60afff;
                   color: #60afff;
@@ -565,12 +554,12 @@
                 :step="{
                   count: '2',
                   name: 'QUY TRÌNH',
-                  color: '#000000',
+                  color: '#b5b5c3',
                   bgdColor: '#FFFFFF',
                 }"
                 style="
                   padding-bottom: 8px;
-                  border-bottom: 1px solid black;
+                  border-bottom: 4px solid #b5b5c3;
                   width: 32%;
                 "
               />
@@ -578,12 +567,12 @@
                 :step="{
                   count: '3',
                   name: 'CHỌN VÙNG KÝ',
-                  color: '#000000',
+                  color: '#b5b5c3',
                   bgdColor: '#FFFFFF',
                 }"
                 style="
                   padding-bottom: 8px;
-                  border-bottom: 1px solid black;
+                  border-bottom: 4px solid #b5b5c3;
                   width: 32%;
                 "
               />
@@ -620,7 +609,6 @@
                       label="Mã số"
                       :buttons="customButtons"
                       labelMode="floating"
-                      @initialized="saveSelectBoxInstance"
                     />
                   </div>
                   <div style="width: 24%">
@@ -628,7 +616,6 @@
                       :value="'QUẢN TRỊ'"
                       labelMode="floating"
                       :data-source="store"
-                      @initialized="saveSelectBoxInstance"
                       label="Họ và tên"
                     />
                   </div>
@@ -638,7 +625,6 @@
                       labelMode="floating"
                       placeholder=""
                       :data-source="dataSource"
-                      @initialized="saveSelectBoxInstance"
                     >
                       <DxList
                         :data-source="dataSource"
@@ -651,7 +637,6 @@
                 <div>
                   <DxAutocomplete
                     :data-source="store"
-                    @initialized="saveSelectBoxInstance"
                     label="Tiêu đề"
                     labelMode="floating"
                     :input-attr="{
@@ -661,7 +646,6 @@
                   />
                   <DxAutocomplete
                     :data-source="store"
-                    @initialized="saveSelectBoxInstance"
                     label="Mô tả"
                     labelMode="floating"
                     :input-attr="{
@@ -673,7 +657,6 @@
                     :data-source="store"
                     label="Ghi chú"
                     labelMode="floating"
-                    @initialized="saveSelectBoxInstance"
                     :input-attr="{
                       class: 'search-input',
                     }"
@@ -685,7 +668,6 @@
                     label="Mẫu ký số"
                     labelMode="floating"
                     placeholder=""
-                    @initialized="saveSelectBoxInstance"
                     style="padding-top: 4px; margin-top: 20px"
                   >
                     <DxList
@@ -730,19 +712,29 @@
                         text="Thêm dòng"
                         icon="add"
                         @click="togglePopup"
+                        class="add-button"
                       />
                     </div>
                     <div>
                       <DxButton text="Tải mẫu" icon="download" />
                     </div>
                     <div>
-                      <DxButton text="Import" icon="upload" />
+                      <DxButton
+                        text="Import"
+                        icon="upload"
+                        @click="triggerFileInput"
+                      />
+                      <input
+                        type="file"
+                        ref="fileInput"
+                        @change="uploadFile"
+                        style="display: none"
+                      />
                     </div>
                   </div>
                   <div style="margin-left: 16px; width: 280px">
                     <DxAutocomplete
                       :data-source="store"
-                      @initialized="saveSelectBoxInstance"
                       :input-attr="{
                         placeholder: 'Tìm kiếm...',
                         class: 'search-input',
@@ -832,6 +824,7 @@
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import StepComponent from "@/components/button/StepComponent.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
+import axios from "axios";
 
 import {
   DxDataGrid,
@@ -965,6 +958,10 @@ export default {
     };
   },
   methods: {
+    triggerFileInput() {
+      const fileInput = this.$refs.fileInput;
+      fileInput.click(); // Mở cửa sổ chọn tệp
+    },
     onSelectionChanged(e) {
       const selectedButton = e.addedItems[0];
       if (selectedButton.id === 1) {
@@ -979,28 +976,37 @@ export default {
     navigateStepTwo() {
       this.$router.push("/create_plan_step_two");
     },
-    // Lưu instance của DxSelectBox khi nó được khởi tạo
-    saveSelectBoxInstance(e) {
-      console.log("DxSelectBox initialized:", e);
-    },
-
-    // Lưu instance của DxList khi nó được khởi tạo
-    saveListInstance(e) {
-      console.log("DxList initialized:", e);
-    },
     increaseValue() {
       if (this.year < 9999) this.year++;
     },
     decreaseValue() {
       if (this.year > 1900) this.year--;
     },
+    async uploadFile() {
+      const file = event.target.files[0]; // Lấy file từ input
+
+      if (!file) {
+        alert("Please select a file to upload");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const response = await axios.post("YOUR_API_URL_HERE", formData);
+        console.log("File uploaded successfully", response.data);
+      } catch (error) {
+        console.error("Error uploading file", error);
+      }
+    },
   },
 };
 </script>
 
-<style scoped>
-.add-button .dx-button-icon {
-  background-color: white;
+<style>
+.add-button .dx-icon {
+  color: white !important; /* Đặt màu icon thành trắng */
 }
 
 .search-input {

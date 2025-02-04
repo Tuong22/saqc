@@ -42,7 +42,7 @@
                       class="input"
                       style="display: flex; justify-content: space-between"
                     >
-                      <DxButton text="" icon="add" class="add-button" />
+                      <DxButton text="" icon="add" class="add" />
                     </div>
                   </div>
                   <role-layout style="margin-left: 12px" />

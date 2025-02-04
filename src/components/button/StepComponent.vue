@@ -10,7 +10,7 @@
         }"
         >{{ step.count }}</span
       >
-      {{ step.name }}
+      <p :style="{ color: `${step.color}` }">{{ step.name }}</p>
     </div>
   </div>
 </template>

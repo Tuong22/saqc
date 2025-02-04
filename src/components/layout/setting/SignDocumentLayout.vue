@@ -75,10 +75,9 @@
           padding-top: 12px;
         "
       >
-        <DxButton text="" icon="add" class="add-button" @click="togglePopup" />
+        <DxButton text="" icon="add" class="add" @click="togglePopup" />
         <DxAutocomplete
           :data-source="store"
-          @initialized="saveSelectBoxInstance"
           :input-attr="{
             placeholder: 'Tìm kiếm...',
             class: 'search-input',
@@ -93,11 +92,9 @@
     </div>
     <DxDataGrid
       id="dataGrid"
-      :allow-column-reordering="true"
       show-borders="true"
       row-alternation-enabled="true"
       :data-source="gridData"
-      @selection-changed="selectEmployee"
       show-row-lines="true"
       show-column-lines="true"
     >
@@ -174,13 +171,6 @@ export default {
       this.gridData = this.gridData.filter((item) =>
         item["Mã số"].toString().includes(this.filterText)
       );
-    },
-    selectEmployee(e) {
-      e.component.byKey(e.currentSelectedRowKeys[0]).done((employee) => {
-        if (employee) {
-          this.selectedEmployee = employee;
-        }
-      });
     },
   },
 };

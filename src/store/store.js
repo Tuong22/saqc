@@ -13,6 +13,9 @@ const store = new Vuex.Store({
   mutations,
   actions,
   getters,
+  errorHandler: (error) => {
+    console.error("Lỗi khi tải dữ liệu:", error);
+  },
 });
 
 export default store;

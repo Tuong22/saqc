@@ -75,7 +75,7 @@
               "
             >
               <div><p>Hiển thị điện thoại</p></div>
-              <div><DxCheckBox :value="null" style="width: 400px" /></div>
+              <div><DxCheckBox style="width: 400px" /></div>
             </div>
             <div
               style="
@@ -85,7 +85,7 @@
               "
             >
               <div><p>Mở rộng:</p></div>
-              <div><DxCheckBox :value="null" style="width: 400px" /></div>
+              <div><DxCheckBox style="width: 400px" /></div>
             </div>
           </div>
           <div style="width: 50%; padding-left: 8px">
@@ -127,7 +127,7 @@
               "
             >
               <div><p>Đếm số:</p></div>
-              <div><DxCheckBox :value="null" style="width: 400px" /></div>
+              <div><DxCheckBox style="width: 400px" /></div>
             </div>
             <div
               style="
@@ -137,7 +137,7 @@
               "
             >
               <div><p>Hiển thị trang chủ điện thoại:</p></div>
-              <div><DxCheckBox :value="null" style="width: 400px" /></div>
+              <div><DxCheckBox style="width: 400px" /></div>
             </div>
             <div
               style="
@@ -203,7 +203,7 @@
                   "
                 >
                   <div class="add">
-                    <DxButton text="Nhóm" class="add-button" />
+                    <DxButton text="Nhóm" class="add" />
                   </div>
                   <div
                     class="input"
@@ -216,12 +216,11 @@
                     <DxButton
                       text=""
                       icon="add"
-                      class="add-button"
+                      class="add"
                       @click="togglePopup"
                     />
                     <DxAutocomplete
                       :data-source="store"
-                      @initialized="saveSelectBoxInstance"
                       :input-attr="{
                         placeholder: 'Tìm kiếm...',
                         class: 'search-input',
@@ -286,12 +285,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 input {
   margin: 5px;
   padding: 5px;
 }
-
+.add .dx-icon {
+  color: black !important; /* Đặt màu icon thành trắng */
+}
 .content {
   flex: 1;
   justify-content: center;

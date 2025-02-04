@@ -7,12 +7,22 @@
       <div style="display: flex; width: 32%; padding-bottom: 12px">
         <!-- upload -->
         <div style="display: flex; flex: 1">
-          <DxButton text="" icon="upload" style="margin-right: 8px" />
+          <DxButton
+            text=""
+            icon="upload"
+            style="margin-right: 8px"
+            @click="triggerFileInput"
+          />
+          <input
+            type="file"
+            ref="fileInput"
+            @change="uploadFile"
+            style="display: none"
+          />
           <DxButton text="" icon="add" />
         </div>
         <DxAutocomplete
           :data-source="store"
-          @initialized="saveSelectBoxInstance"
           :input-attr="{
             placeholder: 'Tìm kiếm...',
             class: 'search-input',
@@ -32,7 +42,6 @@
         id="dataGrid"
         show-borders="true"
         row-alternation-enabled="true"
-        :allow-column-reordering="true"
         :data-source="gridData"
         @selection-changed="selectEmployee"
         show-row-lines="true"
@@ -72,6 +81,7 @@ import {
 } from "devextreme-vue/data-grid";
 import { DxAutocomplete } from "devextreme-vue/autocomplete";
 import DxButton from "devextreme-vue/button";
+import axios from "axios";
 
 export default {
   name: "SignDocumentLayout", // Tên component chính
@@ -84,6 +94,30 @@ export default {
     DxButton,
     DxPaging,
     DxPager,
+  },
+  methods: {
+    triggerFileInput() {
+      const fileInput = this.$refs.fileInput;
+      fileInput.click(); // Mở cửa sổ chọn tệp
+    },
+    async uploadFile() {
+      const file = event.target.files[0]; // Lấy file từ input
+
+      if (!file) {
+        alert("Please select a file to upload");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const response = await axios.post("YOUR_API_URL_HERE", formData);
+        console.log("File uploaded successfully", response.data);
+      } catch (error) {
+        console.error("Error uploading file", error);
+      }
+    },
   },
 };
 </script>

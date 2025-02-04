@@ -6,7 +6,6 @@
         <div style="flex: 1">
           <DxAutocomplete
             :data-source="store"
-            @initialized="saveSelectBoxInstance"
             :input-attr="{
               placeholder: 'Tìm kiếm phòng ban',
               class: 'search-input',
@@ -42,7 +41,6 @@
           id="dataGrid"
           show-borders="true"
           row-alternation-enabled="true"
-          :allow-column-reordering="true"
           :data-source="gridData"
           @selection-changed="selectEmployee"
           show-row-lines="true"

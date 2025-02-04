@@ -1,3 +1,5 @@
+
+
 <template>
   <div>
     <div
@@ -12,7 +14,6 @@
         </div>
         <DxAutocomplete
           :data-source="store"
-          @initialized="saveSelectBoxInstance"
           :input-attr="{
             placeholder: 'Tìm kiếm...',
             class: 'search-input',
@@ -30,7 +31,6 @@
     <div>
       <DxDataGrid
         id="dataGrid"
-        :allow-column-reordering="true"
         :data-source="gridData"
         show-borders="true"
         row-alternation-enabled="true"

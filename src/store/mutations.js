@@ -1,10 +1,7 @@
+import { SET_COUNT } from "./mutation-types";
 // src/store/mutations.js
 export default {
-    SELECT_MENU(state, menuCode) {
-      state.selectedMenu = menuCode;
-    },
-    COUNT_MENUS(state) {
-      state.menuCount = state.menus.length;
-    },
-  };
-  
+  [SET_COUNT](state, payload) {
+    state.count = (state.count || 0) + payload.amount;
+  },
+};

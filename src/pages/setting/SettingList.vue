@@ -47,7 +47,6 @@
                 <div style="width: 500px; padding-right: 20px">
                   <DxAutocomplete
                     :data-source="store"
-                    @initialized="saveSelectBoxInstance"
                     placeholder=""
                     label="Mã số kế hoạch"
                     labelMode="floating"
@@ -60,7 +59,7 @@
                   <p style="font-weight: bold; font-size: 16px">
                     Cho phép tất cả người dùng truy cập
                   </p>
-                  <DxCheckBox :value="null" />
+                  <DxCheckBox />
                 </div>
               </div>
               <div
@@ -104,12 +103,6 @@ export default {
     DxAutocomplete,
     DxButton,
     HeaderComponent,
-  },
-  methods: {
-    saveSelectBoxInstance(e) {
-      // Thiết lập giá trị ban đầu khi Autocomplete được khởi tạo
-      e.component.option("value", "{%Year%}/{%Number:D2%}/KH-QLCL-NCPT-VHSX");
-    },
   },
   data() {
     return {

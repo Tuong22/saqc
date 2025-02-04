@@ -3,9 +3,7 @@
   <div style="flex: 1">
     <DxDataGrid
       id="dataGrid"
-      :allow-column-reordering="true"
       :data-source="gridData"
-      @selection-changed="selectEmployee"
       show-row-lines="true"
       show-column-lines="true"
     >
@@ -139,13 +137,6 @@ export default {
       this.gridData = this.gridData.filter((item) =>
         item["Mã số"].toString().includes(this.filterText)
       );
-    },
-    selectEmployee(e) {
-      e.component.byKey(e.currentSelectedRowKeys[0]).done((employee) => {
-        if (employee) {
-          this.selectedEmployee = employee;
-        }
-      });
     },
   },
 };

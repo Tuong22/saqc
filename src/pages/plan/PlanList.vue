@@ -28,7 +28,7 @@
             border-left: 1px solid #e8e8e8;
           "
         >
-          <div style="width: 98%; height: 100%;">
+          <div style="width: 98%; height: 100%">
             <div
               style="
                 flex: 1;
@@ -37,7 +37,7 @@
                 margin: 12px 0 16px 12px;
               "
             >
-              <div class="add">
+              <div>
                 <DxButton
                   text="Thêm"
                   icon="add"
@@ -46,6 +46,16 @@
                   @click="navigateToCreatePlan"
                 />
               </div>
+              <!-- <div style="display: flex">
+                <DxButton
+                  text="Cộng STT"
+                  icon="add"
+                  style="background-color: #337ab7; color: white"
+                  class="add-button"
+                  @click="countNumber"
+                />
+                <p>Count hiện tại: {{ count }}</p>
+              </div> -->
               <div
                 class="input"
                 style="
@@ -66,7 +76,6 @@
                 />
                 <DxSelectBox
                   :data-source="dataSource"
-                  @initialized="saveSelectBoxInstance"
                   placeholder=""
                   label="Tình trạng"
                   labelMode="floating"
@@ -80,7 +89,6 @@
                 </DxSelectBox>
                 <DxAutocomplete
                   :data-source="store"
-                  @initialized="saveSelectBoxInstance"
                   placeholder=""
                   label="Tìm kiếm"
                   labelMode="floating"
@@ -116,6 +124,9 @@ import { createStore } from "devextreme-aspnet-data-nojquery";
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import PlanLayout from "@/components/layout/plan/PlanLayout.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
+
+import { mapActions, mapGetters } from "vuex";
+import { GET_COUNT } from "@/store/action-types";
 
 export default {
   name: "PlanList",
@@ -157,29 +168,31 @@ export default {
         status: "",
         search: "",
       },
+      data: {
+        // Nếu cần thêm dữ liệu khác khi upload, ví dụ như metadata
+        user_id: 123,
+      },
     };
   },
+  computed: {
+    ...mapGetters({ count: "getCount" }),
+  },
   methods: {
-    // Lưu instance của DxSelectBox khi nó được khởi tạo
-    saveSelectBoxInstance(e) {
-      console.log("DxSelectBox initialized:", e);
-    },
-
-    // Lưu instance của DxList khi nó được khởi tạo
-    saveListInstance(e) {
-      console.log("DxList initialized:", e);
-    },
-
     navigateToCreatePlan() {
       this.$router.push({ path: "/create_plan" });
+    },
+
+    ...mapActions([GET_COUNT]), // Gọi action từ store
+    countNumber() {
+      this.GET_COUNT(); // Gọi action để tăng count
     },
   },
 };
 </script>
 
-<style scoped>
-.add-button .dx-button-icon {
-  background-color: white;
+<style>
+.add-button .dx-icon {
+  color: white !important; /* Đặt màu icon thành trắng */
 }
 
 .search-input {

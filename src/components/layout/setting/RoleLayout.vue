@@ -3,14 +3,12 @@
   <div style="flex: 1">
     <DxDataGrid
       id="dataGrid"
-      :allow-column-reordering="true"
       show-borders="true"
       row-alternation-enabled="true"
       :data-source="gridData"
       show-row-lines="true"
       show-column-lines="true"
       :state-storing="stateStoring"
-      @selection-changed="selectEmployee"
       @content-ready="onContentReady"
     >
       <DxHeaderFilter :visible="true" />
@@ -122,13 +120,6 @@ export default {
       this.gridData = this.gridData.filter((item) =>
         item["Mã số"].toString().includes(this.filterText)
       );
-    },
-    selectEmployee(e) {
-      e.component.byKey(e.currentSelectedRowKeys[0]).done((employee) => {
-        if (employee) {
-          this.selectedEmployee = employee;
-        }
-      });
     },
   },
 };

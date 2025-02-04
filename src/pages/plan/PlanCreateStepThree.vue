@@ -41,7 +41,6 @@
                 placeholder=""
                 :data-source="typeSource"
                 show-clear-button="true"
-                @initialized="saveSelectBoxInstance"
               >
                 <DxList :data-source="dataSource"> </DxList>
               </DxSelectBox>
@@ -106,12 +105,12 @@
                 :step="{
                   count: '1',
                   name: 'THÔNG TIN KẾ HOẠCH',
-                  color: '#000000',
+                  color: '#b5b5c3',
                   bgdColor: '#FFFFFF',
                 }"
                 style="
                   padding-bottom: 8px;
-                  border-bottom: 1px solid black;
+                  border-bottom: 4px solid #b5b5c3;
                   width: 32%;
                 "
               />
@@ -119,12 +118,12 @@
                 :step="{
                   count: '2',
                   name: 'QUY TRÌNH',
-                  color: '#000000',
+                  color: '#b5b5c3',
                   bgdColor: '#FFFFFF',
                 }"
                 style="
                   padding-bottom: 8px;
-                  border-bottom: 1px solid black;
+                  border-bottom: 4px solid #b5b5c3;
                   width: 32%;
                 "
               />
@@ -137,7 +136,7 @@
                 }"
                 style="
                   padding-bottom: 8px;
-                  border-bottom: 1px solid black;
+                  border-bottom: 4px solid #b5b5c3;
                   width: 32%;
                   border-color: #60afff;
                   color: #60afff;

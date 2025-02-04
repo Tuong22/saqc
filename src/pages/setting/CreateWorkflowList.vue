@@ -36,7 +36,6 @@
                 placeholder=""
                 :data-source="typeSource"
                 show-clear-button="true"
-                @initialized="saveSelectBoxInstance"
               >
                 <DxList :data-source="dataSource"> </DxList>
               </DxSelectBox>

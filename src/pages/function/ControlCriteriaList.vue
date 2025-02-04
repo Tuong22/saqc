@@ -20,7 +20,7 @@
           <h3 style="text-align: center; font-weight: bold">
             CHỈ TIÊU KIỂM SOÁT
           </h3>
-          <function-layout style="padding-left: 8px" />
+          <function-layout style="padding-left: 8px; padding-right: 12px" />
         </div>
       </div>
     </div>

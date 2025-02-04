@@ -31,6 +31,7 @@
             rtl-enabled="true"
             styling-mode="text"
             style="color: white; font-weight: bold"
+            class="white-icon-btn"
           />
         </div>
         <div>
@@ -40,6 +41,7 @@
             rtl-enabled="true"
             styling-mode="text"
             style="color: white; font-weight: bold"
+            class="white-icon-btn"
           />
         </div>
         <div>
@@ -49,6 +51,7 @@
             rtl-enabled="true"
             styling-mode="text"
             style="color: white; font-weight: bold"
+            class="white-icon-btn"
           />
         </div>
         <div>
@@ -58,7 +61,7 @@
             rtl-enabled="true"
             styling-mode="text"
             style="color: white; font-weight: bold"
-            class="custom-button"
+            class="white-icon-btn"
           />
         </div>
         <div>
@@ -69,6 +72,7 @@
             rtl-enabled="true"
             style="color: white; font-weight: bold"
             @click="goToHome"
+            class="white-icon-btn"
           />
         </div>
       </div>
@@ -96,7 +100,7 @@
           width: 180px;
         "
       >
-        <div style="align-items: center">
+        <div>
           <div>
             <p
               style="
@@ -116,7 +120,6 @@
                 font-weight: bold;
                 font-size: 10px;
                 color: #a5d1ff;
-                margin-bottom: 10px;
               "
             >
               Chuyên viên quản trị
@@ -160,8 +163,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.custom-button .dx-icon {
-  color: white; /* Đổi màu icon sang trắng */
+<style>
+.white-icon-btn .dx-icon {
+  color: white !important; /* Đặt màu icon thành trắng */
 }
 </style>

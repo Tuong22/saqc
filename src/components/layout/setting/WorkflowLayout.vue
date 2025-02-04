@@ -16,12 +16,11 @@
         <DxButton
           text=""
           icon="add"
-          class="add-button"
+          class="add"
           @click="createWorkflow"
         />
         <DxAutocomplete
           :data-source="store"
-          @initialized="saveSelectBoxInstance"
           :input-attr="{
             placeholder: 'Tìm kiếm...',
             class: 'search-input',
@@ -38,9 +37,7 @@
       id="dataGrid"
       show-borders="true"
       row-alternation-enabled="true"
-      :allow-column-reordering="true"
       :data-source="gridData"
-      @selection-changed="selectEmployee"
       show-row-lines="true"
       show-column-lines="true"
     >
@@ -106,13 +103,6 @@ export default {
       this.gridData = this.gridData.filter((item) =>
         item["Mã số"].toString().includes(this.filterText)
       );
-    },
-    selectEmployee(e) {
-      e.component.byKey(e.currentSelectedRowKeys[0]).done((employee) => {
-        if (employee) {
-          this.selectedEmployee = employee;
-        }
-      });
     },
   },
 };
