@@ -25,6 +25,8 @@ import PlanCreateList from "@/pages/plan/PlanCreateList.vue";
 import CreateWorkflowList from "@/pages/setting/CreateWorkflowList.vue";
 import PlanCreateStepTwo from "@/pages/plan/PlanCreateStepTwo.vue";
 import PlanCreateStepThree from "@/pages/plan/PlanCreateStepThree.vue";
+import UpdatePlan from "@/pages/plan/UpdatePlan.vue";
+import ViewPlan from '@/pages/plan/ViewPlan.vue';
 
 Vue.use(Router);
 
@@ -73,6 +75,16 @@ const routes = [
     path: "/create_plan_step_three",
     name: "Step_Three",
     component: PlanCreateStepThree,
+  },
+  {
+    path: "/update-plan",
+    name: "Update_Plan",
+    component: UpdatePlan,
+  },
+  {
+    path: "/view-plan",
+    name: "View_Plan",
+    component: ViewPlan,
   },
   {
     path: "/menu",

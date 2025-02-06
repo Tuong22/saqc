@@ -4,11 +4,62 @@
     <DxDataGrid
       id="dataGrid"
       :data-source="gridData"
-      show-row-lines="true"
-      show-column-lines="true"
-      :state-storing="stateStoring"
-      @content-ready="onContentReady"
+      :show-row-lines="isShowRowLines"
+      :show-column-lines="isShowColumnLines"
+      :column-hiding-enabled="isColumnHidingEnabled"
+      :showBorders="isShowBorders"
+      :editing="{
+        mode: 'popup', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
+        allowAdding: true, // Cho phép thêm hàng
+        allowDeleting: true, // Cho phép xóa hàng
+        allowUpdating: true,
+        useIcons: true,
+        popup: {
+          title: 'Dẫn hướng', // Tiêu đề của popup
+          showTitle: true, // Hiển thị tiêu đề
+          height: 440, // Chiều cao popup
+        },
+        form: {
+          colCount: 2, // Chia form thành 2 cột
+        },
+      }"
+      style="border: none"
     >
+      <DxToolbar>
+        <!-- Nút thêm hàng mặc định -->
+        <DxItem name="addRowButton" />
+
+        <!-- Dropdown Filter cho cột Nhóm -->
+        <DxItem location="before">
+          <template #default>
+            <DxSelectBox
+              v-model="selectedGroup"
+              :items="groupOptions"
+              placeholder="Lọc theo Nhóm"
+              @value-changed="filterByGroup"
+              class="custom-dropdown"
+            />
+          </template>
+        </DxItem>
+
+        <!-- Ô input tùy chỉnh -->
+        <DxItem location="after">
+          <template #default>
+            <DxAutocomplete
+              :input-attr="{
+                placeholder: 'Tìm kiếm...',
+                class: 'search-input',
+              }"
+              :show-clear-button="true"
+              style="width: 280px"
+              ><template #prefix>
+                <span class="dx-icon dx-icon-search"></span>
+              </template>
+            </DxAutocomplete>
+          </template>
+        </DxItem>
+      </DxToolbar>
+
       <DxHeaderFilter :visible="true" />
       <DxPaging :enabled="true" :pageSize="10" />
       <DxPager
@@ -18,26 +69,58 @@
         :showInfo="true"
       />
 
-      <DxColumn data-field="STT" alignment="left"> </DxColumn>
+      <DxColumn data-field="STT" alignment="left" width="60px"> </DxColumn>
+      <DxColumn data-field="Mã" width="120px"></DxColumn>
       <DxColumn
-        data-field="Mã"
+        data-field="Nhóm"
         :group-index="0"
         header-cell-template="headerCellTemplate"
-      ></DxColumn>
-      <template #headerCellTemplate="{ data }">
-        <div>{{ data.value }}</div>
-      </template>
-      <DxColumn data-field="Tên" data-type="date"></DxColumn>
-      <DxColumn data-field="Dẫn hướng"></DxColumn>
-      <DxColumn data-field="Icon"></DxColumn>
+      >
+        <template #headerCellTemplate="{ data }">
+          <div>{{ data.value }}</div>
+        </template></DxColumn
+      >
+      <DxColumn data-field="Tên" width="120px"></DxColumn>
+      <DxColumn data-field="Dẫn hướng" width="120px"></DxColumn>
+      <DxColumn data-field="Icon" width="120px"></DxColumn>
       <DxColumn data-field="Truy vấn"></DxColumn>
-      <DxColumn data-field="Đếm số" alignment="left"></DxColumn>
-      <DxColumn data-field="Hiển thị số điện thoại"></DxColumn>
-      <DxColumn data-field=""></DxColumn>
-      <DxColumn data-field=""></DxColumn>
+      <DxColumn data-field="Đếm số"
+        ><template #checkboxCountTemplate="{ data }">
+          <input
+            type="checkbox"
+            :checked="data.value"
+            @change="toggleShowCount(data)"
+          /> </template
+      ></DxColumn>
+      <DxColumn data-field="Hiển thị số điện thoại" caption="Hiển thị SĐT"
+        ><template #checkboxPhoneNumberTemplate="{ data }">
+          <input
+            type="checkbox"
+            :checked="data.value"
+            @change="toggleShowPhone(data)"
+          /> </template
+      ></DxColumn>
+      <DxColumn
+        data-field="Hiển thị trang chủ số điện thoại"
+        caption="Hiển thị trang chủ SĐT"
+        ><template #checkboxHomePagePhoneNumberTemplate="{ data }">
+          <input
+            type="checkbox"
+            :checked="data.value"
+            @change="toggleShowHomePagePhone(data)"
+          /> </template
+      ></DxColumn>
+      <DxColumn data-field="Mở rộng" caption="Mở rộng"
+        ><template #checkboxExpandTemplate="{ data }">
+          <input
+            type="checkbox"
+            :checked="data.value"
+            @change="toggleExpand(data)"
+          /> </template
+      ></DxColumn>
+      <DxColumn data-field="Phân quyền"></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>
-    <DxPagination />
   </div>
 </template>
 
@@ -49,86 +132,109 @@ import {
   DxHeaderFilter,
   DxPaging,
   DxPager,
+  DxToolbar,
+  DxItem,
 } from "devextreme-vue/data-grid";
 import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
-
-const stateStoring = {
-  enabled: false, // Không lưu trạng thái
-};
-
-function onContentReady(e) {
-  // Đóng tất cả nhóm khi lưới sẵn sàng
-  e.component.collapseAll();
-}
+import DxSelectBox from "devextreme-vue/select-box"; // Import dropdown
+import { DxAutocomplete } from "devextreme-vue/autocomplete";
 
 export default {
   name: "NavigationLayout", // Tên component chính
   components: {
     DxDataGrid,
+    DxSelectBox,
     DxColumn,
     DxSelection,
     DxTextBox, // Đăng ký DxTextBox
     DxHeaderFilter,
     DxPaging,
     DxPager,
+    DxToolbar,
+    DxItem,
+    DxAutocomplete,
   },
   data() {
     return {
-      selectedEmployee: undefined,
-      filterText: "", // Biến lưu trữ bộ lọc
+      selectedGroup: "", 
+      groupOptions: ["QUẢN TRỊ", "HỆ THỐNG"], 
+      originalData: [], 
+      filterText: "",
+      isShowRowLines: true,
+      isShowColumnLines: true,
+      isColumnHidingEnabled: true,
+      isShowBorders: true,
       gridData: [
         {
           STT: 1,
           Mã: "KH001",
+          Nhóm: "QUẢN TRỊ",
           Tên: "Kế hoạch 1",
           "Dẫn hướng": "Trang chủ",
           Icon: "home",
           "Truy vấn": "SELECT * FROM KH001",
-          "Đếm số": 5,
-          "Hiển thị số điện thoại": "0123456789",
+          "Đếm số": false,
+          "Hiển thị số điện thoại": false,
+          "Hiển thị trang chủ số điện thoại": false,
+          "Mở rộng": false,
         },
         {
           STT: 2,
           Mã: "KH002",
+          Nhóm: "QUẢN TRỊ",
           Tên: "Kế hoạch 2",
           "Dẫn hướng": "Báo cáo",
           Icon: "report",
           "Truy vấn": "SELECT * FROM KH002",
-          "Đếm số": 10,
-          "Hiển thị số điện thoại": "0987654321",
+          "Đếm số": false,
+          "Hiển thị số điện thoại": true,
+          "Hiển thị trang chủ số điện thoại": false,
+          "Mở rộng": false,
         },
         {
           STT: 3,
           Mã: "KH003",
+          Nhóm: "QUẢN TRỊ",
           Tên: "Kế hoạch 3",
           "Dẫn hướng": "Danh mục",
           Icon: "list",
           "Truy vấn": "SELECT * FROM KH003",
-          "Đếm số": 8,
-          "Hiển thị số điện thoại": "0333333333",
+          "Đếm số": false,
+          "Hiển thị số điện thoại": false,
+          "Hiển thị trang chủ số điện thoại": false,
+          "Mở rộng": false,
         },
         {
           STT: 4,
           Mã: "KH004",
+          Nhóm: "",
           Tên: "Kế hoạch 4",
           "Dẫn hướng": "Thống kê",
           Icon: "chart",
           "Truy vấn": "SELECT * FROM KH004",
-          "Đếm số": 12,
-          "Hiển thị số điện thoại": "0777777777",
+          "Đếm số": false,
+          "Hiển thị số điện thoại": true,
+          "Hiển thị trang chủ số điện thoại": false,
+          "Mở rộng": false,
         },
         {
           STT: 5,
           Mã: "KH005",
+          Nhóm: "",
           Tên: "Kế hoạch 5",
           "Dẫn hướng": "Hệ thống",
           Icon: "settings",
           "Truy vấn": "SELECT * FROM KH005",
-          "Đếm số": 15,
-          "Hiển thị số điện thoại": "0111111111",
+          "Đếm số": false,
+          "Hiển thị số điện thoại": true,
+          "Hiển thị trang chủ số điện thoại": false,
+          "Mở rộng": false,
         },
       ],
     };
+  },
+  mounted() {
+    this.originalData = [...this.gridData]; // Lưu trữ dữ liệu gốc
   },
   methods: {
     // Phương thức xử lý thay đổi bộ lọc
@@ -139,38 +245,24 @@ export default {
         item["Mã số"].toString().includes(this.filterText)
       );
     },
+    toggleShowPhone(e) {
+      e.setValue(!e.value);
+    },
+    toggleShowHomePagePhone(e) {
+      e.setValue(!e.value);
+    },
+    toggleShowCount(e) {
+      e.setValue(!e.value);
+    },
+    toggleExpand(e) {
+      e.setValue(!e.value);
+    },
+    filterByGroup(e) {
+      this.selectedGroup = e.value;
+      this.gridData = this.selectedGroup
+        ? this.originalData.filter((item) => item.Nhóm === this.selectedGroup)
+        : [...this.originalData];
+    },
   },
 };
 </script>
-
-<style scoped>
-/* Màu nền tiêu đề */
-.custom-header {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.filter {
-  margin-top: 8px;
-}
-
-#dataGrid {
-  height: 500px;
-  border: 1px solid #ccc;
-}
-
-#app-container {
-  width: 900px;
-  position: relative;
-}
-
-#selected-employee {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-</style>

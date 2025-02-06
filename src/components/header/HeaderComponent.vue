@@ -1,67 +1,56 @@
 <template>
   <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #3699ff;
-    "
+    class="headerFrame"
+    :style="{ background: $store.state.theme.header.background }"
   >
-    <div style="display: flex; justify-content: space-between">
-      <div style="padding-left: 32px; padding-right: 30px; align-items: center">
+    <div class="leftComponent">
+      <div class="logo">
         <img
           src="@/assets/logo-light.png"
           alt="Logo"
-          style="width: 60px; height: 40px"
+          class="logoImg"
           @click="goToHome"
         />
       </div>
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          width: 600px;
-        "
-      >
+      <div class="menus">
         <div>
           <DxButton
             text="OFFICE"
             icon="chevrondown"
-            rtl-enabled="true"
+            :rtl-enabled="isRtlEnabled"
             styling-mode="text"
-            style="color: white; font-weight: bold"
-            class="white-icon-btn"
+            class="menuStyle"
+            :style="{ color: $store.state.theme.header.menusColor }"
           />
         </div>
         <div>
           <DxButton
             text="HSES"
             icon="chevrondown"
-            rtl-enabled="true"
+            :rtl-enabled="isRtlEnabled"
             styling-mode="text"
-            style="color: white; font-weight: bold"
-            class="white-icon-btn"
+            class="menuStyle"
+            :style="{ color: $store.state.theme.header.menusColor }"
           />
         </div>
         <div>
           <DxButton
             text="Procurement"
             icon="chevrondown"
-            rtl-enabled="true"
+            :rtl-enabled="isRtlEnabled"
             styling-mode="text"
-            style="color: white; font-weight: bold"
-            class="white-icon-btn"
+            class="menuStyle"
+            :style="{ color: $store.state.theme.header.menusColor }"
           />
         </div>
         <div>
           <DxButton
             text="Quản trị rủi ro"
             icon="chevrondown"
-            rtl-enabled="true"
+            :rtl-enabled="isRtlEnabled"
             styling-mode="text"
-            style="color: white; font-weight: bold"
-            class="white-icon-btn"
+            class="menuStyle"
+            :style="{ color: $store.state.theme.header.menusColor }"
           />
         </div>
         <div>
@@ -69,74 +58,39 @@
             text="Plan"
             icon="chevrondown"
             styling-mode="text"
-            rtl-enabled="true"
-            style="color: white; font-weight: bold"
+            :rtl-enabled="isRtlEnabled"
             @click="goToHome"
-            class="white-icon-btn"
+            class="menuStyle"
+            :style="{ color: $store.state.theme.header.menusColor }"
           />
         </div>
       </div>
     </div>
-    <div
-      style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 240px;
-      "
-    >
+    <div class="rightComponent">
       <div>
-        <img
-          src="@/assets/vietnam.png"
-          alt="vietnam"
-          style="height: 24px; width: 28px; border-radius: 8px"
-        />
+        <img src="@/assets/vietnam.png" alt="vietnam" class="flagStyle" />
       </div>
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 180px;
-        "
-      >
+      <div class="accountInfo">
         <div>
           <div>
             <p
-              style="
-                text-align: right;
-                color: white;
-                font-weight: bold;
-                font-size: 12px;
-              "
+              class="accountName"
+              :style="{ color: $store.state.theme.header.accountNameColor }"
             >
               QUẢN TRỊ
             </p>
           </div>
           <div>
             <p
-              style="
-                text-align: right;
-                font-weight: bold;
-                font-size: 10px;
-                color: #a5d1ff;
-              "
+              class="accountRole"
+              :style="{ color: $store.state.theme.header.accountRoleColor }"
             >
               Chuyên viên quản trị
             </p>
           </div>
         </div>
         <div>
-          <img
-            src="@/assets/avatar.png"
-            alt="avatar"
-            style="
-              height: 36px;
-              width: 36px;
-              border-radius: 20px;
-              margin-right: 20px;
-            "
-          />
+          <img src="@/assets/avatar.png" alt="avatar" class="accountAvatar" />
         </div>
       </div>
     </div>
@@ -151,6 +105,12 @@ export default {
   components: {
     DxButton,
   },
+  data() {
+    return {
+      isRtlEnabled: true
+    };
+  },
+
   methods: {
     goToHome() {
       if (this.$route.path === "/all_plans") {
@@ -163,8 +123,4 @@ export default {
 };
 </script>
 
-<style>
-.white-icon-btn .dx-icon {
-  color: white !important; /* Đặt màu icon thành trắng */
-}
-</style>
+<style src="@/assets/css/header.css"></style>

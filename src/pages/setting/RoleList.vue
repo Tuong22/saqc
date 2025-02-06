@@ -38,12 +38,12 @@
                       margin: 12px 0 16px 12px;
                     "
                   >
-                    <div
+                    <!-- <div
                       class="input"
                       style="display: flex; justify-content: space-between"
                     >
                       <DxButton text="" icon="add" class="add" />
-                    </div>
+                    </div> -->
                   </div>
                   <role-layout style="margin-left: 12px" />
                 </div>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import DxButton from "devextreme-vue/button";
+// import DxButton from "devextreme-vue/button";
 
 // Import component LeftMenu và LeftMenuItem
 import LeftMenu from "@/components/layout/LeftMenu.vue";
@@ -70,8 +70,13 @@ export default {
     LeftMenu, // Khai báo sử dụng LeftMenu
     RoleLayout,
     HeaderComponent,
-    DxButton,
+    // DxButton,
   },
+  data () {
+    return {
+      loading: false,
+    }
+  }
 };
 </script>
 

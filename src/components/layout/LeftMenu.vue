@@ -1,32 +1,18 @@
 <template>
-  <div
-    style="
-      height: 100%;
-      width: 260px;
-    "
-  >
+  <div style="height: 100%; width: 260px">
     <div v-for="group in data" :key="group.id" class="menu-group">
       <div
         @click="toggleDropdown(group.id)"
         class="menu-group-header"
         :class="{ active: group.isOpen }"
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
       >
         <div>
-          <i
-            :class="group.icon"
-            class="mr-3"
-            style="padding-right: 8px; color: #ffa800"
-          ></i>
+          <i :class="group.icon" class="headerIcon"></i>
         </div>
         <div>
           <span>{{ group.name }}</span>
         </div>
-        <div style="padding-right: 12px">
+        <div class="openCloseBtns">
           <i v-show="!group.isOpen" class="fa-solid fa-angle-right"></i>
           <i v-show="group.isOpen" class="fa-solid fa-angle-down"></i>
         </div>
@@ -106,47 +92,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.menu-group {
-  margin-bottom: 10px;
-  box-shadow: offset-x offset-y blur-radius spread-radius color;
-}
-
-.menu-group-header {
-  padding: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.menu-group-children {
-  padding-left: 20px;
-  overflow: hidden; /* Đảm bảo phần tử bên trong không tràn ra ngoài */
-  max-height: 0; /* Bắt đầu với chiều cao bằng 0 */
-  transition: 100% 0.3s ease-out; /* Hiệu ứng cuộn từ từ */
-}
-
-.menu-group-children.slide-in {
-  max-height: 100%; /* Chiều cao tối đa khi danh sách mở */
-}
-
-.menu-group-children.slide-out {
-  height: 100%; /* Chiều cao 0 khi danh sách đóng */
-}
-
-.menu-item {
-  padding: 5px;
-}
-
-.menu-item a {
-  text-decoration: none;
-  color: #333;
-}
-
-.menu-item :active {
-  background-color: #e1e1e1;
-}
-
-.menu-item a:hover {
-  color: #007bff;
-}
-</style>
+<style src="@/assets/css/leftMenu.css"></style>

@@ -18,7 +18,7 @@
               <DxAutocomplete
                 inputmode="decimal"
                 label="STT"
-                :value="1"
+                :value="String(value)"
                 labelMode="floating"
               />
             </div>
@@ -35,7 +35,7 @@
                 labelMode="floating"
                 placeholder=""
                 :data-source="typeSource"
-                show-clear-button="true"
+                :show-clear-button="isShowClearButton"
               >
                 <DxList :data-source="dataSource"> </DxList>
               </DxSelectBox>
@@ -74,7 +74,15 @@
         "
       >
         <left-menu />
-        <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8; padding-left: 12px; padding-right: 12px">
+        <div
+          style="
+            flex: 1;
+            margin-left: 12px;
+            border-left: 1px solid #e8e8e8;
+            padding-left: 12px;
+            padding-right: 12px;
+          "
+        >
           <h3 style="text-align: center; font-weight: bold">
             THÊM MỚI QUY TRÌNH
           </h3>
@@ -82,11 +90,10 @@
             <div>
               <div>
                 <DxAutocomplete
-                  :data-source="store"
                   label="Tên quy trình"
                   labelMode="floating"
                   placeholder=""
-                  :show-clear-button="true"
+                  :show-clear-button="isShowClearButton"
                 />
               </div>
               <div style="padding-top: 12px; padding-bottom: 20px">
@@ -140,7 +147,7 @@ import LeftMenu from "@/components/layout/LeftMenu.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 
 export default {
-  name: "WorkflowList", // Tên component chính
+  name: "CreateWorkflowList", // Tên component chính
   components: {
     LeftMenu, // Khai báo sử dụng LeftMenu
     DxSelectBox,
@@ -155,6 +162,9 @@ export default {
       dataSource: [],
       isPopupVisible: false,
       typeSource: ["Tuần tự", "Song song", "Song song đồng thuận"],
+      loading: false,
+      isShowClearButton: true,
+      value: "1"
     };
   },
   methods: {

@@ -40,6 +40,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       filters: {
         name: "",
         age: "",

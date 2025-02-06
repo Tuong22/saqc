@@ -1,103 +1,47 @@
 <template>
   <!-- Component dành riêng cho KIỂM SOÁT CHẤT LƯỢNG -->
   <div style="flex: 1">
-    <DxPopup
-      :visible="isPopupVisible"
-      title="Mẫu ký số"
-      :hide-on-outside-click="true"
-      :show-title="true"
-      :show-close-button="true"
-      position="center"
-      height="auto"
-      width="1000px"
-    >
-      <template>
-        <div>
-          <div style="width: 100%">
-            <div style="display: flex; justify-content: space-between">
-              <div>
-                <DxAutocomplete
-                  label="STT"
-                  labelMode="floating"
-                  style="width: 460px"
-                />
-              </div>
-              <div>
-                <DxAutocomplete
-                  label="Mã"
-                  labelMode="floating"
-                  style="width: 460px"
-                />
-              </div>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding-top: 12px">
-              <div>
-                <DxAutocomplete
-                  label="Tên"
-                  labelMode="floating"
-                  style="width: 460px"
-                />
-              </div>
-              <div>
-                <DxSelectBox
-                  placeholder="Loại mẫu"
-                  :data-source="dataSource"
-                  style="width: 460px; margin-top: 8px;"
-                >
-                  <DxList :data-source="dataSource"> </DxList>
-                </DxSelectBox>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div><h4 style="color: #fa896b">TỆP ĐÍNH KÈM</h4></div>
-            <div>
-              <div>
-                <DxButton text="Chọn tập tin" style="margin-right: 12px"/>hoặc Thả tập tin vào đây
-              </div>
-            </div>
-          </div>
-          <div style="display: flex; justify-content: flex-end;">
-            <div><DxButton text="Lưu" icon="save" /></div>
-          </div>
-        </div>
-      </template>
-    </DxPopup>
-    <div style="width: 100%; display: flex">
-      <div style="flex: 1"></div>
-      <div
-        class="input"
-        style="
-          display: flex;
-          width: 28%;
-          justify-content: space-between;
-          padding-bottom: 12px;
-          padding-top: 12px;
-        "
-      >
-        <DxButton text="" icon="add" class="add" @click="togglePopup" />
-        <DxAutocomplete
-          :data-source="store"
-          :input-attr="{
-            placeholder: 'Tìm kiếm...',
-            class: 'search-input',
-          }"
-          :show-clear-button="true"
-          style="width: 280px"
-          ><template #prefix>
-            <span class="dx-icon dx-icon-search"></span>
-          </template>
-        </DxAutocomplete>
-      </div>
-    </div>
     <DxDataGrid
       id="dataGrid"
-      show-borders="true"
-      row-alternation-enabled="true"
+      :show-borders="isShowBorders"
+      :row-alternation-enabled="isRowAlternationEnabled"
       :data-source="gridData"
-      show-row-lines="true"
-      show-column-lines="true"
+      :show-row-lines="isShowRowLines"
+      :show-column-lines="isShowColumnLines"
+      :editing="{
+        mode: 'popup', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
+        allowAdding: true, // Cho phép thêm hàng
+        allowDeleting: true, // Cho phép xóa hàng
+        useIcons: true,
+        popup: {
+          title: 'Mẫu ký số',
+          showTitle: true,
+          height: '260px',
+        },
+        form: { items: formItems },
+      }"
+      style="border: none"
     >
+      <DxToolbar>
+        <!-- Nút thêm mặc định của DxDataGrid -->
+        <DxItem name="addRowButton" />
+        <!-- Ô input tùy chỉnh -->
+        <DxItem location="after">
+          <template #default>
+            <DxAutocomplete
+              :input-attr="{
+                placeholder: 'Tìm kiếm...',
+                class: 'search-input',
+              }"
+              :show-clear-button="true"
+              style="width: 280px"
+              ><template #prefix>
+                <span class="dx-icon dx-icon-search"></span>
+              </template>
+            </DxAutocomplete>
+          </template>
+        </DxItem>
+      </DxToolbar>
       <DxHeaderFilter :visible="true" />
       <DxPaging :enabled="true" :pageSize="10" />
       <DxPager
@@ -110,7 +54,6 @@
       <DxColumn data-field="Mã"> </DxColumn>
       <DxColumn data-field="Tên" alignment="left"> </DxColumn>
       <DxColumn data-field="Loại mẫu"></DxColumn>
-      <DxColumn data-field="" data-type="date"></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>
   </div>
@@ -124,6 +67,8 @@ import {
   DxHeaderFilter,
   DxPaging,
   DxPager,
+  DxToolbar,
+  DxItem,
 } from "devextreme-vue/data-grid";
 import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
 import DxButton from "devextreme-vue/button";
@@ -149,15 +94,62 @@ export default {
     DxCheckBox,
     DxList,
     DxSelectBox,
+    DxToolbar,
+    DxItem,
   },
   data() {
     return {
-      selectedEmployee: undefined,
       filterText: "", // Biến lưu trữ bộ lọc
-      gridData: [],
+      isShowBorders: true,
+      isRowAlternationEnabled: true,
+      isShowRowLines: true,
+      isShowColumnLines: true,
+      gridData: [
+        { id: 1, Mã: "A001", Tên: "Sản phẩm 1", "Loại mẫu": "Loại A" },
+        { id: 2, Mã: "B002", Tên: "Sản phẩm 2", "Loại mẫu": "Loại B" },
+      ],
       isPopupVisible: false,
       loading: false,
       dataSource: [],
+      customInput: "",
+      formItems: [
+        {
+          dataField: "#",
+          label: { visible: false }, // Ẩn tiêu đề mặc định
+          editorType: "dxAutocomplete",
+          editorOptions: {
+            label: "STT",
+            labelMode: "floating",
+          },
+        },
+        {
+          dataField: "Mã",
+          label: { visible: false }, // Ẩn tiêu đề mặc định
+          editorType: "dxAutocomplete",
+          editorOptions: {
+            label: "Mã",
+            labelMode: "floating",
+          },
+        },
+        {
+          dataField: "Tên",
+          label: { visible: false }, // Ẩn tiêu đề mặc định
+          editorType: "dxAutocomplete",
+          editorOptions: {
+            label: "Tên",
+            labelMode: "floating",
+          },
+        },
+        {
+          dataField: "Loại mẫu",
+          label: { visible: false }, // Ẩn tiêu đề mặc định
+          editorType: "dxAutocomplete",
+          editorOptions: {
+            label: "Loại mẫu",
+            labelMode: "floating",
+          },
+        },
+      ],
     };
   },
   methods: {
@@ -175,35 +167,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Màu nền tiêu đề */
-.custom-header {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.filter {
-  margin-top: 8px;
-}
-
-#dataGrid {
-  height: 500px;
-  border: 1px solid #ccc;
-}
-
-#app-container {
-  width: 900px;
-  position: relative;
-}
-
-#selected-employee {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-</style>

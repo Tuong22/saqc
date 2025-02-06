@@ -1,5 +1,3 @@
-
-
 <template>
   <div>
     <div
@@ -13,7 +11,6 @@
           <DxButton text="" icon="add" />
         </div>
         <DxAutocomplete
-          :data-source="store"
           :input-attr="{
             placeholder: 'Tìm kiếm...',
             class: 'search-input',
@@ -32,11 +29,11 @@
       <DxDataGrid
         id="dataGrid"
         :data-source="gridData"
-        show-borders="true"
-        row-alternation-enabled="true"
-        @selection-changed="selectEmployee"
-        show-row-lines="true"
-        show-column-lines="true"
+        :show-borders="isShowBorders"
+        :row-alternation-enabled="isRowAlternationEnabled"
+        @selection-changed="selectItems"
+        :show-row-lines="isShowRowLines"
+        :show-column-lines="isShowColumnLines"
         style="border: 1px solid #ccc"
       >
         <DxHeaderFilter :visible="true" />
@@ -83,5 +80,19 @@ export default {
     DxPaging,
     DxPager
   },
+  data() {
+    return {
+      gridData: [],
+      isShowBorders: true,
+      isRowAlternationEnabled: true,
+      isShowRowLines: true,
+      isShowColumnLines: true
+    }
+  },
+  methods: {
+    selectItems() {
+      console.log("Items selected!")
+    }
+  }
 };
 </script>

@@ -1,0 +1,27 @@
+/* CSS Style for All Functions List */
+.fullFunctionFrame {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.positionFrame {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.contentFrame {
+    flex: 1; 
+    margin-left: 12px; 
+    border-left: 1px solid #e8e8e8;
+}
+
+.title {
+    text-align: center; 
+    font-weight: bold !important;
+}
+
+.functionLayout {
+    padding-left: 8px; 
+    padding-right: 12px;
+}

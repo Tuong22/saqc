@@ -16,9 +16,15 @@
         "
       >
         <left-menu />
-        <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8">
-          <h3 style="text-align: center; font-weight: bold">QUY TRÌNH MẪU</h3>
-          <workflow-layout style="padding-left: 8px; padding-right: 12px" />
+        <div style="flex: 1; border-left: 1px solid #e8e8e8">
+          <div style="flex: 1; justify-content: center; align-items: center">
+            <h3 style="text-align: center; font-weight: bold">QUY TRÌNH MẪU</h3>
+          </div>
+          <div style="flex: 1; justify-content: center; align-items: center">
+            <div style="width: 98%; justify-content: center">
+              <workflow-layout style="padding-left: 12px" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +46,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       filters: {
         name: "",
         age: "",

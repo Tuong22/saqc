@@ -4,8 +4,9 @@
     <DxDataGrid
       id="dataGrid"
       :data-source="gridData"
-      show-row-lines="true"
-      show-column-lines="true"
+      :show-row-lines="isShowRowLines"
+      :show-column-lines="isShowColumnLines"
+      :show-borders="isShowBorders"
     >
       <DxHeaderFilter :visible="true" />
       <!-- Tích hợp pagination -->
@@ -17,56 +18,14 @@
         :showInfo="true"
       />
       <!-- Cột Mã số với bộ lọc -->
-      <DxColumn
-        data-field="Mã số"
-        alignment="left"
-        :width="160"
-        :header-cell-template="headerCellTemplate"
-      >
-        <template #headerCellTemplate="{ column }">
-          <div class="custom-header">
-            {{ column.caption }}
-            <div v-if="column.dataField === 'Mã số'" class="filter">
-              <DxTextBox
-                :value="filterText"
-                @value-changed="onFilterChanged"
-                placeholder="Tìm kiếm"
-              />
-            </div>
-          </div>
-        </template>
-      </DxColumn>
-
+      <DxColumn data-field="Mã số" alignment="left" :width="160" />
       <!-- Các cột khác -->
-      <DxColumn
-        data-field="Tiêu đề"
-        :width="240"
-        :header-cell-template="headerCellTemplate"
-      ></DxColumn>
-      <DxColumn
-        data-field="Năm KH"
-        data-type="date"
-        :width="120"
-        :header-cell-template="headerCellTemplate"
-      ></DxColumn>
-      <DxColumn
-        data-field="Người tạo"
-        :width="160"
-        :header-cell-template="headerCellTemplate"
-      ></DxColumn>
-      <DxColumn
-        data-field="Bước xử lý"
-        :header-cell-template="headerCellTemplate"
-      ></DxColumn>
-      <DxColumn
-        data-field="Người xử lý"
-        :header-cell-template="headerCellTemplate"
-      ></DxColumn>
-      <DxColumn
-        data-field="Tình trạng"
-        :header-cell-template="headerCellTemplate"
-      ></DxColumn>
-
+      <DxColumn data-field="Tiêu đề" :width="240" />
+      <DxColumn data-field="Năm KH" data-type="date" :width="120" />
+      <DxColumn data-field="Người tạo" :width="160" />
+      <DxColumn data-field="Bước xử lý" />
+      <DxColumn data-field="Người xử lý" />
+      <DxColumn data-field="Tình trạng" />
       <DxSelection mode="single" />
     </DxDataGrid>
   </div>
@@ -96,7 +55,9 @@ export default {
   },
   data() {
     return {
-      selectedEmployee: undefined,
+      isShowRowLines: true,
+      isShowColumnLines: true,
+      isShowBorders: true,
       filterText: "", // Biến lưu trữ bộ lọc
       gridData: [
         {
@@ -141,35 +102,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Màu nền tiêu đề */
-.custom-header {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.filter {
-  margin-top: 8px;
-}
-
-#dataGrid {
-  height: 500px;
-  border: 1px solid #ccc;
-}
-
-#app-container {
-  width: 900px;
-  position: relative;
-}
-
-#selected-employee {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-</style>

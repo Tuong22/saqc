@@ -3,14 +3,21 @@
   <div style="flex: 1">
     <DxDataGrid
       id="dataGrid"
-      show-borders="true"
-      row-alternation-enabled="true"
+      :show-borders="isShowBorders"
+      :row-alternation-enabled="isRowAlternationEnabled"
       :data-source="gridData"
-      show-row-lines="true"
-      show-column-lines="true"
-      :state-storing="stateStoring"
-      @content-ready="onContentReady"
+      :show-row-lines="isShowRowLines"
+      :show-column-lines="isShowColumnLines"
+      :editing="{
+        mode: 'cell', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
+        allowUpdating: true, // Cho phép chỉnh sửa
+        allowAdding: true, // Cho phép thêm hàng
+        allowDeleting: true, // Cho phép xóa hàng
+        useIcons: true,
+      }"
+      style="border: none"
     >
+      <DxFilterRow :visible="true" />
       <DxHeaderFilter :visible="true" />
       <DxPaging :enabled="true" :pageSize="10" />
       <DxPager
@@ -21,27 +28,23 @@
       />
       <DxColumn data-field="Thứ tự" alignment="left" width="100px" />
       <DxColumn data-field="Mã" />
-      <DxColumn data-field="Tên" data-type="date" />
-      <DxColumn data-field="Cố định" />
+      <DxColumn data-field="Tên" />
       <DxColumn
-        data-field=""
-        :cell-template="statusCellTemplate"
-        width="100px"
-      />
+        data-field="Cố định"
+        caption="Cố định"
+        width="120px"
+      >
+        <template #checkboxTemplate="{ data }">
+          <input
+            type="checkbox"
+            :checked="data.value"
+            @change="toggle(data)"
+          /> </template
+      ></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>
   </div>
 </template>
-
-<script setup>
-const statusCellTemplate = ({ data }) => {
-  return (
-    <div style="text-align: center;">
-      <DxButton icon="trash" onClick="handleDelete(data)" />
-    </div>
-  );
-};
-</script>
 
 <script setup lang="ts">
 import {
@@ -50,19 +53,11 @@ import {
   DxSelection,
   DxHeaderFilter,
   DxPaging,
-  DxPager
+  DxPager,
+  DxFilterRow,
   // DxLookup,
 } from "devextreme-vue/data-grid";
 // import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
-
-const stateStoring = {
-  enabled: false, // Không lưu trạng thái
-};
-
-function onContentReady(e) {
-  // Đóng tất cả nhóm khi lưới sẵn sàng
-  e.component.collapseAll();
-}
 
 const lookupDataSourceConfig = [
   { CustomerID: 1, ContactName: "Nguyễn Văn A", Phone: "0123456789" },
@@ -86,25 +81,29 @@ export default {
     // DxTextBox, // Đăng ký DxTextBox
     DxHeaderFilter,
     DxPaging,
-    DxPager
+    DxPager,
+    DxFilterRow,
     // DxLookup,
   },
   data() {
     return {
       lookupDataSourceConfig,
-      selectedEmployee: undefined,
-      filterText: "", // Biến lưu trữ bộ lọc
+      filterText: "", 
+      isShowBorders: true,
+      isRowAlternationEnabled: true,
+      isShowRowLines: true,
+      isShowColumnLines: true,
       gridData: [
-        { "Thứ tự": 1, Mã: "A001", Tên: "Nguyễn Văn A", "Cố định": "Có" },
-        { "Thứ tự": 2, Mã: "A002", Tên: "Trần Thị B", "Cố định": "Không" },
-        { "Thứ tự": 3, Mã: "A003", Tên: "Lê Văn C", "Cố định": "Có" },
-        { "Thứ tự": 4, Mã: "A004", Tên: "Phạm Thị D", "Cố định": "Không" },
-        { "Thứ tự": 5, Mã: "A005", Tên: "Hoàng Văn E", "Cố định": "Có" },
-        { "Thứ tự": 6, Mã: "A006", Tên: "Đinh Thị F", "Cố định": "Không" },
-        { "Thứ tự": 7, Mã: "A007", Tên: "Phan Văn G", "Cố định": "Có" },
-        { "Thứ tự": 8, Mã: "A008", Tên: "Vũ Thị H", "Cố định": "Không" },
-        { "Thứ tự": 9, Mã: "A009", Tên: "Ngô Văn I", "Cố định": "Có" },
-        { "Thứ tự": 10, Mã: "A010", Tên: "Đỗ Thị J", "Cố định": "Không" },
+        { "Thứ tự": 1, Mã: "A001", Tên: "Nguyễn Văn A", "Cố định": false },
+        { "Thứ tự": 2, Mã: "A002", Tên: "Trần Thị B", "Cố định": false },
+        { "Thứ tự": 3, Mã: "A003", Tên: "Lê Văn C", "Cố định": false },
+        { "Thứ tự": 4, Mã: "A004", Tên: "Phạm Thị D", "Cố định": false },
+        { "Thứ tự": 5, Mã: "A005", Tên: "Hoàng Văn E", "Cố định": true },
+        { "Thứ tự": 6, Mã: "A006", Tên: "Đinh Thị F", "Cố định": false },
+        { "Thứ tự": 7, Mã: "A007", Tên: "Phan Văn G", "Cố định": true },
+        { "Thứ tự": 8, Mã: "A008", Tên: "Vũ Thị H", "Cố định": false },
+        { "Thứ tự": 9, Mã: "A009", Tên: "Ngô Văn I", "Cố định": true },
+        { "Thứ tự": 10, Mã: "A010", Tên: "Đỗ Thị J", "Cố định": true },
       ],
     };
   },
@@ -121,38 +120,9 @@ export default {
         item["Mã số"].toString().includes(this.filterText)
       );
     },
+    toggle(e) {
+      e.setValue(!e.value);
+    },
   },
 };
 </script>
-
-<style scoped>
-/* Màu nền tiêu đề */
-.custom-header {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.filter {
-  margin-top: 8px;
-}
-
-#dataGrid {
-  height: 500px;
-  border: 1px solid #ccc;
-}
-
-#app-container {
-  width: 900px;
-  position: relative;
-}
-
-#selected-employee {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-</style>

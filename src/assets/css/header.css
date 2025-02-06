@@ -1,0 +1,76 @@
+/* Style CSS HeaderComponent.vue */
+.headerFrame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leftComponent {
+    display: flex; 
+    justify-content: space-between;
+}
+
+.logo {
+    padding-left: 32px; 
+    padding-right: 30px; 
+    align-items: center;
+}
+
+.logoImg {
+    width: 60px; 
+    height: 40px;
+}
+
+.menus {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 600px;
+}
+
+.menuStyle {
+    font-weight: bold !important;
+}
+.menuStyle .dx-icon {
+    color: var(--menus-color) !important; 
+    font-size: 12px !important;
+}
+
+.rightComponent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 240px;
+}
+
+.flagStyle {
+    height: 24px; 
+    width: 28px; 
+    border-radius: 8px;
+}
+
+.accountInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 180px;
+}
+
+.accountName {
+    text-align: right;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.accountRole {
+    text-align: right;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.accountAvatar {
+    height: 36px;
+    width: 36px;
+    border-radius: 20px;
+    margin-right: 20px;
+}

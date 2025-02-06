@@ -1,9 +1,9 @@
 <template>
   <div
     style="
+      background-color: #f5f5f5;
       display: flex;
       justify-content: space-between;
-      background-color: #f5f5f5;
     "
   >
     <!-- Popup Tần suất -->
@@ -73,9 +73,9 @@
                         placeholder="Tháng"
                         label="Tháng"
                         label-mode="floating"
-                        show-clear-button="true"
-                        show-drop-down-button="true"
-                        show-selection-controls="true"
+                        :show-clear-button="isShowDropdownButton"
+                        :show-drop-down-button="isShowDropdownButton"
+                        :show-selection-controls="isShowSelectionControls"
                         height="40px"
                       />
                     </div>
@@ -86,7 +86,7 @@
                         placeholder="Lần/Ngày"
                         :showSpinButtons="isShownSpinButtons"
                         labelMode="floating"
-                        :show-clear-button="true"
+                        :show-clear-button="isShowClearButton"
                         height="40px"
                       ></DxNumberBox>
                     </div>
@@ -97,7 +97,7 @@
                         placeholder="Lần/Năm"
                         :showSpinButtons="isShownSpinButtons"
                         labelMode="floating"
-                        :show-clear-button="true"
+                        :show-clear-button="isShowClearButton"
                         height="40px"
                       ></DxNumberBox>
                     </div>
@@ -158,7 +158,7 @@
                 label="Mức độ thay đổi"
                 labelMode="floating"
                 placeholder=""
-                show-clear-button="true"
+                :show-clear-button="isShowClearButton"
                 :data-source="limitationType"
               >
                 <DxList :data-source="limitationType"> </DxList>
@@ -227,11 +227,7 @@
                   width="390px"
                   :data-source="dataSource"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
               </div>
               <div>
@@ -242,11 +238,7 @@
                   width="390px"
                   :data-source="dataSource"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
               </div>
               <div>
@@ -257,11 +249,7 @@
                   width="390px"
                   :data-source="dataSource"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
               </div>
             </div>
@@ -272,11 +260,7 @@
                 placeholder=""
                 :data-source="dataSource"
               >
-                <DxList
-                  :data-source="dataSource"
-                  @initialized="saveListInstance"
-                >
-                </DxList>
+                <DxList :data-source="dataSource"> </DxList>
               </DxSelectBox>
             </div>
             <div>
@@ -286,11 +270,7 @@
                 placeholder=""
                 :data-source="dataSource"
               >
-                <DxList
-                  :data-source="dataSource"
-                  @initialized="saveListInstance"
-                >
-                </DxList>
+                <DxList :data-source="dataSource"> </DxList>
               </DxSelectBox>
             </div>
             <div>
@@ -300,11 +280,7 @@
                 placeholder=""
                 :data-source="dataSource"
               >
-                <DxList
-                  :data-source="dataSource"
-                  @initialized="saveListInstance"
-                >
-                </DxList>
+                <DxList :data-source="dataSource"> </DxList>
               </DxSelectBox>
             </div>
             <div style="display: flex; justify-content: space-between">
@@ -316,11 +292,7 @@
                   width="390px"
                   :data-source="dataSource"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
               </div>
               <div>
@@ -331,11 +303,7 @@
                   width="390px"
                   :data-source="dataSource"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
               </div>
               <div>
@@ -346,11 +314,7 @@
                   width="390px"
                   :data-source="dataSource"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
               </div>
             </div>
@@ -370,11 +334,7 @@
                   placeholder=""
                   :data-source="dataSource"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
               </div>
             </div>
@@ -468,11 +428,9 @@
             <div style="display: flex; justify-content: space-between">
               <div style="width: 580px">
                 <DxAutocomplete
-                  :data-source="store"
                   label="Tần suất VHBT"
                   :buttons="addButtons"
                   labelMode="floating"
-                  @click="addFrequency"
                 />
               </div>
               <div style="width: 580px">
@@ -591,7 +549,7 @@
                       label="Năm kế hoạch"
                       :showSpinButtons="isShownSpinButtons"
                       labelMode="floating"
-                      :show-clear-button="true"
+                      :show-clear-button="isShowClearButton"
                       ><template #content>
                         <div class="number-box-icons">
                           <span @click="increaseValue" class="icon-up">▲</span>
@@ -626,11 +584,7 @@
                       placeholder=""
                       :data-source="dataSource"
                     >
-                      <DxList
-                        :data-source="dataSource"
-                        @initialized="saveListInstance"
-                      >
-                      </DxList>
+                      <DxList :data-source="dataSource"> </DxList>
                     </DxSelectBox>
                   </div>
                 </div>
@@ -670,11 +624,7 @@
                     placeholder=""
                     style="padding-top: 4px; margin-top: 20px"
                   >
-                    <DxList
-                      :data-source="dataSource"
-                      @initialized="saveListInstance"
-                    >
-                    </DxList>
+                    <DxList :data-source="dataSource"> </DxList>
                   </DxSelectBox>
                 </div>
               </div>
@@ -712,7 +662,7 @@
                         text="Thêm dòng"
                         icon="add"
                         @click="togglePopup"
-                        class="add-button"
+                        class="add-btn"
                       />
                     </div>
                     <div>
@@ -739,7 +689,7 @@
                         placeholder: 'Tìm kiếm...',
                         class: 'search-input',
                       }"
-                      :show-clear-button="true"
+                      :show-clear-button="isShowClearButton"
                       style="width: 268px"
                       ><template #prefix>
                         <span class="dx-icon dx-icon-search"></span>
@@ -785,7 +735,11 @@
                   <h4 style="color: #fa896b">TỆP ĐÍNH KÈM</h4>
                 </div>
                 <div>
-                  <DxButton text="Chọn tập tin" style="margin-right: 8px" />
+                  <DxButton
+                    text="Chọn tập tin"
+                    style="margin-right: 8px"
+                    @click="triggerFileInput"
+                  />
                   hoặc Thả tập tin vào đây
                 </div>
                 <div style="width: 100%; display: flex; padding-top: 30px">
@@ -905,29 +859,26 @@ export default {
       isPopupFrequencyVisible: false,
       customButtons: [
         {
-          name: "refresh", // Tên của button
-          location: "after", // Vị trí: trước ('before') hoặc sau ('after')
+          name: "refresh",
+          location: "after",
           options: {
-            icon: "refresh", // Icon hiển thị
-            hint: "Refresh", // Gợi ý tooltip
-            // onClick: () => {
-            //   alert("Refresh Clicked!");
-            // },
+            icon: "refresh",
+            hint: "Refresh",
           },
         },
         {
           name: "clear",
           location: "after",
-          options: undefined, // Nút clear mặc định
+          options: undefined,
         },
       ],
       addButtons: [
         {
-          name: "add", // Tên của button
-          location: "after", // Vị trí: trước ('before') hoặc sau ('after')
+          name: "add",
+          location: "after",
           options: {
-            icon: "add", // Icon hiển thị
-            hint: "Add", // Gợi ý tooltip
+            icon: "add",
+            hint: "Add",
             onClick: () => {
               this.isPopupFrequencyVisible = !this.isPopupFrequencyVisible;
             },
@@ -939,6 +890,9 @@ export default {
         { id: 1, text: "Tần suất" },
         { id: 2, text: "Lịch sử thay đổi" },
       ],
+      isShowClearButton: true,
+      isShowDropdownButton: true,
+      isShowSelectionControls: true,
       selectedKeys: [1], // Mặc định chọn nút đầu tiên
       frequencyComponent: true,
       MonthsItems: [
@@ -1003,45 +957,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.add-button .dx-icon {
-  color: white !important; /* Đặt màu icon thành trắng */
-}
-
-.search-input {
-  padding-left: 30px; /* Thêm khoảng cách để chứa icon */
-}
-
-.search-input::before {
-  content: "\f002"; /* Mã unicode cho icon tìm kiếm (FontAwesome) */
-  font-family: "FontAwesome"; /* Font của FontAwesome */
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.number-box-icons {
-  position: absolute;
-  top: 50%;
-  right: 5px;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-}
-
-.icon-up,
-.icon-down {
-  cursor: pointer;
-  font-size: 12px;
-  line-height: 1;
-  margin: 2px 0;
-  color: #555;
-}
-
-.icon-up:hover,
-.icon-down:hover {
-  color: #000;
-}
-</style>

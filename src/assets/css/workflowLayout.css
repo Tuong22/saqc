@@ -1,0 +1,21 @@
+/* Style CSS WorkflowLayout.vue */
+.workflowFrame {
+    width: 100%; 
+    display: flex;
+}
+
+.empFrame {
+    flex: 1;
+}
+
+.toolbars {
+    display: flex;
+    width: 28%;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+.searchItemsInput {
+    width: 280px;
+}

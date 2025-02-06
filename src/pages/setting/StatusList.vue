@@ -45,6 +45,7 @@ export default {
         age: "",
         city: "",
       },
+      loading: false,
       users: [
         { name: "Alice", age: 25, city: "Hà Nội" },
         { name: "Bob", age: 30, city: "Hồ Chí Minh" },

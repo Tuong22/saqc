@@ -1,45 +1,28 @@
 <template>
   <!-- Component dành riêng cho KIỂM SOÁT CHẤT LƯỢNG -->
-  <div style="flex: 1">
-    <div style="width: 100%; display: flex">
-      <div style="flex: 1"></div>
-      <div
-        class="input"
-        style="
-          display: flex;
-          width: 28%;
-          justify-content: space-between;
-          padding-bottom: 12px;
-          padding-top: 12px;
-        "
-      >
-        <DxButton
-          text=""
-          icon="add"
-          class="add"
-          @click="createWorkflow"
-        />
+  <div>
+    <div class="workflowFrame">
+      <div class="empFrame"></div>
+      <div class="toolbars">
+        <DxButton text="" icon="add" class="add" @click="createWorkflow" />
         <DxAutocomplete
-          :data-source="store"
           :input-attr="{
             placeholder: 'Tìm kiếm...',
             class: 'search-input',
           }"
           :show-clear-button="true"
-          style="width: 280px"
-          ><template #prefix>
-            <span class="dx-icon dx-icon-search"></span>
-          </template>
-        </DxAutocomplete>
+          class="searchItemsInput"
+        />
       </div>
     </div>
     <DxDataGrid
       id="dataGrid"
-      show-borders="true"
-      row-alternation-enabled="true"
+      :show-borders="isShowBorders"
+      :row-alternation-enabled="isRowAlternationEnabled"
       :data-source="gridData"
-      show-row-lines="true"
-      show-column-lines="true"
+      :show-row-lines="isShowRowLines"
+      :show-column-lines="isShowColumnLines"
+      style="border: none"
     >
       <DxHeaderFilter :visible="true" />
       <DxPaging :enabled="true" :pageSize="10" />
@@ -57,7 +40,6 @@
       <DxColumn data-field="" data-type="date"></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>
-    <DxPagination />
   </div>
 </template>
 
@@ -75,7 +57,7 @@ import DxButton from "devextreme-vue/button";
 import { DxAutocomplete } from "devextreme-vue/autocomplete";
 
 export default {
-  name: "ProcessLayout", // Tên component chính
+  name: "WorkflowLayout", // Tên component chính
   components: {
     DxDataGrid,
     DxColumn,
@@ -92,6 +74,10 @@ export default {
       selectedEmployee: undefined,
       filterText: "", // Biến lưu trữ bộ lọc
       gridData: [],
+      isShowBorders: true,
+      isRowAlternationEnabled: true,
+      isShowRowLines: true,
+      isShowColumnLines: true,
     };
   },
   methods: {
@@ -108,34 +94,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Màu nền tiêu đề */
-.custom-header {
-  background-color: #f2f2f2;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.filter {
-  margin-top: 8px;
-}
-
-#dataGrid {
-  height: 500px;
-  border: 1px solid #ccc;
-}
-
-#app-container {
-  width: 900px;
-  position: relative;
-}
-
-#selected-employee {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-</style>
+<style src="@/assets/css/workflowLayout.css"></style>

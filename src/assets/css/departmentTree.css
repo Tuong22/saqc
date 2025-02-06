@@ -1,0 +1,57 @@
+/* CSS Style DepartmentTree.vue */
+.fullFrame {
+    margin-left: 12px;
+}
+
+.departmentTreeFrame {
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftFrame {
+    flex: 1;
+}
+
+.searchInput {
+    width: 360px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.departmentTree {
+    border: none !important;
+}
+
+.contentFrame {
+    width: 70%;
+}
+
+.contentTitle {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.contentTitleText {
+    font-weight: bold;
+    color: #3699ff;
+    text-decoration: underline;
+    text-decoration-color: #3699ff;
+    text-underline-offset: 18px;
+}
+
+.table {
+    border: 1px solid #ccc;
+    width: 99%;
+}
+
+/* Thêm style cho cây tổ chức */
+#department-jstree {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#department-jstree .jstree-node {
+    border: none !important;
+    box-shadow: none !important;
+}

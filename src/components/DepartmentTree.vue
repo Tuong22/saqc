@@ -1,17 +1,15 @@
 <template>
-  <div style="margin-left: 12px">
-    <!-- <div id="department-jstree" ref="departmentTree"></div> -->
-    <div style="display: flex; justify-content: space-between">
+  <div class="fullFrame">
+    <div class="departmentTreeFrame">
       <div>
-        <div style="flex: 1">
+        <div class="leftFrame">
           <DxAutocomplete
-            :data-source="store"
             :input-attr="{
               placeholder: 'Tìm kiếm phòng ban',
               class: 'search-input',
             }"
             :show-clear-button="true"
-            style="width: 360px; border: none; border-bottom: 1px solid #ccc"
+            class="searchInput"
             ><template #prefix>
               <span class="dx-icon dx-icon-search"></span>
             </template>
@@ -20,32 +18,22 @@
         <div
           id="department-jstree"
           ref="departmentTree"
-          style="border: none"
+          class="departmentTree"
         ></div>
       </div>
-      <div style="width: 70%">
-        <div style="width: 100%; border-bottom: 1px solid #ccc">
-          <p
-            style="
-              font-weight: bold;
-              color: #3699ff;
-              text-decoration: underline;
-              text-decoration-color: #3699ff;
-              text-underline-offset: 18px;
-            "
-          >
-            Vai trò
-          </p>
+      <div class="contentFrame">
+        <div class="contentTitle">
+          <p class="contentTitleText">Vai trò</p>
         </div>
         <DxDataGrid
           id="dataGrid"
-          show-borders="true"
-          row-alternation-enabled="true"
+          :show-borders="isShowBorders"
+          :row-alternation-enabled="isRowAlternationEnabled"
           :data-source="gridData"
-          @selection-changed="selectEmployee"
-          show-row-lines="true"
-          show-column-lines="true"
-          style="border: 1px solid #ccc; width: 99%"
+          @selection-changed="selectDepartments"
+          :show-row-lines="isShowRowLines"
+          :show-column-lines="isShowColumnLines"
+          class="table"
         >
           <DxColumn data-field="Vai trò" width="100px"> </DxColumn>
           <DxColumn data-field="Người dùng"> </DxColumn>
@@ -73,6 +61,15 @@ export default {
     DxDataGrid,
     DxColumn,
     DxSelection,
+  },
+  data() {
+    return {
+      gridData: [],
+      isShowBorders: true,
+      isRowAlternationEnabled: true,
+      isShowRowLines: true,
+      isShowColumnLines: true,
+    };
   },
   mounted() {
     this.initTree();
@@ -2443,26 +2440,11 @@ export default {
         },
       });
     },
+    selectDepartments() {
+      console.log("A department was selected!");
+    },
   },
 };
 </script>
 
-<style scoped>
-/* Thêm style cho cây tổ chức */
-#department-jstree {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-#department-jstree .jstree-node {
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* Thay thế icon mặc định bằng icon từ FontAwesome */
-.jstree .jstree-icon {
-  font-family: "Font Awesome 5 Free" !important; /* Chỉ định FontAwesome */
-  font-weight: 900 !important; /* Đảm bảo rằng icon FontAwesome hiển thị đúng */
-}
-</style>
+<style src="@/assets/css/departmentTree.css"></style>

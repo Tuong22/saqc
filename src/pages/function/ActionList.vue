@@ -1,6 +1,6 @@
 <!-- Tình trạng -->
 <template>
-  <div style="display: flex; justify-content: space-between">
+  <div class="fullFunctionFrame">
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
@@ -8,17 +8,13 @@
     <div v-else>
       <header-component />
       <div
-        style="
-          display: flex;
-          width: 100%;
-          height: 100%;
-          background-color: white;
-        "
+        :style="{ background: $store.state.theme.functionList.backgroundColor }"
+        class="positionFrame"
       >
         <left-menu />
-        <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8">
-          <h3 style="text-align: center; font-weight: bold">HÀNH ĐỘNG</h3>
-          <function-layout style="padding-left: 8px; padding-right: 12px" />
+        <div class="contentFrame">
+          <h3 class="title">HÀNH ĐỘNG</h3>
+          <function-layout class="functionLayout" />
         </div>
       </div>
     </div>
@@ -46,21 +42,4 @@ export default {
 };
 </script>
 
-<style scoped>
-input {
-  margin: 5px;
-  padding: 5px;
-}
-.content {
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-}
-.input {
-  flex: 1;
-  width: 100%;
-  justify-content: flex-end;
-  align-items: center;
-  display: flex;
-}
-</style>
+<style src="@/assets/css/function.css"></style>

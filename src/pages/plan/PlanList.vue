@@ -46,7 +46,7 @@
                   @click="navigateToCreatePlan"
                 />
               </div>
-              <!-- <div style="display: flex">
+              <div style="display: flex">
                 <DxButton
                   text="Cộng STT"
                   icon="add"
@@ -55,7 +55,7 @@
                   @click="countNumber"
                 />
                 <p>Count hiện tại: {{ count }}</p>
-              </div> -->
+              </div>
               <div
                 class="input"
                 style="
@@ -70,7 +70,7 @@
                   :max="9999"
                   label="Năm"
                   labelMode="floating"
-                  showSpinButtons="true"
+                  :showSpinButtons="isShowSpinBtn"
                   :show-clear-button="true"
                   style="width: 240px"
                 />
@@ -81,11 +81,7 @@
                   labelMode="floating"
                   style="width: 240px"
                 >
-                  <DxList
-                    :data-source="dataSource"
-                    @initialized="saveListInstance"
-                  >
-                  </DxList>
+                  <DxList :data-source="dataSource"> </DxList>
                 </DxSelectBox>
                 <DxAutocomplete
                   :data-source="store"
@@ -139,6 +135,8 @@ export default {
     DxAutocomplete,
     DxNumberBox,
     HeaderComponent,
+    // DxItem,
+    // DxForm,
   },
   data() {
     const serviceUrl = "http://localhost:8080/#/all_plans";
@@ -161,13 +159,13 @@ export default {
     return {
       store,
       dataSource: options,
-      listInstance: null,
       loading: false,
       filters: {
         year: "",
         status: "",
         search: "",
       },
+      isShowSpinBtn: true,
       data: {
         // Nếu cần thêm dữ liệu khác khi upload, ví dụ như metadata
         user_id: 123,
@@ -189,22 +187,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.add-button .dx-icon {
-  color: white !important; /* Đặt màu icon thành trắng */
-}
-
-.search-input {
-  padding-left: 30px; /* Thêm khoảng cách để chứa icon */
-}
-
-.search-input::before {
-  content: "\f002"; /* Mã unicode cho icon tìm kiếm (FontAwesome) */
-  font-family: "FontAwesome"; /* Font của FontAwesome */
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-</style>
