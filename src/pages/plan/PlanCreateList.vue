@@ -187,7 +187,6 @@
           <div v-else>
             <DxDataGrid
               id="dataGrid"
-              :allow-column-reordering="true"
               :data-source="gridData"
               :show-borders="isShownBorders"
               :row-alternation-enabled="rowAlternationEnabled"
@@ -435,7 +434,6 @@
               </div>
               <div style="width: 580px">
                 <DxAutocomplete
-                  :data-source="store"
                   label="Tần suất các dịp lễ tết (>3 ngày)"
                   :buttons="addButtons"
                   labelMode="floating"
@@ -563,18 +561,18 @@
                   <div style="width: 24%">
                     <DxAutocomplete
                       :value="'2025/40/KH-QLCL-NCPT-VHSX'"
-                      :data-source="store"
                       label="Mã số"
                       :buttons="customButtons"
                       labelMode="floating"
+                      :read-only="isReadOnly"
                     />
                   </div>
                   <div style="width: 24%">
                     <DxAutocomplete
                       :value="'QUẢN TRỊ'"
                       labelMode="floating"
-                      :data-source="store"
                       label="Họ và tên"
+                      :read-only="isReadOnly"
                     />
                   </div>
                   <div style="width: 24%">
@@ -582,6 +580,7 @@
                       label="Đơn vị/Ban"
                       labelMode="floating"
                       placeholder=""
+                      :value="dataSource[0]"
                       :data-source="dataSource"
                     >
                       <DxList :data-source="dataSource"> </DxList>
@@ -590,7 +589,6 @@
                 </div>
                 <div>
                   <DxAutocomplete
-                    :data-source="store"
                     label="Tiêu đề"
                     labelMode="floating"
                     :input-attr="{
@@ -599,7 +597,6 @@
                     style="padding-top: 4px; margin-top: 20px"
                   />
                   <DxAutocomplete
-                    :data-source="store"
                     label="Mô tả"
                     labelMode="floating"
                     :input-attr="{
@@ -608,13 +605,17 @@
                     style="padding-top: 4px; margin-top: 20px"
                   />
                   <DxAutocomplete
-                    :data-source="store"
                     label="Ghi chú"
                     labelMode="floating"
                     :input-attr="{
                       class: 'search-input',
                     }"
-                    style="padding-top: 4px; margin-top: 20px"
+                    style="
+                      padding-top: 4px;
+                      margin-top: 20px;
+                      height: 60px;
+                      width: 100%;
+                    "
                   />
                   <!-- Mẫu ký số -->
                   <DxSelectBox
@@ -650,64 +651,70 @@
                     BẢNG CHI TIẾT KẾ HOẠCH
                     <h4 style="color: red; font-weight: bold">(*)</h4>
                   </h4>
-                  <div
-                    style="
-                      display: flex;
-                      width: 30%;
-                      justify-content: space-between;
-                    "
-                  >
-                    <div>
-                      <DxButton
-                        text="Thêm dòng"
-                        icon="add"
-                        @click="togglePopup"
-                        class="add-btn"
-                      />
-                    </div>
-                    <div>
-                      <DxButton text="Tải mẫu" icon="download" />
-                    </div>
-                    <div>
-                      <DxButton
-                        text="Import"
-                        icon="upload"
-                        @click="triggerFileInput"
-                      />
-                      <input
-                        type="file"
-                        ref="fileInput"
-                        @change="uploadFile"
-                        style="display: none"
-                      />
-                    </div>
-                  </div>
-                  <div style="margin-left: 16px; width: 280px">
-                    <DxAutocomplete
-                      :data-source="store"
-                      :input-attr="{
-                        placeholder: 'Tìm kiếm...',
-                        class: 'search-input',
-                      }"
-                      :show-clear-button="isShowClearButton"
-                      style="width: 268px"
-                      ><template #prefix>
-                        <span class="dx-icon dx-icon-search"></span>
-                      </template>
-                    </DxAutocomplete>
-                  </div>
                 </div>
-                <div style="width: 100%">
+                <div>
                   <DxDataGrid
+                    :column-auto-width="isColumnAutoWidth"
+                    :allow-column-resizing="isAllowColumnResizing"
                     id="dataGrid"
-                    :allow-column-reordering="true"
                     :data-source="gridData"
                     :show-borders="isShownBorders"
                     :row-alternation-enabled="rowAlternationEnabled"
                     @selection-changed="selectEmployee"
                     :show-row-lines="isShownRowLines"
                     :show-column-lines="isShownColumnLines"
+                    :editing="{
+                      mode: 'popup', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
+                      allowAdding: true, // Cho phép thêm hàng
+                      allowDeleting: true, // Cho phép xóa hàng
+                      allowUpdating: true,
+                      useIcons: true,
+                      popup: {
+                        title: 'Dẫn hướng', // Tiêu đề của popup
+                        showTitle: true, // Hiển thị tiêu đề
+                        height: 440, // Chiều cao popup
+                      },
+                      form: {
+                        colCount: 2, // Chia form thành 2 cột
+                      },
+                    }"
+                    style="border: none"
                   >
+                    <DxToolbar>
+                      <DxItem name="addRowButton" />
+
+                      <DxItem location="after">
+                        <template #default>
+                          <DxButton icon="download" text="Tải mẫu" />
+                        </template>
+                      </DxItem>
+                      <DxItem location="after">
+                        <!-- <template #default>
+                          <DxFileUploader
+                            style="width: 100px"
+                            select-button-text="Import"
+                            label-text=""
+                            :show-file-list="isShowFileList"
+                            :multiple="false"
+                          />
+                        </template> -->
+                      </DxItem>
+                      <DxItem location="after">
+                        <template #default>
+                          <DxAutocomplete
+                            :input-attr="{
+                              placeholder: 'Tìm kiếm...',
+                              class: 'search-input',
+                            }"
+                            :show-clear-button="true"
+                            style="width: 280px"
+                            ><template #prefix>
+                              <span class="dx-icon dx-icon-search"></span>
+                            </template>
+                          </DxAutocomplete>
+                        </template>
+                      </DxItem>
+                    </DxToolbar>
                     <DxHeaderFilter :visible="true" />
                     <DxPaging :enabled="true" :pageSize="10" />
                     <DxPager
@@ -716,17 +723,118 @@
                       :allowedPageSizes="[10, 25, 50, 100]"
                       :showInfo="true"
                     />
-                    <DxColumn data-field="Ý kiến "> </DxColumn>
-                    <DxColumn data-field="#" alignment="center"> </DxColumn>
-                    <DxColumn data-field="Điểm lấy mẫu"> </DxColumn>
-                    <DxColumn data-field="Phân xưởng"> </DxColumn>
-                    <DxColumn data-field="Têm mẫu"></DxColumn>
-                    <DxColumn data-field="Mục đích chính"></DxColumn>
-                    <DxColumn data-field="Quy trình lấy mẫu"></DxColumn>
-                    <DxColumn data-field="Phương pháp thử nghiệm"></DxColumn>
-                    <DxColumn data-field="Chỉ tiêu"></DxColumn>
-                    <DxColumn data-field=""></DxColumn>
-                    <DxSelection mode="single" />
+                    <DxColumn data-field="Ý kiến" caption="Ý kiến" />
+                    <DxColumn data-field="#" caption="#" />
+                    <DxColumn
+                      data-field="Điểm lấy mẫu"
+                      caption="Điểm lấy mẫu"
+                    />
+                    <DxColumn data-field="Phân xưởng" caption="Phân xưởng" />
+                    <DxColumn data-field="Tên mẫu" caption="Tên mẫu" />
+                    <DxColumn
+                      data-field="Mục đích chính"
+                      caption="Mục đích chính"
+                    />
+                    <DxColumn
+                      data-field="Quy trình lấy mẫu"
+                      caption="Quy trình lấy mẫu"
+                    />
+                    <DxColumn
+                      data-field="Phương pháp thử nghiệm"
+                      caption="Phương pháp thử nghiệm"
+                    />
+                    <DxColumn
+                      data-field="Chỉ tiêu kiểm soát"
+                      caption="Chỉ tiêu kiểm soát"
+                    />
+                    <DxColumn
+                      data-field="Phòng thử nghiệm"
+                      caption="Phòng thử nghiệm"
+                    />
+                    <DxColumn data-field="Giờ lấy mẫu" caption="Giờ lấy mẫu" />
+                    <DxColumn data-field="VHBT" caption="VHBT">
+                      <DxColumn data-field="Tần suất" caption="Tần suất" />
+                    </DxColumn>
+                    <DxColumn
+                      data-field="Các dịp lễ tết (>3 ngày)"
+                      caption="Các dịp lễ tết (>3 ngày)"
+                      ><DxColumn data-field="Tần suất" caption="Tần suất" />
+                    </DxColumn>
+                    <DxColumn
+                      caption="KẾ HOẠCH TEST RUN DẦU THÔ"
+                      alignment="center"
+                    >
+                      <DxColumn data-field="Step at 5%" caption="Step at 5%" />
+                      <DxColumn
+                        data-field="Step at 10%"
+                        caption="Step at 10%"
+                        data-type="boolean"
+                      >
+                        <DxColumn
+                          data-field="5:00"
+                          caption="5:00"
+                          data-type="boolean"
+                        />
+                        <DxColumn
+                          data-field="20:00"
+                          caption="20:00"
+                          data-type="boolean"
+                        />
+                      </DxColumn>
+
+                      <DxColumn
+                        data-field="Step at 15%"
+                        caption="Step at 15%"
+                        data-type="boolean"
+                      >
+                        <DxColumn
+                          data-field="5:00"
+                          caption="5:00"
+                          data-type="boolean"
+                        />
+                        <DxColumn
+                          data-field="20:00"
+                          caption="20:00"
+                          data-type="boolean"
+                        />
+                      </DxColumn>
+
+                      <DxColumn
+                        data-field="Final step 1(15%)"
+                        caption="Final step 1(15%)"
+                        data-type="boolean"
+                      >
+                        <DxColumn
+                          data-field="5:00"
+                          caption="5:00"
+                          data-type="boolean"
+                        />
+                        <DxColumn
+                          data-field="20:00"
+                          caption="20:00"
+                          data-type="boolean"
+                        />
+                      </DxColumn>
+
+                      <DxColumn
+                        data-field="Final step 2(15%)"
+                        caption="Final step 2(15%)"
+                        data-type="boolean"
+                      >
+                        <DxColumn
+                          data-field="5:00"
+                          caption="5:00"
+                          data-type="boolean"
+                        />
+                        <DxColumn
+                          data-field="20:00"
+                          caption="20:00"
+                          data-type="boolean"
+                        />
+                      </DxColumn>
+                    </DxColumn>
+                    <DxColumn data-field="CRITICAL" caption="CRITICAL" />
+                    <DxScrolling column-rendering-mode="virtual" />
                   </DxDataGrid>
                 </div>
               </div>
@@ -734,14 +842,10 @@
                 <div style="width: 100%; padding-left: 12px">
                   <h4 style="color: #fa896b">TỆP ĐÍNH KÈM</h4>
                 </div>
-                <div>
-                  <DxButton
-                    text="Chọn tập tin"
-                    style="margin-right: 8px"
-                    @click="triggerFileInput"
-                  />
-                  hoặc Thả tập tin vào đây
-                </div>
+                <DxFileUploader
+                  select-button-text="Chọn tập tin"
+                  label-text="hoặc Thả tập tin vào đây"
+                />
                 <div style="width: 100%; display: flex; padding-top: 30px">
                   <div>
                     <DxButton
@@ -778,26 +882,26 @@
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import StepComponent from "@/components/button/StepComponent.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
-import axios from "axios";
 
 import {
   DxDataGrid,
   DxColumn,
-  DxSelection,
   DxHeaderFilter,
   DxPaging,
   DxPager,
+  DxToolbar,
+  DxItem,
 } from "devextreme-vue/data-grid";
 import DxButton from "devextreme-vue/button";
 import { DxAutocomplete } from "devextreme-vue/autocomplete";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import { DxSelectBox } from "devextreme-vue/select-box";
 import DxList from "devextreme-vue/list";
-import { createStore } from "devextreme-aspnet-data-nojquery";
 import { DxPopup } from "devextreme-vue/popup";
 import { DxCheckBox } from "devextreme-vue";
 import { DxButtonGroup } from "devextreme-vue/button-group";
 import { DxTagBox } from "devextreme-vue/tag-box";
+import { DxFileUploader } from "devextreme-vue/file-uploader";
 
 export default {
   name: "PlanCreateList",
@@ -808,7 +912,6 @@ export default {
     DxAutocomplete,
     DxDataGrid,
     DxColumn,
-    DxSelection,
     DxHeaderFilter,
     DxNumberBox,
     DxSelectBox,
@@ -820,17 +923,12 @@ export default {
     HeaderComponent,
     DxButtonGroup,
     DxTagBox,
+    DxFileUploader,
+    DxToolbar,
+    DxItem,
   },
 
   data() {
-    const serviceUrl = "http://localhost:8080/#/all_plans";
-    const store = createStore({
-      key: "ID",
-      loadUrl: serviceUrl,
-      insertUrl: serviceUrl,
-      updateUrl: serviceUrl,
-      deleteUrl: serviceUrl,
-    });
     const options = [
       "Công ty Cổ phần Lọc hóa dầu Bình Sơn",
       "Công ty CP Nhựa Hoa Sen",
@@ -839,21 +937,19 @@ export default {
       "Ban Công nghệ Thông tin",
     ];
     return {
-      store,
+      isShowFileList: false,
+      isReadOnly: true,
+      isColumnHidingEnabled: true,
+      isColumnAutoWidth: true,
+      isAllowColumnResizing: true,
       selectEmployee: [],
       dataSource: options,
-      listInstance: null,
       isShownSpinButtons: true,
       rowAlternationEnabled: true,
       isShownBorders: true,
       isShownRowLines: true,
       isShownColumnLines: true,
       loading: false,
-      filters: {
-        year: "",
-        status: "",
-        search: "",
-      },
       gridData: [],
       isPopupVisible: false,
       isPopupFrequencyVisible: false,
@@ -936,24 +1032,12 @@ export default {
     decreaseValue() {
       if (this.year > 1900) this.year--;
     },
-    async uploadFile() {
-      const file = event.target.files[0]; // Lấy file từ input
-
-      if (!file) {
-        alert("Please select a file to upload");
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("file", file);
-
-      try {
-        const response = await axios.post("YOUR_API_URL_HERE", formData);
-        console.log("File uploaded successfully", response.data);
-      } catch (error) {
-        console.error("Error uploading file", error);
-      }
-    },
   },
 };
 </script>
+
+<style>
+#dataGrid {
+  width: 1220px;
+}
+</style>

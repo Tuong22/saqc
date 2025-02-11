@@ -8,6 +8,7 @@ import RolePage from "@/pages/setting/RoleList.vue";
 import PrivilegePage from "@/pages/setting/PrivilegeList.vue";
 import SettingPage from "@/pages/setting/SettingList.vue";
 import WorkflowPage from "@/pages/setting/WorkflowList.vue";
+import UpdateWorkflow from "@/pages/setting/UpdateWorkflow.vue";
 import SamplingProcedurePage from "@/pages/setting/SamplingProcedureList.vue";
 import SignDocumentPage from "@/pages/setting/SignDocumentList.vue";
 import StatusPage from "@/pages/setting/StatusList.vue";
@@ -26,7 +27,7 @@ import CreateWorkflowList from "@/pages/setting/CreateWorkflowList.vue";
 import PlanCreateStepTwo from "@/pages/plan/PlanCreateStepTwo.vue";
 import PlanCreateStepThree from "@/pages/plan/PlanCreateStepThree.vue";
 import UpdatePlan from "@/pages/plan/UpdatePlan.vue";
-import ViewPlan from '@/pages/plan/ViewPlan.vue';
+import ViewPlan from "@/pages/plan/ViewPlan.vue";
 
 Vue.use(Router);
 
@@ -37,7 +38,7 @@ const routes = [
     component: PlanPage,
   },
   {
-    path: "/create-plan",
+    path: "/create_plan",
     name: "/Create_Plan",
     component: PlanCreateList,
   },
@@ -77,12 +78,12 @@ const routes = [
     component: PlanCreateStepThree,
   },
   {
-    path: "/update-plan",
+    path: "/update_plan",
     name: "Update_Plan",
     component: UpdatePlan,
   },
   {
-    path: "/view-plan",
+    path: "/view_plan",
     name: "View_Plan",
     component: ViewPlan,
   },
@@ -115,6 +116,11 @@ const routes = [
     path: "/create_workflow",
     name: "Create_Workflow",
     component: CreateWorkflowList,
+  },
+  {
+    path: "/update_workflow",
+    name: "Update_Workflow",
+    component: UpdateWorkflow,
   },
   {
     path: "/sign_document",

@@ -5,7 +5,7 @@
       <base-spinner />
     </div>
     <!-- Sử dụng component LeftMenu -->
-    <div v-else>
+    <div v-else style="flex: 1">
       <header-component />
       <div
         class="mb-5"
@@ -19,7 +19,7 @@
         <left-menu />
         <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8">
           <h3 style="text-align: center; font-weight: bold">TÊN MẪU</h3>
-          <function-layout style="padding-left: 8px; padding-right: 12px" />
+          <function-layout style="padding-left: 8px; padding-right: 12px" items="sample_name" />
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
       <base-spinner />
     </div>
     <!-- Sử dụng component LeftMenu -->
-    <div v-else>
+    <div v-else style="flex: 1">
       <header-component />
       <div
         :style="{ background: $store.state.theme.functionList.backgroundColor }"
@@ -14,7 +14,7 @@
         <left-menu />
         <div class="contentFrame">
           <h3 class="title">HÀNH ĐỘNG</h3>
-          <function-layout class="functionLayout" />
+          <function-layout class="functionLayout" items="actions" />
         </div>
       </div>
     </div>

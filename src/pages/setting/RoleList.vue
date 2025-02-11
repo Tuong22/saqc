@@ -10,7 +10,7 @@
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
-    <div v-else>
+    <div v-else style="flex: 1">
       <header-component />
       <div
         style="

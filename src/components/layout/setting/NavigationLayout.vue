@@ -7,7 +7,7 @@
       :show-row-lines="isShowRowLines"
       :show-column-lines="isShowColumnLines"
       :column-hiding-enabled="isColumnHidingEnabled"
-      :showBorders="isShowBorders"
+      :show-borders="isShowBorders"
       :editing="{
         mode: 'popup', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
         allowAdding: true, // Cho phép thêm hàng
@@ -23,14 +23,20 @@
           colCount: 2, // Chia form thành 2 cột
         },
       }"
+      :group-panel="{ visible: true }"
       style="border: none"
+      :search-panel="{
+        placeholder: 'Tìm kiếm...',
+        visible: true,
+        hightlightSearchText: true,
+        text: 'xin chào',
+      }"
     >
       <DxToolbar>
         <!-- Nút thêm hàng mặc định -->
         <DxItem name="addRowButton" />
-
         <!-- Dropdown Filter cho cột Nhóm -->
-        <DxItem location="before">
+        <!-- <DxItem location="before">
           <template #default>
             <DxSelectBox
               v-model="selectedGroup"
@@ -40,12 +46,12 @@
               class="custom-dropdown"
             />
           </template>
-        </DxItem>
+        </DxItem> -->
 
         <!-- Ô input tùy chỉnh -->
         <DxItem location="after">
           <template #default>
-            <DxAutocomplete
+            <!-- <DxAutocomplete
               :input-attr="{
                 placeholder: 'Tìm kiếm...',
                 class: 'search-input',
@@ -55,11 +61,11 @@
               ><template #prefix>
                 <span class="dx-icon dx-icon-search"></span>
               </template>
-            </DxAutocomplete>
+            </DxAutocomplete> -->
           </template>
         </DxItem>
       </DxToolbar>
-
+      <DxGroupPanel :visible="true" />
       <DxHeaderFilter :visible="true" />
       <DxPaging :enabled="true" :pageSize="10" />
       <DxPager
@@ -68,7 +74,7 @@
         :allowedPageSizes="[10, 25, 50, 100]"
         :showInfo="true"
       />
-
+      <DxGrouping :auto-expand-all="false" />
       <DxColumn data-field="STT" alignment="left" width="60px"> </DxColumn>
       <DxColumn data-field="Mã" width="120px"></DxColumn>
       <DxColumn
@@ -134,6 +140,8 @@ import {
   DxPager,
   DxToolbar,
   DxItem,
+  DxGroupPanel,
+  DxGrouping,
 } from "devextreme-vue/data-grid";
 import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
 import DxSelectBox from "devextreme-vue/select-box"; // Import dropdown
@@ -153,12 +161,14 @@ export default {
     DxToolbar,
     DxItem,
     DxAutocomplete,
+    DxGroupPanel,
+    DxGrouping,
   },
   data() {
     return {
-      selectedGroup: "", 
-      groupOptions: ["QUẢN TRỊ", "HỆ THỐNG"], 
-      originalData: [], 
+      selectedGroup: "",
+      groupOptions: ["QUẢN TRỊ", "HỆ THỐNG"],
+      originalData: [],
       filterText: "",
       isShowRowLines: true,
       isShowColumnLines: true,
@@ -241,8 +251,8 @@ export default {
     onFilterChanged(e) {
       this.filterText = e.value;
       // Lọc dữ liệu theo "Mã số" khi có thay đổi bộ lọc
-      this.gridData = this.gridData.filter((item) =>
-        item["Mã số"].toString().includes(this.filterText)
+      this.gridData = this.originalData.filter((item) =>
+        item["Mã"].toString().includes(this.filterText)
       );
     },
     toggleShowPhone(e) {

@@ -5,7 +5,7 @@
       <base-spinner />
     </div>
     <!-- Sử dụng component LeftMenu -->
-    <div v-else>
+    <div v-else style="flex: 1">
       <header-component />
       <div
         style="
@@ -20,7 +20,7 @@
           <h3 style="text-align: center; font-weight: bold">
             PHƯƠNG PHÁP THỬ NGHIỆM
           </h3>
-          <function-layout style="padding-left: 8px; padding-right: 12px" />
+          <function-layout style="padding-left: 8px; padding-right: 12px" items="testing_method"/>
         </div>
       </div>
     </div>

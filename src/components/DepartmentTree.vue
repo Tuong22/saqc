@@ -37,8 +37,6 @@
         >
           <DxColumn data-field="Vai trò" width="100px"> </DxColumn>
           <DxColumn data-field="Người dùng"> </DxColumn>
-          <DxColumn data-field="" width="100px"> </DxColumn>
-          <DxSelection mode="single" />
         </DxDataGrid>
       </div>
     </div>
@@ -51,7 +49,7 @@ import "jstree/dist/themes/default/style.min.css";
 import $ from "jquery";
 import "jstree";
 
-import { DxDataGrid, DxColumn, DxSelection } from "devextreme-vue/data-grid";
+import { DxDataGrid, DxColumn } from "devextreme-vue/data-grid";
 import DxAutocomplete from "devextreme-vue/autocomplete";
 
 export default {
@@ -60,7 +58,6 @@ export default {
     DxAutocomplete,
     DxDataGrid,
     DxColumn,
-    DxSelection,
   },
   data() {
     return {

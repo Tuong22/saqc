@@ -61,7 +61,6 @@
           <div>
             <h3 style="text-align: center; font-weight: bold">PHÂN QUYỀN</h3>
             <department-tree />
-
             <!-- Nút cài đặt tạm thời để hiển thị Popup sau khi nhấn -->
             <DxButton icon="add" text="" @click="togglePopup" />
           </div>
@@ -108,5 +107,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

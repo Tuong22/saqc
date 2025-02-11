@@ -14,8 +14,8 @@
 
 .searchInput {
     width: 360px;
-    border: none;
-    border-bottom: 1px solid #ccc;
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
 }
 
 .departmentTree {
@@ -27,31 +27,25 @@
 }
 
 .contentTitle {
-    width: 100%;
-    border-bottom: 1px solid #ccc;
+    width: 99%;
+    border-bottom: 1px solid #ccc !important;
 }
 
 .contentTitleText {
-    font-weight: bold;
+    font-weight: bold !important;
     color: #3699ff;
-    text-decoration: underline;
+    text-decoration: underline ;
+    padding-left: 20px;
     text-decoration-color: #3699ff;
     text-underline-offset: 18px;
 }
 
 .table {
-    border: 1px solid #ccc;
-    width: 99%;
+    width: 99% !important;
 }
 
 /* Thêm style cho cây tổ chức */
 #department-jstree {
     margin-top: 20px;
     padding: 10px;
-    border: 1px solid #ccc;
-}
-
-#department-jstree .jstree-node {
-    border: none !important;
-    box-shadow: none !important;
 }

@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <DxButton @click="getData" text="Lấy Dữ Liệu Feedback" />
       <DxDataGrid
         id="dataGrid"
         :show-borders="isShowBorders"
@@ -94,7 +93,7 @@ import DxButton from "devextreme-vue/button";
 import axios from "axios";
 import { DxColorBox } from "devextreme-vue/color-box";
 
-import { fetchData } from "@/api/getData.js"; // Đảm bảo bạn nhập đúng đường dẫn tới file chứa fetchData
+import { functionServices } from "@/services/FunctionService.js";
 
 export default {
   name: "FunctionLayout", // Tên component chính
@@ -172,15 +171,29 @@ export default {
     },
 
     // FETCH DATA
-    async getData() {
+    async getData(items) {
       try {
-        const data = await fetchData("menus");
-        this.dataSource = data; 
-        console.log(this.dataSource[0].name);
+        const data = await functionServices(items);
+        this.dataSource = data.map((item, index) => ({
+          "#": index + 1,
+          Mã: item.code,
+          Tên:
+            item.room ||
+            item.sample ||
+            item.samplingPointName ||
+            item.testMethod ||
+            item.workshop,
+        }));
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
     },
+  },
+  props: {
+    items: String,
+  },
+  mounted() {
+    this.getData(this.items);
   },
 };
 </script>

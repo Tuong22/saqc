@@ -5,7 +5,7 @@
       <base-spinner />
     </div>
     <!-- Sử dụng component LeftMenu -->
-    <div v-else>
+    <div v-else style="flex: 1">
       <header-component />
       <div
         style="
@@ -18,7 +18,7 @@
         <left-menu />
         <div style="flex: 1; margin-left: 12px; border-left: 1px solid #e8e8e8">
           <h3 style="text-align: center; font-weight: bold">BỘ MẪU</h3>
-          <sample-layout style="padding-left: 8px; padding-right: 12px" />
+          <sample-layout style="padding-left: 8px; padding-right: 12px" items="sample"/>
         </div>
       </div>
     </div>
