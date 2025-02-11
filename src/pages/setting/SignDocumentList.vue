@@ -4,7 +4,6 @@
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
-    <!-- Sử dụng component LeftMenu -->
     <div v-else style="flex: 1">
       <header-component />
       <div
@@ -26,15 +25,15 @@
 </template>
 
 <script>
-// Import component LeftMenu và LeftMenuItem
+
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import SignDocumentLayout from "@/components/layout/setting/SignDocumentLayout.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 
 export default {
-  name: "SignDocumentList", // Tên component chính
+  name: "SignDocumentList", 
   components: {
-    LeftMenu, // Khai báo sử dụng LeftMenu
+    LeftMenu,
     SignDocumentLayout,
     HeaderComponent,
   },

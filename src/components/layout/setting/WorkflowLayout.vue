@@ -1,20 +1,6 @@
+<!-- Component cho Trang WorkflowList.vue -->
 <template>
-  <!-- Component dành riêng cho KIỂM SOÁT CHẤT LƯỢNG -->
   <div>
-    <div class="workflowFrame">
-      <div class="empFrame"></div>
-      <div class="toolbars">
-        <DxButton text="" icon="add" class="add" @click="createWorkflow" />
-        <DxAutocomplete
-          :input-attr="{
-            placeholder: 'Tìm kiếm...',
-            class: 'search-input',
-          }"
-          :show-clear-button="true"
-          class="searchItemsInput"
-        />
-      </div>
-    </div>
     <DxDataGrid
       id="dataGrid"
       :show-borders="isShowBorders"
@@ -22,7 +8,19 @@
       :data-source="gridData"
       :show-row-lines="isShowRowLines"
       :show-column-lines="isShowColumnLines"
+      :search-panel="{ visible: true, width: 240, placeholder: 'Tìm kiếm...' }"
       style="border: none"
+      :editing="{
+        mode: 'form',
+        allowAdding: true,
+        allowDeleting: true,
+        useIcons: true,
+        popup: {
+          title: 'Thêm mới quy trình',
+          showTitle: true,
+          height: 220,
+        },
+      }"
     >
       <DxHeaderFilter :visible="true" />
       <DxPaging :enabled="true" :pageSize="10" />
@@ -32,18 +30,18 @@
         :allowedPageSizes="[10, 25, 50, 100]"
         :showInfo="true"
       />
-      <!-- Cột Tên với bộ lọc -->
+      <DxToolbar>
+        <DxItem name="addRowButton" />
+        <DxItem name="searchPanel" />
+      </DxToolbar>
       <DxColumn data-field="Tên" alignment="left"> </DxColumn>
-
-      <!-- Các cột khác -->
       <DxColumn data-field="Loại áp dụng"></DxColumn>
-      <DxColumn data-field="" data-type="date"></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>
   </div>
 </template>
 
-<script setup lang="ts">
+<script>
 import {
   DxDataGrid,
   DxColumn,
@@ -51,45 +49,32 @@ import {
   DxHeaderFilter,
   DxPaging,
   DxPager,
+  DxToolbar,
+  DxItem,
 } from "devextreme-vue/data-grid";
-import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
-import DxButton from "devextreme-vue/button";
-import { DxAutocomplete } from "devextreme-vue/autocomplete";
 
 export default {
-  name: "WorkflowLayout", // Tên component chính
+  name: "WorkflowLayout",
   components: {
     DxDataGrid,
     DxColumn,
     DxSelection,
-    DxTextBox, // Đăng ký DxTextBox
     DxHeaderFilter,
-    DxButton,
-    DxAutocomplete,
     DxPaging,
     DxPager,
+    DxToolbar,
+    DxItem,
   },
   data() {
     return {
       selectedEmployee: undefined,
-      filterText: "", // Biến lưu trữ bộ lọc
+      filterText: "",
       gridData: [],
       isShowBorders: true,
       isRowAlternationEnabled: true,
       isShowRowLines: true,
       isShowColumnLines: true,
     };
-  },
-  methods: {
-    createWorkflow() {
-      this.$router.push("/create_workflow");
-    },
-    onFilterChanged(e) {
-      this.filterText = e.value;
-      this.gridData = this.gridData.filter((item) =>
-        item["Mã số"].toString().includes(this.filterText)
-      );
-    },
   },
 };
 </script>

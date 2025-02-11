@@ -1,3 +1,4 @@
+<!-- Component Lập kế hoạch Bước 3 -->
 <template>
   <div
     style="
@@ -252,20 +253,17 @@ export default {
       typeSource: ["Tuần tự", "Song song", "Song song đồng thuận"],
       customButtons: [
         {
-          name: "refresh", // Tên của button
-          location: "after", // Vị trí: trước ('before') hoặc sau ('after')
+          name: "refresh",
+          location: "after",
           options: {
-            icon: "refresh", // Icon hiển thị
-            hint: "Refresh", // Gợi ý tooltip
-            // onClick: () => {
-            //   alert("Refresh Clicked!");
-            // },
+            icon: "refresh",
+            hint: "Refresh",
           },
         },
         {
           name: "clear",
           location: "after",
-          options: undefined, // Nút clear mặc định
+          options: undefined,
         },
       ],
       typePDFSource: [
@@ -273,24 +271,17 @@ export default {
       ],
       addButtons: [
         {
-          name: "add", // Tên của button
-          location: "after", // Vị trí: trước ('before') hoặc sau ('after')
+          name: "add",
+          location: "after",
           options: {
-            icon: "add", // Icon hiển thị
-            hint: "Add", // Gợi ý tooltip
-            // onClick: () => {
-            //   alert("Refresh Clicked!");
-            // },
+            icon: "add",
+            hint: "Add",
           },
         },
       ],
     };
   },
   methods: {
-    togglePopup() {
-      this.isPopupVisible = !this.isPopupVisible;
-    },
-
     navigateBack() {
       this.$router.push("/create_plan_step_two");
     },

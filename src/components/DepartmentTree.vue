@@ -1,3 +1,4 @@
+<!-- Component Biểu đồ cây các Doanh nghiệp -->
 <template>
   <div class="fullFrame">
     <div class="departmentTreeFrame">
@@ -44,7 +45,6 @@
 </template>
 
 <script>
-// Import jsTree
 import "jstree/dist/themes/default/style.min.css";
 import $ from "jquery";
 import "jstree";
@@ -73,7 +73,6 @@ export default {
   },
   methods: {
     initTree() {
-      // Dữ liệu cây tổ chức cơ bản
       const data = [
         {
           parentItem: null,
@@ -2418,22 +2417,18 @@ export default {
           left_paramnames: null,
         },
       ];
-      // Thay thế icon là null bằng một icon mặc định từ FontAwesome (hoặc từ một thư viện icon khác)
-      const defaultIcon = "fa fa-sitemap"; // Icon mặc định nếu không có icon trong dữ liệu
-
-      // Duyệt qua từng phần tử và thay thế icon nếu cần
+      const defaultIcon = "fa fa-sitemap";
       data.forEach((node) => {
         if (node.icon === null) {
-          node.icon = defaultIcon; // Thêm icon mặc định vào các node có icon là null
+          node.icon = defaultIcon;
         }
       });
-      // Khởi tạo jsTree
       $(this.$refs.departmentTree).jstree({
         core: {
           data: data,
         },
         themes: {
-          icons: true, // Bật tính năng icon
+          icons: true,
         },
       });
     },

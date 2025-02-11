@@ -1,4 +1,4 @@
-<!-- Vai trò - Component-->
+<!-- Vai trò -->
 <template>
   <div
     style="
@@ -20,7 +20,6 @@
           background-color: white;
         "
       >
-        <!-- Sử dụng component LeftMenu -->
         <left-menu />
         <div class="content" style="flex: 1; border-left: 1px solid #e8e8e8">
           <div style="flex: 1; margin-left: 12px">
@@ -37,14 +36,7 @@
                       justify-content: flex-end;
                       margin: 12px 0 16px 12px;
                     "
-                  >
-                    <!-- <div
-                      class="input"
-                      style="display: flex; justify-content: space-between"
-                    >
-                      <DxButton text="" icon="add" class="add" />
-                    </div> -->
-                  </div>
+                  ></div>
                   <role-layout style="margin-left: 12px" />
                 </div>
               </div>
@@ -57,26 +49,22 @@
 </template>
 
 <script>
-// import DxButton from "devextreme-vue/button";
-
-// Import component LeftMenu và LeftMenuItem
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import RoleLayout from "@/components/layout/setting/RoleLayout.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 
 export default {
-  name: "RoleList", // Tên component chính
+  name: "RoleList",
   components: {
-    LeftMenu, // Khai báo sử dụng LeftMenu
+    LeftMenu,
     RoleLayout,
     HeaderComponent,
-    // DxButton,
   },
-  data () {
+  data() {
     return {
       loading: false,
-    }
-  }
+    };
+  },
 };
 </script>
 

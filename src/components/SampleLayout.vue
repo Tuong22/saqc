@@ -1,3 +1,4 @@
+<!-- Component cho Trang SampleList.vue -->
 <template>
   <div>
     <div>
@@ -16,31 +17,20 @@
           allowUpdating: true,
           useIcons: true,
         }"
+        :search-panel="{
+          visible: true,
+          width: 240,
+          placeholder: 'Tìm kiếm...',
+        }"
       >
         <DxToolbar>
           <DxItem name="addRowButton" />
-          <!-- Ô input tùy chỉnh -->
           <DxItem location="after">
             <template #default>
               <DxButton text="" icon="upload" @click="triggerFileInput" />
             </template>
           </DxItem>
-
-          <DxItem location="after">
-            <template #default>
-              <DxAutocomplete
-                :input-attr="{
-                  placeholder: 'Tìm kiếm...',
-                  class: 'search-input',
-                }"
-                :show-clear-button="true"
-                style="width: 280px"
-                ><template #prefix>
-                  <span class="dx-icon dx-icon-search"></span>
-                </template>
-              </DxAutocomplete>
-            </template>
-          </DxItem>
+          <DxItem name="searchPanel" />
         </DxToolbar>
         <DxHeaderFilter :visible="true" />
         <DxPaging :enabled="true" :pageSize="10" />
@@ -73,19 +63,17 @@ import {
   DxItem,
   DxToolbar,
 } from "devextreme-vue/data-grid";
-import { DxAutocomplete } from "devextreme-vue/autocomplete";
 import DxButton from "devextreme-vue/button";
 import axios from "axios";
 import { functionServices } from "@/services/FunctionService.js";
 
 export default {
-  name: "SampleLayout", // Tên component chính
+  name: "SampleLayout",
   components: {
     DxDataGrid,
     DxColumn,
     DxSelection,
     DxHeaderFilter,
-    DxAutocomplete,
     DxButton,
     DxPaging,
     DxPager,
@@ -148,10 +136,11 @@ export default {
     },
     triggerFileInput() {
       const fileInput = this.$refs.fileInput;
-      fileInput.click(); // Mở cửa sổ chọn tệp
+      fileInput.click();
     },
+    
     async uploadFile() {
-      const file = event.target.files[0]; // Lấy file từ input
+      const file = event.target.files[0];
 
       if (!file) {
         alert("Please select a file to upload");
@@ -168,6 +157,7 @@ export default {
         console.error("Error uploading file", error);
       }
     },
+
     async getData(items) {
       try {
         const data = await functionServices(items);

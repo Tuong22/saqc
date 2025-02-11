@@ -1,3 +1,4 @@
+<!-- Component các bước trong quá trình lập kế hoạch -->
 <template>
   <div style="display: flex">
     <div class="circle-text">
@@ -20,10 +21,9 @@ export default {
   name: "StepComponent",
   props: {
     step: {
-      type: Object, // Xác định kiểu dữ liệu là Object
-      required: true, // Prop này là bắt buộc
+      type: Object,
+      required: true,
       validator(value) {
-        // Xác thực rằng 'step' có các trường cần thiết
         return (
           typeof value.count === "string" &&
           typeof value.name === "string" &&

@@ -1,10 +1,9 @@
-<!-- Mẫu ký số -->
+<!-- Quy trình -->
 <template>
   <div style="display: flex; justify-content: space-between">
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
-    <!-- Sử dụng component LeftMenu -->
     <div v-else style="flex: 1">
       <header-component />
       <div
@@ -18,7 +17,7 @@
         <left-menu />
         <div style="flex: 1; border-left: 1px solid #e8e8e8">
           <div style="flex: 1; justify-content: center; align-items: center">
-            <h3 style="text-align: center; font-weight: bold">QUY TRÌNH MẪU</h3>
+            <h3 style="text-align: center; font-weight: bold">QUY TRÌNH</h3>
           </div>
           <div style="flex: 1; justify-content: center; align-items: center">
             <div style="width: 98%; justify-content: center">
@@ -32,15 +31,14 @@
 </template>
 
 <script>
-// Import component LeftMenu và LeftMenuItem
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import WorkflowLayout from "@/components/layout/setting/WorkflowLayout.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 
 export default {
-  name: "WorkflowList", // Tên component chính
+  name: "WorkflowList",
   components: {
-    LeftMenu, // Khai báo sử dụng LeftMenu
+    LeftMenu,
     WorkflowLayout,
     HeaderComponent,
   },

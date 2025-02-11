@@ -23,7 +23,6 @@ import SamplingPointPage from "@/pages/function/SamplingPointList.vue";
 import ControlCriteriaPage from "@/pages/function/ControlCriteriaList.vue";
 import CriticalPage from "@/pages/function/CriticalList.vue";
 import PlanCreateList from "@/pages/plan/PlanCreateList.vue";
-import CreateWorkflowList from "@/pages/setting/CreateWorkflowList.vue";
 import PlanCreateStepTwo from "@/pages/plan/PlanCreateStepTwo.vue";
 import PlanCreateStepThree from "@/pages/plan/PlanCreateStepThree.vue";
 import UpdatePlan from "@/pages/plan/UpdatePlan.vue";
@@ -111,11 +110,6 @@ const routes = [
     path: "/workflow",
     name: "Workflow",
     component: WorkflowPage,
-  },
-  {
-    path: "/create_workflow",
-    name: "Create_Workflow",
-    component: CreateWorkflowList,
   },
   {
     path: "/update_workflow",

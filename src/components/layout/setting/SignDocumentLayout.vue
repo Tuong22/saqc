@@ -1,5 +1,5 @@
+<!-- Component cho Trang SignDocumentList.vue -->
 <template>
-  <!-- Component dành riêng cho KIỂM SOÁT CHẤT LƯỢNG -->
   <div style="flex: 1">
     <DxDataGrid
       id="dataGrid"
@@ -8,39 +8,25 @@
       :data-source="gridData"
       :show-row-lines="isShowRowLines"
       :show-column-lines="isShowColumnLines"
+      :search-panel="{ visible: true, width: 240, placeholder: 'Tìm kiếm...' }"
       :editing="{
-        mode: 'popup', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
-        allowAdding: true, // Cho phép thêm hàng
-        allowDeleting: true, // Cho phép xóa hàng
+        mode: 'popup',
+        allowAdding: true,
+        allowDeleting: true,
         useIcons: true,
         popup: {
           title: 'Mẫu ký số',
           showTitle: true,
-          height: '260px',
+          height: '360px',
+          width: '900px',
         },
         form: { items: formItems },
       }"
       style="border: none"
     >
       <DxToolbar>
-        <!-- Nút thêm mặc định của DxDataGrid -->
         <DxItem name="addRowButton" />
-        <!-- Ô input tùy chỉnh -->
-        <DxItem location="after">
-          <template #default>
-            <DxAutocomplete
-              :input-attr="{
-                placeholder: 'Tìm kiếm...',
-                class: 'search-input',
-              }"
-              :show-clear-button="true"
-              style="width: 280px"
-              ><template #prefix>
-                <span class="dx-icon dx-icon-search"></span>
-              </template>
-            </DxAutocomplete>
-          </template>
-        </DxItem>
+        <DxItem name="searchPanel" />
       </DxToolbar>
       <DxHeaderFilter :visible="true" />
       <DxPaging :enabled="true" :pageSize="10" />
@@ -54,6 +40,16 @@
       <DxColumn data-field="Mã"> </DxColumn>
       <DxColumn data-field="Tên" alignment="left"> </DxColumn>
       <DxColumn data-field="Loại mẫu"></DxColumn>
+      <template #fileUploader>
+        <DxFileUploader
+          accept=".pdf,.doc,.docx,.txt"
+          :multiple="false"
+          :upload-mode="'useForm'"
+          @value-changed="onFileUpload"
+          select-button-text="Chọn tập tin"
+          label-text="hoặc Thả tập tin vào đây"
+        />
+      </template>
       <DxSelection mode="single" />
     </DxDataGrid>
   </div>
@@ -70,36 +66,26 @@ import {
   DxToolbar,
   DxItem,
 } from "devextreme-vue/data-grid";
-import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
-import DxButton from "devextreme-vue/button";
-import { DxAutocomplete } from "devextreme-vue/autocomplete";
-import { DxPopup } from "devextreme-vue/popup";
-import DxList from "devextreme-vue/list";
-import { DxCheckBox } from "devextreme-vue";
-import { DxSelectBox } from "devextreme-vue/select-box";
+import DxFileUploader from "devextreme-vue/file-uploader";
 
 export default {
-  name: "SignDocumentLayout", // Tên component chính
+  name: "SignDocumentLayout",
   components: {
     DxDataGrid,
     DxColumn,
     DxSelection,
-    DxTextBox, // Đăng ký DxTextBox
     DxHeaderFilter,
-    DxButton,
-    DxAutocomplete,
     DxPaging,
     DxPager,
-    DxPopup,
-    DxCheckBox,
-    DxList,
-    DxSelectBox,
     DxToolbar,
     DxItem,
+    DxFileUploader,
   },
   data() {
     return {
-      filterText: "", // Biến lưu trữ bộ lọc
+      uploadedFileName: "", // Lưu tên file upload
+
+      filterText: "",
       isShowBorders: true,
       isRowAlternationEnabled: true,
       isShowRowLines: true,
@@ -115,7 +101,7 @@ export default {
       formItems: [
         {
           dataField: "#",
-          label: { visible: false }, // Ẩn tiêu đề mặc định
+          label: { visible: false },
           editorType: "dxAutocomplete",
           editorOptions: {
             label: "STT",
@@ -124,7 +110,7 @@ export default {
         },
         {
           dataField: "Mã",
-          label: { visible: false }, // Ẩn tiêu đề mặc định
+          label: { visible: false },
           editorType: "dxAutocomplete",
           editorOptions: {
             label: "Mã",
@@ -133,7 +119,7 @@ export default {
         },
         {
           dataField: "Tên",
-          label: { visible: false }, // Ẩn tiêu đề mặc định
+          label: { visible: false },
           editorType: "dxAutocomplete",
           editorOptions: {
             label: "Tên",
@@ -142,28 +128,38 @@ export default {
         },
         {
           dataField: "Loại mẫu",
-          label: { visible: false }, // Ẩn tiêu đề mặc định
+          label: { visible: false },
           editorType: "dxAutocomplete",
           editorOptions: {
             label: "Loại mẫu",
             labelMode: "floating",
           },
         },
+        {
+          // Component upload file
+          label: { text: "TỆP ĐÍNH KÈM", cssClass: "label" },
+          template: "fileUploader",
+          cssClass: "upload_file",
+        },
       ],
     };
   },
   methods: {
-    // Phương thức xử lý thay đổi bộ lọc
-    togglePopup() {
-      this.isPopupVisible = !this.isPopupVisible;
-    },
-    onFilterChanged(e) {
-      this.filterText = e.value;
-      // Lọc dữ liệu theo "Mã số" khi có thay đổi bộ lọc
-      this.gridData = this.gridData.filter((item) =>
-        item["Mã số"].toString().includes(this.filterText)
-      );
+    onFileUpload(e) {
+      const file = e.value[0]; // Lấy file đầu tiên
+      if (file) {
+        this.uploadedFileName = file.name; // Cập nhật tên file vào form
+      }
     },
   },
 };
 </script>
+
+<style>
+.upload_file {
+  padding-top: 12px;
+  color: #fa896c;
+  font-size: 16px;
+  font-weight: bold;
+}
+</style>

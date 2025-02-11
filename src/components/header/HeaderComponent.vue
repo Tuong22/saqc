@@ -1,3 +1,4 @@
+<!-- Component Header cho cả Module -->
 <template>
   <div
     class="headerFrame"

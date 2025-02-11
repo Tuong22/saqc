@@ -1,4 +1,4 @@
-<!-- Phân quyền - Privilege-->
+<!-- Phân quyền -->
 <template>
   <div
     style="
@@ -67,12 +67,10 @@
         </div>
       </div>
     </div>
-    <!-- Sử dụng component LeftMenu -->
   </div>
 </template>
 
 <script>
-// Import component LeftMenu và LeftMenuItem
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import DepartmentTree from "@/components/DepartmentTree.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
@@ -83,10 +81,10 @@ import { DxSelectBox } from "devextreme-vue/select-box";
 import DxList from "devextreme-vue/list";
 
 export default {
-  name: "PrivilegeList", // Tên component chính
+  name: "PrivilegeList", 
   components: {
-    LeftMenu, // Khai báo sử dụng LeftMenu
-    DepartmentTree, // Khai báo sử dụng DepartmentTree
+    LeftMenu, 
+    DepartmentTree,
     HeaderComponent,
     DxPopup,
     DxButton,

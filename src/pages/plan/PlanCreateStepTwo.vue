@@ -1,3 +1,4 @@
+<!-- Component Lập kế hoạch Bước 2 -->
 <template>
   <div
     style="
@@ -64,7 +65,6 @@
         </div>
       </template>
     </DxPopup>
-    <!-- Sử dụng component LeftMenu -->
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
@@ -249,32 +249,26 @@ export default {
       typeSource: ["Tuần tự", "Song song", "Song song đồng thuận"],
       customButtons: [
         {
-          name: "refresh", // Tên của button
-          location: "after", // Vị trí: trước ('before') hoặc sau ('after')
+          name: "refresh",
+          location: "after",
           options: {
-            icon: "refresh", // Icon hiển thị
-            hint: "Refresh", // Gợi ý tooltip
-            // onClick: () => {
-            //   alert("Refresh Clicked!");
-            // },
+            icon: "refresh",
+            hint: "Refresh",
           },
         },
         {
           name: "clear",
           location: "after",
-          options: undefined, // Nút clear mặc định
+          options: undefined,
         },
       ],
       addButtons: [
         {
-          name: "add", // Tên của button
-          location: "after", // Vị trí: trước ('before') hoặc sau ('after')
+          name: "add",
+          location: "after",
           options: {
-            icon: "add", // Icon hiển thị
-            hint: "Add", // Gợi ý tooltip
-            // onClick: () => {
-            //   alert("Refresh Clicked!");
-            // },
+            icon: "add",
+            hint: "Add",
           },
         },
       ],
@@ -290,13 +284,9 @@ export default {
     navigateBack() {
       this.$router.push("/create_plan");
     },
-    navigateToStepThree() {
-      this.$router.push("/create_plan_step_three");
-    },
     navigateAll() {
       this.$router.push("/create_plan");
     },
   },
 };
 </script>
-

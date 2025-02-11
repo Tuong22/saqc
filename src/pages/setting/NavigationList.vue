@@ -1,4 +1,4 @@
-<!-- Dẫn hướng - Component-->
+<!-- Dẫn hướng -->
 <template>
   <div
     style="
@@ -20,7 +20,6 @@
           background-color: white;
         "
       >
-        <!-- Sử dụng component LeftMenu -->
         <left-menu />
         <div class="content" style="border-left: 1px solid #e8e8e8">
           <div class="title">
@@ -40,16 +39,15 @@
 </template>
 
 <script>
-import HeaderComponent from "@/components/header/HeaderComponent.vue";
 
-// Import component LeftMenu và LeftMenuItem
+import HeaderComponent from "@/components/header/HeaderComponent.vue";
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import NavigationLayout from "@/components/layout/setting/NavigationLayout.vue";
 
 export default {
-  name: "NavigationList", // Tên component chính
+  name: "NavigationList", 
   components: {
-    LeftMenu, // Khai báo sử dụng LeftMenu
+    LeftMenu, 
     NavigationLayout,
     HeaderComponent,
   },
@@ -60,12 +58,6 @@ export default {
       dataSource: [],
     };
   },
-  methods: {
-    togglePopup() {
-      this.isPopupVisible = !this.isPopupVisible;
-      console.log("HELLO");
-    },
-  },
 };
 </script>
 
@@ -75,7 +67,7 @@ input {
   padding: 5px;
 }
 .add .dx-icon {
-  color: black !important; /* Đặt màu icon thành trắng */
+  color: black !important; 
 }
 .content {
   flex: 1;

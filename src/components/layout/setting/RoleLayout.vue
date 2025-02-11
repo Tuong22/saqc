@@ -1,5 +1,5 @@
+<!-- Component cho Trang RoleList.vue -->
 <template>
-  <!-- Sử dụng component LeftMenu -->
   <div style="flex: 1">
     <DxDataGrid
       id="dataGrid"
@@ -9,10 +9,10 @@
       :show-row-lines="isShowRowLines"
       :show-column-lines="isShowColumnLines"
       :editing="{
-        mode: 'cell', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
-        allowUpdating: true, // Cho phép chỉnh sửa
-        allowAdding: true, // Cho phép thêm hàng
-        allowDeleting: true, // Cho phép xóa hàng
+        mode: 'cell',
+        allowUpdating: true,
+        allowAdding: true,
+        allowDeleting: true,
         useIcons: true,
       }"
       style="border: none"
@@ -29,11 +29,7 @@
       <DxColumn data-field="Thứ tự" alignment="left" width="100px" />
       <DxColumn data-field="Mã" />
       <DxColumn data-field="Tên" />
-      <DxColumn
-        data-field="Cố định"
-        caption="Cố định"
-        width="120px"
-      >
+      <DxColumn data-field="Cố định" caption="Cố định" width="120px">
         <template #checkboxTemplate="{ data }">
           <input
             type="checkbox"
@@ -46,7 +42,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script>
 import {
   DxDataGrid,
   DxColumn,
@@ -55,9 +51,7 @@ import {
   DxPaging,
   DxPager,
   DxFilterRow,
-  // DxLookup,
 } from "devextreme-vue/data-grid";
-// import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
 
 const lookupDataSourceConfig = [
   { CustomerID: 1, ContactName: "Nguyễn Văn A", Phone: "0123456789" },
@@ -73,22 +67,20 @@ const lookupDataSourceConfig = [
 ];
 
 export default {
-  name: "RoleLayout", // Tên component chính
+  name: "RoleLayout",
   components: {
     DxDataGrid,
     DxColumn,
     DxSelection,
-    // DxTextBox, // Đăng ký DxTextBox
     DxHeaderFilter,
     DxPaging,
     DxPager,
     DxFilterRow,
-    // DxLookup,
   },
   data() {
     return {
       lookupDataSourceConfig,
-      filterText: "", 
+      filterText: "",
       isShowBorders: true,
       isRowAlternationEnabled: true,
       isShowRowLines: true,
@@ -108,18 +100,6 @@ export default {
     };
   },
   methods: {
-    handleDelete(data) {
-      // Xử lý xóa
-      console.log("Xóa dữ liệu:", data);
-    },
-    // Phương thức xử lý thay đổi bộ lọc
-    onFilterChanged(e) {
-      this.filterText = e.value;
-      // Lọc dữ liệu theo "Mã số" khi có thay đổi bộ lọc
-      this.gridData = this.gridData.filter((item) =>
-        item["Mã số"].toString().includes(this.filterText)
-      );
-    },
     toggle(e) {
       e.setValue(!e.value);
     },

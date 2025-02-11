@@ -1,5 +1,5 @@
+<!-- Component cho Trang NavigationList.vue -->
 <template>
-  <!-- Sử dụng component LeftMenu -->
   <div style="flex: 1">
     <DxDataGrid
       id="dataGrid"
@@ -8,62 +8,28 @@
       :show-column-lines="isShowColumnLines"
       :column-hiding-enabled="isColumnHidingEnabled"
       :show-borders="isShowBorders"
+      :search-panel="{ visible: true, width: 240, placeholder: 'Tìm kiếm...' }"
       :editing="{
-        mode: 'popup', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
-        allowAdding: true, // Cho phép thêm hàng
-        allowDeleting: true, // Cho phép xóa hàng
+        mode: 'popup', 
+        allowAdding: true, 
+        allowDeleting: true,
         allowUpdating: true,
         useIcons: true,
         popup: {
-          title: 'Dẫn hướng', // Tiêu đề của popup
-          showTitle: true, // Hiển thị tiêu đề
-          height: 440, // Chiều cao popup
+          title: 'Dẫn hướng', 
+          showTitle: true, 
+          height: 440, 
         },
         form: {
-          colCount: 2, // Chia form thành 2 cột
+          colCount: 2, 
         },
       }"
       :group-panel="{ visible: true }"
       style="border: none"
-      :search-panel="{
-        placeholder: 'Tìm kiếm...',
-        visible: true,
-        hightlightSearchText: true,
-        text: 'xin chào',
-      }"
     >
       <DxToolbar>
-        <!-- Nút thêm hàng mặc định -->
         <DxItem name="addRowButton" />
-        <!-- Dropdown Filter cho cột Nhóm -->
-        <!-- <DxItem location="before">
-          <template #default>
-            <DxSelectBox
-              v-model="selectedGroup"
-              :items="groupOptions"
-              placeholder="Lọc theo Nhóm"
-              @value-changed="filterByGroup"
-              class="custom-dropdown"
-            />
-          </template>
-        </DxItem> -->
-
-        <!-- Ô input tùy chỉnh -->
-        <DxItem location="after">
-          <template #default>
-            <!-- <DxAutocomplete
-              :input-attr="{
-                placeholder: 'Tìm kiếm...',
-                class: 'search-input',
-              }"
-              :show-clear-button="true"
-              style="width: 280px"
-              ><template #prefix>
-                <span class="dx-icon dx-icon-search"></span>
-              </template>
-            </DxAutocomplete> -->
-          </template>
-        </DxItem>
+        <DxItem name="searchPanel" />
       </DxToolbar>
       <DxGroupPanel :visible="true" />
       <DxHeaderFilter :visible="true" />

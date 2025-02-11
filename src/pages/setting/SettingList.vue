@@ -1,10 +1,9 @@
-<!-- Dẫn hướng - Component-->
+<!-- Cài đặt -->
 <template>
   <div style="display: flex; justify-content: space-between">
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
-    <!-- Sử dụng component LeftMenu -->
     <div v-else style="flex: 1">
       <header-component />
       <div
@@ -87,7 +86,6 @@
 </template>
 
 <script>
-// Import component LeftMenu và LeftMenuItem
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 
@@ -96,9 +94,9 @@ import { DxAutocomplete } from "devextreme-vue/autocomplete";
 import DxButton from "devextreme-vue/button";
 
 export default {
-  name: "SettingList", // Tên component chính
+  name: "SettingList",
   components: {
-    LeftMenu, // Khai báo sử dụng LeftMenu
+    LeftMenu,
     DxCheckBox,
     DxAutocomplete,
     DxButton,
@@ -107,7 +105,7 @@ export default {
   data() {
     return {
       loading: false,
-      store: ["ABC", "DEF", "GHI", "XYZ"], // Dữ liệu gợi ý
+      store: ["ABC", "DEF", "GHI", "XYZ"],
     };
   },
 };

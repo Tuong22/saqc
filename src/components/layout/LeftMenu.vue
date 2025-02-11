@@ -1,3 +1,4 @@
+<!-- Component Menu trái của module SAQC -->
 <template>
   <div style="height: 100%; width: 260px">
     <div v-for="group in data" :key="group.id" class="menu-group">

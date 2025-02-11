@@ -1,3 +1,4 @@
+<!-- Component Lập kế hoạch Bước 1 -->
 <template>
   <div
     style="
@@ -454,7 +455,6 @@
         </div>
       </template>
     </DxPopup>
-    <!-- Sử dụng component LeftMenu -->
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
@@ -663,57 +663,42 @@
                     @selection-changed="selectEmployee"
                     :show-row-lines="isShownRowLines"
                     :show-column-lines="isShownColumnLines"
+                    :export="{
+                      enabled: true,
+                    }"
+                    :search-panel="{
+                      visible: true,
+                      width: 240,
+                      placeholder: 'Tìm kiếm...',
+                    }"
                     :editing="{
-                      mode: 'popup', // Kiểu chỉnh sửa: 'row', 'cell', 'batch', 'popup', 'form'
-                      allowAdding: true, // Cho phép thêm hàng
-                      allowDeleting: true, // Cho phép xóa hàng
+                      mode: 'popup',
+                      allowAdding: true,
+                      allowDeleting: true,
                       allowUpdating: true,
                       useIcons: true,
                       popup: {
-                        title: 'Dẫn hướng', // Tiêu đề của popup
-                        showTitle: true, // Hiển thị tiêu đề
-                        height: 440, // Chiều cao popup
+                        title: 'Dẫn hướng',
+                        showTitle: true,
+                        height: 440,
+                      },
+                      texts: {
+                        addRow: 'Thêm dòng',
                       },
                       form: {
-                        colCount: 2, // Chia form thành 2 cột
+                        colCount: 2,
                       },
                     }"
                     style="border: none"
                   >
                     <DxToolbar>
                       <DxItem name="addRowButton" />
-
                       <DxItem location="after">
                         <template #default>
                           <DxButton icon="download" text="Tải mẫu" />
                         </template>
                       </DxItem>
-                      <DxItem location="after">
-                        <!-- <template #default>
-                          <DxFileUploader
-                            style="width: 100px"
-                            select-button-text="Import"
-                            label-text=""
-                            :show-file-list="isShowFileList"
-                            :multiple="false"
-                          />
-                        </template> -->
-                      </DxItem>
-                      <DxItem location="after">
-                        <template #default>
-                          <DxAutocomplete
-                            :input-attr="{
-                              placeholder: 'Tìm kiếm...',
-                              class: 'search-input',
-                            }"
-                            :show-clear-button="true"
-                            style="width: 280px"
-                            ><template #prefix>
-                              <span class="dx-icon dx-icon-search"></span>
-                            </template>
-                          </DxAutocomplete>
-                        </template>
-                      </DxItem>
+                      <DxItem name="searchPanel" />
                     </DxToolbar>
                     <DxHeaderFilter :visible="true" />
                     <DxPaging :enabled="true" :pageSize="10" />
@@ -989,7 +974,7 @@ export default {
       isShowClearButton: true,
       isShowDropdownButton: true,
       isShowSelectionControls: true,
-      selectedKeys: [1], // Mặc định chọn nút đầu tiên
+      selectedKeys: [1],
       frequencyComponent: true,
       MonthsItems: [
         { id: 1, text: "Tháng 1" },

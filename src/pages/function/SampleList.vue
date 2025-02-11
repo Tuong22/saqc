@@ -1,10 +1,9 @@
-<!-- Tình trạng -->
+<!-- Bộ mẫu -->
 <template>
   <div style="display: flex; justify-content: space-between">
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
-    <!-- Sử dụng component LeftMenu -->
     <div v-else style="flex: 1">
       <header-component />
       <div
@@ -26,15 +25,14 @@
 </template>
 
 <script>
-// Import component LeftMenu và LeftMenuItem
 import SampleLayout from "@/components/SampleLayout.vue";
 import LeftMenu from "@/components/layout/LeftMenu.vue";
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 
 export default {
-  name: "SampleList", // Tên component chính
+  name: "SampleList", 
   components: {
-    LeftMenu, // Khai báo sử dụng LeftMenu
+    LeftMenu, 
     SampleLayout,
     HeaderComponent,
   },
