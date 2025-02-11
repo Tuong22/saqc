@@ -195,12 +195,12 @@
               :show-row-lines="isShownRowLines"
               :show-column-lines="isShownColumnLines"
             >
-              <DxColumn data-field="# "> </DxColumn>
-              <DxColumn data-field="Năm"> </DxColumn>
-              <DxColumn data-field="Trước thay đổi"> </DxColumn>
-              <DxColumn data-field="Sau thay đổi"> </DxColumn>
-              <DxColumn data-field="Mức độ"> </DxColumn>
-              <DxColumn data-field="Ghi chú"> </DxColumn>
+              <DxColumn data-field="#" alignment="center"> </DxColumn>
+              <DxColumn data-field="Năm" alignment="center"> </DxColumn>
+              <DxColumn data-field="Trước thay đổi" alignment="center"> </DxColumn>
+              <DxColumn data-field="Sau thay đổi" alignment="center"> </DxColumn>
+              <DxColumn data-field="Mức độ" alignment="center"> </DxColumn>
+              <DxColumn data-field="Ghi chú" alignment="center"> </DxColumn>
             </DxDataGrid>
           </div>
         </div>
@@ -708,62 +708,104 @@
                       :allowedPageSizes="[10, 25, 50, 100]"
                       :showInfo="true"
                     />
-                    <DxColumn data-field="Ý kiến" caption="Ý kiến" />
-                    <DxColumn data-field="#" caption="#" />
+                    <DxColumn
+                      data-field="Ý kiến"
+                      caption="Ý kiến"
+                      alignment="center"
+                    />
+                    <DxColumn data-field="#" caption="#" alignment="center" />
                     <DxColumn
                       data-field="Điểm lấy mẫu"
                       caption="Điểm lấy mẫu"
+                      alignment="center"
                     />
-                    <DxColumn data-field="Phân xưởng" caption="Phân xưởng" />
-                    <DxColumn data-field="Tên mẫu" caption="Tên mẫu" />
+                    <DxColumn
+                      data-field="Phân xưởng"
+                      caption="Phân xưởng"
+                      alignment="center"
+                    />
+                    <DxColumn
+                      data-field="Tên mẫu"
+                      caption="Tên mẫu"
+                      alignment="center"
+                    />
                     <DxColumn
                       data-field="Mục đích chính"
                       caption="Mục đích chính"
+                      alignment="center"
                     />
                     <DxColumn
                       data-field="Quy trình lấy mẫu"
                       caption="Quy trình lấy mẫu"
+                      alignment="center"
                     />
                     <DxColumn
                       data-field="Phương pháp thử nghiệm"
                       caption="Phương pháp thử nghiệm"
+                      alignment="center"
                     />
                     <DxColumn
                       data-field="Chỉ tiêu kiểm soát"
                       caption="Chỉ tiêu kiểm soát"
+                      alignment="center"
                     />
                     <DxColumn
                       data-field="Phòng thử nghiệm"
                       caption="Phòng thử nghiệm"
+                      alignment="center"
                     />
-                    <DxColumn data-field="Giờ lấy mẫu" caption="Giờ lấy mẫu" />
-                    <DxColumn data-field="VHBT" caption="VHBT">
-                      <DxColumn data-field="Tần suất" caption="Tần suất" />
+                    <DxColumn
+                      data-field="Giờ lấy mẫu"
+                      caption="Giờ lấy mẫu"
+                      alignment="center"
+                    />
+                    <DxColumn
+                      data-field="VHBT"
+                      caption="VHBT"
+                      alignment="center"
+                    >
+                      <DxColumn
+                        data-field="Tần suất"
+                        caption="Tần suất"
+                        alignment="center"
+                      />
                     </DxColumn>
                     <DxColumn
                       data-field="Các dịp lễ tết (>3 ngày)"
                       caption="Các dịp lễ tết (>3 ngày)"
-                      ><DxColumn data-field="Tần suất" caption="Tần suất" />
+                      alignment="center"
+                      ><DxColumn
+                        data-field="Tần suất"
+                        caption="Tần suất"
+                        alignment="center"
+                      />
                     </DxColumn>
                     <DxColumn
                       caption="KẾ HOẠCH TEST RUN DẦU THÔ"
                       alignment="center"
                     >
-                      <DxColumn data-field="Step at 5%" caption="Step at 5%" />
+                      <DxColumn
+                        data-field="Step at 5%"
+                        caption="Step at 5%"
+                        alignment="center"
+                      />
                       <DxColumn
                         data-field="Step at 10%"
                         caption="Step at 10%"
                         data-type="boolean"
+                        alignment="center"
                       >
                         <DxColumn
                           data-field="5:00"
                           caption="5:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                         <DxColumn
                           data-field="20:00"
                           caption="20:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                       </DxColumn>
 
@@ -771,16 +813,19 @@
                         data-field="Step at 15%"
                         caption="Step at 15%"
                         data-type="boolean"
+                        alignment="center"
                       >
                         <DxColumn
                           data-field="5:00"
                           caption="5:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                         <DxColumn
                           data-field="20:00"
                           caption="20:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                       </DxColumn>
 
@@ -788,16 +833,19 @@
                         data-field="Final step 1(15%)"
                         caption="Final step 1(15%)"
                         data-type="boolean"
+                        alignment="center"
                       >
                         <DxColumn
                           data-field="5:00"
                           caption="5:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                         <DxColumn
                           data-field="20:00"
                           caption="20:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                       </DxColumn>
 
@@ -805,21 +853,31 @@
                         data-field="Final step 2(15%)"
                         caption="Final step 2(15%)"
                         data-type="boolean"
+                        alignment="center"
                       >
                         <DxColumn
                           data-field="5:00"
                           caption="5:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                         <DxColumn
                           data-field="20:00"
                           caption="20:00"
                           data-type="boolean"
+                          alignment="center"
                         />
                       </DxColumn>
                     </DxColumn>
-                    <DxColumn data-field="CRITICAL" caption="CRITICAL" />
-                    <DxScrolling column-rendering-mode="virtual" />
+                    <DxColumn
+                      data-field="CRITICAL"
+                      caption="CRITICAL"
+                      alignment="center"
+                    />
+                    <DxScrolling
+                      column-rendering-mode="virtual"
+                      alignment="center"
+                    />
                   </DxDataGrid>
                 </div>
               </div>
@@ -1024,5 +1082,12 @@ export default {
 <style>
 #dataGrid {
   width: 1220px;
+  height: auto;
+}
+
+.dx-datagrid .dx-header-row {
+  background-color: #f3f6f9;
+  color: black;
+  font-weight: bold;
 }
 </style>

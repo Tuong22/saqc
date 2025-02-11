@@ -1,45 +1,6 @@
 <!-- Component cho Trang PlanList.vue -->
 <template>
   <div style="flex: 1">
-    <DxPopup
-      :visible="popupVisible"
-      title="Chi tiết kế hoạch"
-      :hide-on-outside-click="true"
-      :show-title="true"
-      :show-close-button="true"
-      position="center"
-      width="600px"
-    >
-      <template>
-        <div v-if="selectedRow" style="flex: 1">
-          <div>
-            <strong>Mã số:</strong> <span>{{ selectedRow["Mã số"] }}</span>
-          </div>
-          <div>
-            <strong>Tiêu đề:</strong> <span>{{ selectedRow["Tiêu đề"] }}</span>
-          </div>
-          <div>
-            <strong>Năm KH:</strong> <span>{{ selectedRow["Năm KH"] }}</span>
-          </div>
-          <div>
-            <strong>Người tạo:</strong>
-            <span>{{ selectedRow["Người tạo"] }}</span>
-          </div>
-          <div>
-            <strong>Bước xử lý:</strong>
-            <span>{{ selectedRow["Bước xử lý"] }}</span>
-          </div>
-          <div>
-            <strong>Người xử lý:</strong>
-            <span>{{ selectedRow["Người xử lý"] }}</span>
-          </div>
-          <div>
-            <strong>Tình trạng:</strong>
-            <span>{{ selectedRow["Tình trạng"] }}</span>
-          </div>
-        </div>
-      </template>
-    </DxPopup>
     <div style="flex: 1; padding-top: 20px">
       <!-- Popup hiển thị thông tin chi tiết -->
 
@@ -109,13 +70,18 @@
           :allowedPageSizes="[10, 25, 50, 100]"
           :showInfo="true"
         />
-        <DxColumn data-field="Mã số" alignment="left" :width="160" />
-        <DxColumn data-field="Tiêu đề" :width="240" />
-        <DxColumn data-field="Năm KH" data-type="date" :width="120" />
-        <DxColumn data-field="Người tạo" :width="160" />
-        <DxColumn data-field="Bước xử lý" />
-        <DxColumn data-field="Người xử lý" />
-        <DxColumn data-field="Tình trạng" />
+        <DxColumn data-field="Mã số" alignment="left" :width="92" />
+        <DxColumn data-field="Tiêu đề" :width="240" alignment="center" />
+        <DxColumn
+          data-field="Năm KH"
+          data-type="date"
+          :width="120"
+          alignment="center"
+        />
+        <DxColumn data-field="Người tạo" :width="160" alignment="center" />
+        <DxColumn data-field="Bước xử lý" alignment="center" />
+        <DxColumn data-field="Người xử lý" alignment="center" />
+        <DxColumn data-field="Tình trạng" alignment="center" />
         <DxSelection mode="single" />
       </DxDataGrid>
     </div>
@@ -138,7 +104,6 @@ import DxButton from "devextreme-vue/button";
 import { DxSelectBox } from "devextreme-vue/select-box";
 import { DxNumberBox } from "devextreme-vue/number-box";
 import { DxList } from "devextreme-vue/list";
-import DxPopup from "devextreme-vue/popup";
 
 export default {
   name: "PlanLayout",
@@ -155,7 +120,6 @@ export default {
     DxNumberBox,
     DxButton,
     DxList,
-    DxPopup,
   },
   data() {
     return {

@@ -34,8 +34,8 @@
         <DxItem name="addRowButton" />
         <DxItem name="searchPanel" />
       </DxToolbar>
-      <DxColumn data-field="Tên" alignment="left"> </DxColumn>
-      <DxColumn data-field="Loại áp dụng"></DxColumn>
+      <DxColumn data-field="Tên" alignment="center"> </DxColumn>
+      <DxColumn data-field="Loại áp dụng" alignment="center"></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>
   </div>

@@ -40,12 +40,12 @@
           :allowedPageSizes="[10, 25, 50, 100]"
           :showInfo="true"
         />
-        <DxColumn data-field="#" alignment="center" width="100px"> </DxColumn>
-        <DxColumn data-field="Mã"> </DxColumn>
-        <DxColumn data-field="Tên" alignment="left"> </DxColumn>
-        <DxColumn data-field="Màu chữ"></DxColumn>
-        <DxColumn data-field="Màu nền"></DxColumn>
-        <DxColumn data-field=""></DxColumn>
+        <DxColumn data-field="#" alignment="left" width="60px"> </DxColumn>
+        <DxColumn data-field="Mã" alignment="center"> </DxColumn>
+        <DxColumn data-field="Tên" alignment="center"> </DxColumn>
+        <DxColumn data-field="Màu chữ" alignment="center"></DxColumn>
+        <DxColumn data-field="Màu nền" alignment="center"></DxColumn>
+        <DxColumn data-field="" alignment="center"></DxColumn>
         <DxSelection mode="single" />
       </DxDataGrid>
     </div>

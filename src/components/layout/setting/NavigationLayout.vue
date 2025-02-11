@@ -10,18 +10,18 @@
       :show-borders="isShowBorders"
       :search-panel="{ visible: true, width: 240, placeholder: 'Tìm kiếm...' }"
       :editing="{
-        mode: 'popup', 
-        allowAdding: true, 
+        mode: 'popup',
+        allowAdding: true,
         allowDeleting: true,
         allowUpdating: true,
         useIcons: true,
         popup: {
-          title: 'Dẫn hướng', 
-          showTitle: true, 
-          height: 440, 
+          title: 'Dẫn hướng',
+          showTitle: true,
+          height: 440,
         },
         form: {
-          colCount: 2, 
+          colCount: 2,
         },
       }"
       :group-panel="{ visible: true }"
@@ -42,21 +42,26 @@
       />
       <DxGrouping :auto-expand-all="false" />
       <DxColumn data-field="STT" alignment="left" width="60px"> </DxColumn>
-      <DxColumn data-field="Mã" width="120px"></DxColumn>
+      <DxColumn data-field="Mã" width="120px" alignment="center"></DxColumn>
       <DxColumn
         data-field="Nhóm"
         :group-index="0"
         header-cell-template="headerCellTemplate"
+        alignment="center"
       >
         <template #headerCellTemplate="{ data }">
           <div>{{ data.value }}</div>
         </template></DxColumn
       >
-      <DxColumn data-field="Tên" width="120px"></DxColumn>
-      <DxColumn data-field="Dẫn hướng" width="120px"></DxColumn>
-      <DxColumn data-field="Icon" width="120px"></DxColumn>
-      <DxColumn data-field="Truy vấn"></DxColumn>
-      <DxColumn data-field="Đếm số"
+      <DxColumn data-field="Tên" width="120px" alignment="center"></DxColumn>
+      <DxColumn
+        data-field="Dẫn hướng"
+        width="160px"
+        alignment="center"
+      ></DxColumn>
+      <DxColumn data-field="Icon" width="120px" alignment="center"></DxColumn>
+      <DxColumn data-field="Truy vấn" alignment="center"></DxColumn>
+      <DxColumn data-field="Đếm số" alignment="center"
         ><template #checkboxCountTemplate="{ data }">
           <input
             type="checkbox"
@@ -64,7 +69,10 @@
             @change="toggleShowCount(data)"
           /> </template
       ></DxColumn>
-      <DxColumn data-field="Hiển thị số điện thoại" caption="Hiển thị SĐT"
+      <DxColumn
+        data-field="Hiển thị số điện thoại"
+        caption="Hiển thị SĐT"
+        alignment="center"
         ><template #checkboxPhoneNumberTemplate="{ data }">
           <input
             type="checkbox"
@@ -75,6 +83,7 @@
       <DxColumn
         data-field="Hiển thị trang chủ số điện thoại"
         caption="Hiển thị trang chủ SĐT"
+        alignment="center"
         ><template #checkboxHomePagePhoneNumberTemplate="{ data }">
           <input
             type="checkbox"
@@ -82,7 +91,7 @@
             @change="toggleShowHomePagePhone(data)"
           /> </template
       ></DxColumn>
-      <DxColumn data-field="Mở rộng" caption="Mở rộng"
+      <DxColumn data-field="Mở rộng" caption="Mở rộng" alignment="center"
         ><template #checkboxExpandTemplate="{ data }">
           <input
             type="checkbox"
@@ -90,7 +99,7 @@
             @change="toggleExpand(data)"
           /> </template
       ></DxColumn>
-      <DxColumn data-field="Phân quyền"></DxColumn>
+      <DxColumn data-field="Phân quyền" alignment="center"></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>
   </div>

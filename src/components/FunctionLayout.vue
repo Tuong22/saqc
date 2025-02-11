@@ -40,10 +40,10 @@
           :allowedPageSizes="[10, 25, 50, 100]"
           :showInfo="true"
         />
-        <DxColumn data-field="#" alignment="center" width="100px"> </DxColumn>
-        <DxColumn data-field="Mã"> </DxColumn>
-        <DxColumn data-field="Tên" alignment="left"> </DxColumn>
-        <DxColumn data-field="Màu chữ">
+        <DxColumn data-field="#" alignment="left" width="60px"> </DxColumn>
+        <DxColumn data-field="Mã" alignment="center"> </DxColumn>
+        <DxColumn data-field="Tên" alignment="center"> </DxColumn>
+        <DxColumn data-field="Màu chữ" alignment="center">
           <template #cell-template="{ data }">
             <DxColorBox
               :value="data.data['Màu chữ']"
@@ -51,7 +51,7 @@
             />
           </template>
         </DxColumn>
-        <DxColumn data-field="Màu nền">
+        <DxColumn data-field="Màu nền" alignment="center">
           <template #cell-template="{ data }">
             <DxColorBox
               :value="data.data['Màu nền']"
@@ -59,8 +59,8 @@
             />
           </template>
         </DxColumn>
-        <DxColumn data-field="Icon"></DxColumn>
-        <DxColumn data-field="Tùy chọn khác"></DxColumn>
+        <DxColumn data-field="Icon" alignment="center"></DxColumn>
+        <DxColumn data-field="Tùy chọn khác" alignment="center"></DxColumn>
         <DxSelection mode="single" />
       </DxDataGrid>
     </div>
@@ -85,7 +85,7 @@ import { DxColorBox } from "devextreme-vue/color-box";
 import { functionServices } from "@/services/FunctionService.js";
 
 export default {
-  name: "FunctionLayout", 
+  name: "FunctionLayout",
   components: {
     DxDataGrid,
     DxColumn,
@@ -130,15 +130,15 @@ export default {
   methods: {
     updateColor(rowData, field, newValue) {
       rowData[field] = newValue;
-      this.dataSource = [...this.dataSource]; 
+      this.dataSource = [...this.dataSource];
     },
     triggerFileInput() {
       const fileInput = this.$refs.fileInput;
-      fileInput.click(); 
+      fileInput.click();
     },
-    
+
     async uploadFile() {
-      const file = event.target.files[0]; 
+      const file = event.target.files[0];
 
       if (!file) {
         alert("Please select a file to upload");

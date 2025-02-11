@@ -27,9 +27,14 @@
         :showInfo="true"
       />
       <DxColumn data-field="Thứ tự" alignment="left" width="100px" />
-      <DxColumn data-field="Mã" />
-      <DxColumn data-field="Tên" />
-      <DxColumn data-field="Cố định" caption="Cố định" width="120px">
+      <DxColumn data-field="Mã" alignment="center" />
+      <DxColumn data-field="Tên" alignment="center" />
+      <DxColumn
+        data-field="Cố định"
+        caption="Cố định"
+        width="120px"
+        alignment="center"
+      >
         <template #checkboxTemplate="{ data }">
           <input
             type="checkbox"
