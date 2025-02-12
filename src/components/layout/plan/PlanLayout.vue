@@ -6,6 +6,7 @@
 
       <DxDataGrid
         id="dataGrid"
+        ref="dataGrid"
         :data-source="gridData"
         :show-row-lines="isShowRowLines"
         :show-column-lines="isShowColumnLines"
@@ -39,25 +40,23 @@
                 :value="2025"
                 :min="1900"
                 :max="9999"
-                label="Năm"
-                labelMode="floating"
-                :showSpinButtons="isShowSpinBtn"
+                placeholder="Năm..."
+                :show-spin-buttons="true"
                 :show-clear-button="true"
-                style="width: 240px"
+                width="200"
+                @value-changed="toggleNumberBoxColumn"
               />
             </template>
           </DxItem>
           <DxItem location="after">
             <template #default>
               <DxSelectBox
-                :data-source="dataSource"
-                placeholder=""
-                label="Tình trạng"
-                labelMode="floating"
-                style="width: 240px"
-              >
-                <DxList :data-source="dataSource"> </DxList>
-              </DxSelectBox>
+                width="220"
+                placeholder="Tình trạng..."
+                :items="dataSource"
+                v-model="selectedStatus"
+                @value-changed="toggleFilterColumn"
+              />
             </template>
           </DxItem>
           <DxItem name="searchPanel" />
@@ -103,7 +102,6 @@ import {
 import DxButton from "devextreme-vue/button";
 import { DxSelectBox } from "devextreme-vue/select-box";
 import { DxNumberBox } from "devextreme-vue/number-box";
-import { DxList } from "devextreme-vue/list";
 
 export default {
   name: "PlanLayout",
@@ -119,7 +117,7 @@ export default {
     DxSelectBox,
     DxNumberBox,
     DxButton,
-    DxList,
+    
   },
   data() {
     return {
@@ -129,6 +127,7 @@ export default {
       isShowColumnLines: true,
       isShowBorders: true,
       isShowSpinBtn: true,
+      selectedStatus: "",
       dataSource: [
         "Từ chối",
         "Trả lại",
@@ -174,8 +173,36 @@ export default {
       this.$router.push({ path: "/create_plan" });
     },
     onRowClick(e) {
-      this.selectedRow = e.data; // Lưu hàng được click vào biến selectedRow
-      this.popupVisible = !this.popupVisible; // Hiển thị popup
+      this.selectedRow = e.data; 
+      this.popupVisible = !this.popupVisible; 
+    },
+    toggleNumberBoxColumn(e) {
+      const ef = e.value.toString();
+      if (this.$refs.dataGrid) {
+        if (ef === "") {
+          this.$refs.dataGrid.instance.clearFilter();
+        } else {
+          this.$refs.dataGrid.instance.filter((rowData) => {
+            const year = new Date(rowData["Năm KH"]).getFullYear(); 
+            return year === parseInt(ef, 10); 
+          }); 
+        }
+      } else {
+        console.error("DataGrid chưa được khởi tạo.");
+      }
+    },
+    toggleFilterColumn(e) {
+      console.log(e.value);
+      if (this.$refs.dataGrid) {
+        this.$refs.dataGrid.instance.clearFilter();
+        if (e.value === "Tất cả") {
+          this.$refs.dataGrid.instance.clearFilter();
+        } else {
+          this.$refs.dataGrid.instance.filter(["Tình trạng", "=", e.value]); 
+        }
+      } else {
+        console.error("DataGrid chưa được khởi tạo.");
+      }
     },
   },
 };

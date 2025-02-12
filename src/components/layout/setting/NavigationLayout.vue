@@ -9,6 +9,9 @@
       :column-hiding-enabled="isColumnHidingEnabled"
       :show-borders="isShowBorders"
       :search-panel="{ visible: true, width: 240, placeholder: 'Tìm kiếm...' }"
+      :group-panel="{
+        visible: true,
+      }"
       :editing="{
         mode: 'popup',
         allowAdding: true,
@@ -24,36 +27,38 @@
           colCount: 2,
         },
       }"
-      :group-panel="{ visible: true }"
       style="border: none"
     >
       <DxToolbar>
         <DxItem name="addRowButton" />
         <DxItem name="searchPanel" />
       </DxToolbar>
-      <DxGroupPanel :visible="true" />
-      <DxHeaderFilter :visible="true" />
-      <DxPaging :enabled="true" :pageSize="10" />
-      <DxPager
-        :visible="true"
-        :showPageSizeSelector="true"
-        :allowedPageSizes="[10, 25, 50, 100]"
-        :showInfo="true"
-      />
-      <DxGrouping :auto-expand-all="false" />
-      <DxColumn data-field="STT" alignment="left" width="60px"> </DxColumn>
-      <DxColumn data-field="Mã" width="120px" alignment="center"></DxColumn>
+
+      <DxColumn
+        data-field="STT"
+        alignment="left"
+        width="60px"
+        :validation-rules="[{ type: 'required', message: 'STT là bắt buộc' }]"
+      >
+      </DxColumn>
+      <DxColumn
+        data-field="Mã"
+        width="120px"
+        alignment="center"
+        :validation-rules="[{ type: 'required', message: 'Mã là bắt buộc' }]"
+      ></DxColumn>
       <DxColumn
         data-field="Nhóm"
         :group-index="0"
-        header-cell-template="headerCellTemplate"
         alignment="center"
-      >
-        <template #headerCellTemplate="{ data }">
-          <div>{{ data.value }}</div>
-        </template></DxColumn
-      >
-      <DxColumn data-field="Tên" width="120px" alignment="center"></DxColumn>
+      ></DxColumn>
+
+      <DxColumn
+        data-field="Tên"
+        width="120px"
+        alignment="center"
+        :validation-rules="[{ type: 'required', message: 'Tên là bắt buộc' }]"
+      ></DxColumn>
       <DxColumn
         data-field="Dẫn hướng"
         width="160px"
@@ -101,11 +106,21 @@
       ></DxColumn>
       <DxColumn data-field="Phân quyền" alignment="center"></DxColumn>
       <DxSelection mode="single" />
+      <DxGroupPanel :visible="true" />
+      <DxGrouping :auto-expand-all="false" />
+      <DxHeaderFilter :visible="true" />
+      <DxPaging :enabled="true" :pageSize="10" />
+      <DxPager
+        :visible="true"
+        :showPageSizeSelector="true"
+        :allowedPageSizes="[10, 25, 50, 100]"
+        :showInfo="true"
+      />
     </DxDataGrid>
   </div>
 </template>
 
-<script setup lang="ts">
+<script>
 import {
   DxDataGrid,
   DxColumn,
@@ -118,24 +133,18 @@ import {
   DxGroupPanel,
   DxGrouping,
 } from "devextreme-vue/data-grid";
-import DxTextBox from "devextreme-vue/text-box"; // Import DxTextBox
-import DxSelectBox from "devextreme-vue/select-box"; // Import dropdown
-import { DxAutocomplete } from "devextreme-vue/autocomplete";
 
 export default {
-  name: "NavigationLayout", // Tên component chính
+  name: "NavigationLayout",
   components: {
     DxDataGrid,
-    DxSelectBox,
     DxColumn,
     DxSelection,
-    DxTextBox, // Đăng ký DxTextBox
     DxHeaderFilter,
     DxPaging,
     DxPager,
     DxToolbar,
     DxItem,
-    DxAutocomplete,
     DxGroupPanel,
     DxGrouping,
   },
@@ -219,13 +228,11 @@ export default {
     };
   },
   mounted() {
-    this.originalData = [...this.gridData]; // Lưu trữ dữ liệu gốc
+    this.originalData = [...this.gridData];
   },
   methods: {
-    // Phương thức xử lý thay đổi bộ lọc
     onFilterChanged(e) {
       this.filterText = e.value;
-      // Lọc dữ liệu theo "Mã số" khi có thay đổi bộ lọc
       this.gridData = this.originalData.filter((item) =>
         item["Mã"].toString().includes(this.filterText)
       );

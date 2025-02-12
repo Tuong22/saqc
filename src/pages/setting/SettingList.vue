@@ -47,6 +47,7 @@
                   <DxAutocomplete
                     :data-source="store"
                     placeholder=""
+                    value="{%Year%}/{%Number:D2%}/KH-QLCL-NCPT-VHSX"
                     label="Mã số kế hoạch"
                     labelMode="floating"
                     :show-clear-button="true"

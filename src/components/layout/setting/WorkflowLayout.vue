@@ -34,7 +34,12 @@
         <DxItem name="addRowButton" />
         <DxItem name="searchPanel" />
       </DxToolbar>
-      <DxColumn data-field="Tên" alignment="center"> </DxColumn>
+      <DxColumn
+        data-field="Tên"
+        alignment="center"
+        :validation-rules="[{ type: 'required', message: 'Tên là bắt buộc' }]"
+      >
+      </DxColumn>
       <DxColumn data-field="Loại áp dụng" alignment="center"></DxColumn>
       <DxSelection mode="single" />
     </DxDataGrid>

@@ -40,11 +40,39 @@
           :allowedPageSizes="[10, 25, 50, 100]"
           :showInfo="true"
         />
-        <DxColumn data-field="#" alignment="left" width="60px"> </DxColumn>
-        <DxColumn data-field="Mã" alignment="center"> </DxColumn>
-        <DxColumn data-field="Tên" alignment="center"> </DxColumn>
-        <DxColumn data-field="Màu chữ" alignment="center"></DxColumn>
-        <DxColumn data-field="Màu nền" alignment="center"></DxColumn>
+        <DxColumn
+          data-field="#"
+          alignment="left"
+          width="60px"
+          :validation-rules="[{ type: 'required', message: 'STT là bắt buộc' }]"
+        >
+        </DxColumn>
+        <DxColumn
+          data-field="Mã"
+          alignment="center"
+          :validation-rules="[{ type: 'required', message: 'Mã là bắt buộc' }]"
+        >
+        </DxColumn>
+        <DxColumn
+          data-field="Tên"
+          alignment="center"
+          :validation-rules="[{ type: 'required', message: 'Tên là bắt buộc' }]"
+        >
+        </DxColumn>
+        <DxColumn
+          data-field="Màu chữ"
+          alignment="center"
+          :validation-rules="[
+            { type: 'required', message: 'Màu chữ là bắt buộc' },
+          ]"
+        ></DxColumn>
+        <DxColumn
+          data-field="Màu nền"
+          alignment="center"
+          :validation-rules="[
+            { type: 'required', message: 'Màu nền là bắt buộc' },
+          ]"
+        ></DxColumn>
         <DxColumn data-field="" alignment="center"></DxColumn>
         <DxSelection mode="single" />
       </DxDataGrid>
@@ -138,7 +166,7 @@ export default {
       const fileInput = this.$refs.fileInput;
       fileInput.click();
     },
-    
+
     async uploadFile() {
       const file = event.target.files[0];
 

@@ -40,10 +40,32 @@
           :allowedPageSizes="[10, 25, 50, 100]"
           :showInfo="true"
         />
-        <DxColumn data-field="#" alignment="left" width="60px"> </DxColumn>
-        <DxColumn data-field="Mã" alignment="center"> </DxColumn>
-        <DxColumn data-field="Tên" alignment="center"> </DxColumn>
-        <DxColumn data-field="Màu chữ" alignment="center">
+        <DxColumn
+          data-field="#"
+          alignment="left"
+          width="60px"
+          :validation-rules="[{ type: 'required', message: 'STT là bắt buộc' }]"
+        >
+        </DxColumn>
+        <DxColumn
+          data-field="Mã"
+          alignment="center"
+          :validation-rules="[{ type: 'required', message: 'Mã là bắt buộc' }]"
+        >
+        </DxColumn>
+        <DxColumn
+          data-field="Tên"
+          alignment="center"
+          :validation-rules="[{ type: 'required', message: 'Tên là bắt buộc' }]"
+        >
+        </DxColumn>
+        <DxColumn
+          data-field="Màu chữ"
+          alignment="center"
+          :validation-rules="[
+            { type: 'required', message: 'Màu chữ là bắt buộc' },
+          ]"
+        >
           <template #cell-template="{ data }">
             <DxColorBox
               :value="data.data['Màu chữ']"
@@ -51,7 +73,13 @@
             />
           </template>
         </DxColumn>
-        <DxColumn data-field="Màu nền" alignment="center">
+        <DxColumn
+          data-field="Màu nền"
+          alignment="center"
+          :validation-rules="[
+            { type: 'required', message: 'Màu nền là bắt buộc' },
+          ]"
+        >
           <template #cell-template="{ data }">
             <DxColorBox
               :value="data.data['Màu nền']"

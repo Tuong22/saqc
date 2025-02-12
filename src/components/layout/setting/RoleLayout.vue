@@ -26,9 +26,24 @@
         :allowedPageSizes="[10, 25, 50, 100]"
         :showInfo="true"
       />
-      <DxColumn data-field="Thứ tự" alignment="left" width="100px" />
-      <DxColumn data-field="Mã" alignment="center" />
-      <DxColumn data-field="Tên" alignment="center" />
+      <DxColumn
+        data-field="Thứ tự"
+        alignment="left"
+        width="100px"
+        :validation-rules="[
+          { type: 'required', message: 'Thứ tự là bắt buộc' },
+        ]"
+      />
+      <DxColumn
+        data-field="Mã"
+        alignment="center"
+        :validation-rules="[{ type: 'required', message: 'Mã là bắt buộc' }]"
+      />
+      <DxColumn
+        data-field="Tên"
+        alignment="center"
+        :validation-rules="[{ type: 'required', message: 'Tên là bắt buộc' }]"
+      />
       <DxColumn
         data-field="Cố định"
         caption="Cố định"

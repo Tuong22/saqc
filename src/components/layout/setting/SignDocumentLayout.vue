@@ -36,10 +36,32 @@
         :allowedPageSizes="[10, 25, 50, 100]"
         :showInfo="true"
       />
-      <DxColumn data-field="#" alignment="left" width="60px"> </DxColumn>
-      <DxColumn data-field="Mã" alignment="center"> </DxColumn>
-      <DxColumn data-field="Tên" alignment="center"> </DxColumn>
-      <DxColumn data-field="Loại mẫu" alignment="center"></DxColumn>
+      <DxColumn
+        data-field="#"
+        alignment="left"
+        width="60px"
+        :validation-rules="[{ type: 'required', message: 'STT là bắt buộc' }]"
+      >
+      </DxColumn>
+      <DxColumn
+        data-field="Mã"
+        alignment="center"
+        :validation-rules="[{ type: 'required', message: 'Mã là bắt buộc' }]"
+      >
+      </DxColumn>
+      <DxColumn
+        data-field="Tên"
+        alignment="center"
+        :validation-rules="[{ type: 'required', message: 'Tên là bắt buộc' }]"
+      >
+      </DxColumn>
+      <DxColumn
+        data-field="Loại mẫu"
+        alignment="center"
+        :validation-rules="[
+          { type: 'required', message: 'Loại mẫu là bắt buộc' },
+        ]"
+      ></DxColumn>
       <template #fileUploader>
         <DxFileUploader
           accept=".pdf,.doc,.docx,.txt"
@@ -83,7 +105,7 @@ export default {
   },
   data() {
     return {
-      uploadedFileName: "", // Lưu tên file upload
+      uploadedFileName: "", 
 
       filterText: "",
       isShowBorders: true,
@@ -136,7 +158,6 @@ export default {
           },
         },
         {
-          // Component upload file
           label: { text: "TỆP ĐÍNH KÈM", cssClass: "label" },
           template: "fileUploader",
           cssClass: "upload_file",
@@ -146,9 +167,9 @@ export default {
   },
   methods: {
     onFileUpload(e) {
-      const file = e.value[0]; // Lấy file đầu tiên
+      const file = e.value[0]; 
       if (file) {
-        this.uploadedFileName = file.name; // Cập nhật tên file vào form
+        this.uploadedFileName = file.name; 
       }
     },
   },
