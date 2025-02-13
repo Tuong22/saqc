@@ -10,9 +10,6 @@
     <!-- Popup Tần suất -->
     <!-- <FrequencyPopup isPopupVisible="isPopupVisible" /> -->
 
-    <!-- Popup - Thêm dòng -->
-    <!-- <AddRowPopup isPopupFrequencyVisible="isPopupFrequencyVisible" /> -->
-
     <div v-if="loading" class="overlay">
       <base-spinner />
     </div>
@@ -106,7 +103,8 @@
                       :showSpinButtons="isShownSpinButtons"
                       labelMode="floating"
                       :show-clear-button="isShowClearButton"
-                      ><template #content>
+                    >
+                      <template #content>
                         <div class="number-box-icons">
                           <span @click="increaseValue" class="icon-up">▲</span>
                           <span @click="decreaseValue" class="icon-down"
@@ -119,6 +117,7 @@
                         <DxRangeRule
                           :min="1900"
                           :max="9999"
+                          type="required"
                           message="Năm kế hoạch phải nằm trong khoảng từ 1900 đến 9999"
                         />
                       </DxValidator>
@@ -248,6 +247,7 @@
                       </DxItem>
                       <DxItem name="searchPanel" />
                     </DxToolbar>
+                    <DxExport :enabled="true" />
                     <DxHeaderFilter :visible="true" />
                     <DxPaging :enabled="true" :pageSize="10" />
                     <DxPager
@@ -339,6 +339,7 @@ import { DxNumberBox } from "devextreme-vue/number-box";
 import { DxSelectBox } from "devextreme-vue/select-box";
 import DxList from "devextreme-vue/list";
 import { DxFileUploader } from "devextreme-vue/file-uploader";
+import { AddLineForm } from "@/components/form/AddLineForm.js";
 
 // import FrequencyPopup from "@/components/popup/FrequencyPopup.vue";
 // import AddRowPopup from "@/components/popup/AddRowPopup.vue";
@@ -397,28 +398,51 @@ export default {
       },
     ];
     const infoColumns = [
-      { dataField: "Ý kiến", caption: "Ý kiến" },
-      { dataField: "#", caption: "#" },
-      { dataField: "Điểm lấy mẫu", caption: "Điểm lấy mẫu" },
-      { dataField: "Phân xưởng", caption: "Phân xưởng" },
-      { dataField: "Tên mẫu", caption: "Tên mẫu" },
-      { dataField: "Mục đích chính", caption: "Mục đích chính" },
-      { dataField: "Quy trình lấy mẫu", caption: "Quy trình lấy mẫu" },
+      { dataField: "Ý kiến", caption: "Ý kiến", dataType: "string" },
+      { dataField: "#", caption: "#", dataType: "string" },
+      {
+        dataField: "Điểm lấy mẫu",
+        caption: "Điểm lấy mẫu",
+        dataType: "string",
+      },
+      { dataField: "Phân xưởng", caption: "Phân xưởng", dataType: "string" },
+      { dataField: "Tên mẫu", caption: "Tên mẫu", dataType: "string" },
+      {
+        dataField: "Mục đích chính",
+        caption: "Mục đích chính",
+        dataType: "string",
+      },
+      {
+        dataField: "Quy trình lấy mẫu",
+        caption: "Quy trình lấy mẫu",
+        dataType: "string",
+      },
       {
         dataField: "Phương pháp thử nghiệm",
         caption: "Phương pháp thử nghiệm",
+        dataType: "string",
       },
-      { dataField: "Chỉ tiêu kiểm soát", caption: "Chỉ tiêu kiểm soát" },
-      { dataField: "Phòng thử nghiệm", caption: "Phòng thử nghiệm" },
-      { dataField: "Giờ lấy mẫu", caption: "Giờ lấy mẫu" },
+      {
+        dataField: "Chỉ tiêu kiểm soát",
+        caption: "Chỉ tiêu kiểm soát",
+        dataType: "string",
+      },
+      {
+        dataField: "Phòng thử nghiệm",
+        caption: "Phòng thử nghiệm",
+        dataType: "string",
+      },
+      { dataField: "Giờ lấy mẫu", caption: "Giờ lấy mẫu", dataType: "date" },
       {
         dataField: "VHBT",
         caption: "VHBT",
+        dataType: "boolean",
         children: [{ dataField: "Tần suất", caption: "VHBT" }],
       },
       {
         dataField: "Các dịp lễ tết (>3 ngày)",
         caption: "Các dịp lễ tết (>3 ngày)",
+        dataType: "boolean",
         children: [{ dataField: "Tần suất", caption: "Lễ tết" }],
       },
       {
@@ -496,16 +520,14 @@ export default {
         allowUpdating: true,
         useIcons: true,
         popup: {
-          title: "Dẫn hướng",
+          title: "Thông tin chi tiết kế hoạch",
           showTitle: true,
-          height: 440,
+          height: 720,
         },
         texts: {
           addRow: "Thêm dòng",
         },
-        form: {
-          colCount: 2,
-        },
+        form: AddLineForm,
       },
       isShowClearButton: true,
       frequencyComponent: true,

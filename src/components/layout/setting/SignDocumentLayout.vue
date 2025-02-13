@@ -17,7 +17,7 @@
         popup: {
           title: 'Mẫu ký số',
           showTitle: true,
-          height: '360px',
+          height: '400px',
           width: '900px',
         },
         form: { items: formItems },
@@ -70,6 +70,7 @@
           @value-changed="onFileUpload"
           select-button-text="Chọn tập tin"
           label-text="hoặc Thả tập tin vào đây"
+          style="margin-left: 40px"
         />
       </template>
       <DxSelection mode="single" />
@@ -105,7 +106,7 @@ export default {
   },
   data() {
     return {
-      uploadedFileName: "", 
+      uploadedFileName: "",
 
       filterText: "",
       isShowBorders: true,
@@ -122,43 +123,51 @@ export default {
       customInput: "",
       formItems: [
         {
-          dataField: "#",
-          label: { visible: false },
-          editorType: "dxAutocomplete",
-          editorOptions: {
-            label: "STT",
-            labelMode: "floating",
-          },
-        },
-        {
-          dataField: "Mã",
-          label: { visible: false },
-          editorType: "dxAutocomplete",
-          editorOptions: {
-            label: "Mã",
-            labelMode: "floating",
-          },
-        },
-        {
-          dataField: "Tên",
-          label: { visible: false },
-          editorType: "dxAutocomplete",
-          editorOptions: {
-            label: "Tên",
-            labelMode: "floating",
-          },
-        },
-        {
-          dataField: "Loại mẫu",
-          label: { visible: false },
-          editorType: "dxAutocomplete",
-          editorOptions: {
-            label: "Loại mẫu",
-            labelMode: "floating",
-          },
+          itemType: "group",
+          colSpan: 2,
+          colCount: 2,
+          items: [
+            {
+              dataField: "#",
+              label: { visible: false },
+              editorType: "dxAutocomplete",
+              editorOptions: {
+                label: "STT",
+                labelMode: "floating",
+              },
+            },
+            {
+              dataField: "Mã",
+              label: { visible: false },
+              editorType: "dxAutocomplete",
+              editorOptions: {
+                label: "Mã",
+                labelMode: "floating",
+              },
+            },
+            {
+              dataField: "Tên",
+              label: { visible: false },
+              editorType: "dxAutocomplete",
+              editorOptions: {
+                label: "Tên",
+                labelMode: "floating",
+              },
+            },
+            {
+              dataField: "Loại mẫu",
+              label: { visible: false },
+              editorType: "dxAutocomplete",
+              editorOptions: {
+                label: "Loại mẫu",
+                labelMode: "floating",
+              },
+            },
+          ],
         },
         {
           label: { text: "TỆP ĐÍNH KÈM", cssClass: "label" },
+          colSpan: 2,
           template: "fileUploader",
           cssClass: "upload_file",
         },
@@ -167,9 +176,9 @@ export default {
   },
   methods: {
     onFileUpload(e) {
-      const file = e.value[0]; 
+      const file = e.value[0];
       if (file) {
-        this.uploadedFileName = file.name; 
+        this.uploadedFileName = file.name;
       }
     },
   },
@@ -178,7 +187,6 @@ export default {
 
 <style>
 .upload_file {
-  padding-top: 12px;
   color: #fa896c;
   font-size: 16px;
   font-weight: bold;
