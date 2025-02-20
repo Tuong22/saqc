@@ -7,6 +7,7 @@
       <DxDataGrid
         id="dataGrid"
         ref="dataGrid"
+        @exporting="onExporting"
         :data-source="gridData"
         :show-row-lines="isShowRowLines"
         :show-column-lines="isShowColumnLines"
@@ -59,7 +60,7 @@
               />
             </template>
           </DxItem>
-<DxItem location="after">
+          <DxItem location="after">
             <template #default>
               <DxButton
                 text="Export Excel"
@@ -68,9 +69,18 @@
                 style="font-weight: bold"
               />
             </template>
-          </DxItem> -->
+          </DxItem>
           <DxItem name="searchPanel" />
         </DxToolbar>
+        <DxColumnFixing :enabled="true" />
+        <DxStateStoring
+          :enabled="true"
+          type="custom"
+          :custom-load="loadState"
+          :custom-save="saveState"
+        />
+        <!-- Export XLSX -->
+        <DxExport :enabled="true" />
         <DxHeaderFilter :visible="true" />
         <DxPaging :enabled="true" :pageSize="10" />
         <DxPager
@@ -107,11 +117,16 @@ import {
   DxPager,
   DxItem,
   DxToolbar,
+  DxStateStoring,
+  DxExport,
 } from "devextreme-vue/data-grid";
 
 import DxButton from "devextreme-vue/button";
 import { DxSelectBox } from "devextreme-vue/select-box";
 import { DxNumberBox } from "devextreme-vue/number-box";
+import { exportDataGrid } from "devextreme/excel_exporter";
+import { Workbook } from "exceljs";
+import saveAs from "file-saver";
 
 export default {
   name: "PlanLayout",
@@ -127,7 +142,8 @@ export default {
     DxSelectBox,
     DxNumberBox,
     DxButton,
-    
+    DxExport,
+    DxStateStoring,
   },
   data() {
     return {
@@ -183,8 +199,8 @@ export default {
       this.$router.push({ path: "/create_plan" });
     },
     onRowClick(e) {
-      this.selectedRow = e.data; 
-      this.popupVisible = !this.popupVisible; 
+      this.selectedRow = e.data;
+      this.popupVisible = !this.popupVisible;
     },
     toggleNumberBoxColumn(e) {
       const ef = e.value.toString();
@@ -193,9 +209,9 @@ export default {
           this.$refs.dataGrid.instance.clearFilter();
         } else {
           this.$refs.dataGrid.instance.filter((rowData) => {
-            const year = new Date(rowData["Năm KH"]).getFullYear(); 
-            return year === parseInt(ef, 10); 
-          }); 
+            const year = new Date(rowData["Năm KH"]).getFullYear();
+            return year === parseInt(ef, 10);
+          });
         }
       } else {
         console.error("DataGrid chưa được khởi tạo.");
@@ -208,11 +224,53 @@ export default {
         if (e.value === "Tất cả") {
           this.$refs.dataGrid.instance.clearFilter();
         } else {
-          this.$refs.dataGrid.instance.filter(["Tình trạng", "=", e.value]); 
+          this.$refs.dataGrid.instance.filter(["Tình trạng", "=", e.value]);
         }
       } else {
         console.error("DataGrid chưa được khởi tạo.");
       }
+    },
+    onExporting(e) {
+      const workbook = new Workbook();
+      const worksheet1 = workbook.addWorksheet("KDKLamSan");
+      const worksheet2 = workbook.addWorksheet("KDKCanLamSan");
+      const worksheet3 = workbook.addWorksheet("KCK");
+
+      exportDataGrid({
+        component: e.component,
+        worksheet: worksheet1,
+        // customizeCell: function (options) {
+        //   options.excelCell.font = { name: "Arial", size: 12 };
+
+        //   if (options.gridCell.rowType === "header") {
+        //     options.excelCell.fill = {
+        //       type: "pattern",
+        //       pattern: "solid",
+        //       fgColor: { argb: "FFA500" }, // Mã màu vàng cam
+        //     };
+        //   }
+        // },
+      }).then(() => {
+        // Export tiếp cho worksheet2
+        exportDataGrid({
+          component: e.component,
+          worksheet: worksheet2,
+        }).then(() => {
+          // Export tiếp cho worksheet3
+          exportDataGrid({
+            component: e.component,
+            worksheet: worksheet3,
+          }).then(() => {
+            // Lưu file sau khi tất cả worksheet đã export xong
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+              saveAs(
+                new Blob([buffer], { type: "application/octet-stream" }),
+                "DataGrid.xlsx"
+              );
+            });
+          });
+        });
+      });
     },
   },
 };

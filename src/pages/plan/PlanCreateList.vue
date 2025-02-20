@@ -238,15 +238,6 @@
                     :editing="editingConfig"
                     style="border: none"
                   >
-                    <DxToolbar>
-                      <DxItem name="addRowButton" />
-                      <DxItem location="after">
-                        <template #default>
-                          <DxButton icon="download" text="Tải mẫu" />
-                        </template>
-                      </DxItem>
-                      <DxItem name="searchPanel" />
-                    </DxToolbar>
                     <DxExport :enabled="true" />
                     <DxHeaderFilter :visible="true" />
                     <DxPaging :enabled="true" :pageSize="10" />
@@ -256,7 +247,7 @@
                       :allowedPageSizes="[10, 25, 50, 100]"
                       :showInfo="true"
                     />
-
+                    <DxExport :enabled="true" />
                     <DxColumn
                       v-for="(column, index) in infoColumns"
                       :key="index"
@@ -264,6 +255,7 @@
                       :caption="column.caption"
                       :alignment="column.alignment || 'center'"
                       v-bind="column.additionalProps"
+                      :fixed="column.fixed"
                     >
                       <template v-if="column.children">
                         <DxColumn
@@ -330,8 +322,9 @@ import {
   DxHeaderFilter,
   DxPaging,
   DxPager,
-  DxToolbar,
-  DxItem,
+  // DxToolbar,
+  // DxItem,
+  DxExport,
 } from "devextreme-vue/data-grid";
 import DxButton from "devextreme-vue/button";
 import { DxAutocomplete } from "devextreme-vue/autocomplete";
@@ -365,11 +358,12 @@ export default {
     DxPager,
     HeaderComponent,
     DxFileUploader,
-    DxToolbar,
-    DxItem,
+    // DxToolbar,
+    // DxItem,
     DxValidator,
     DxRequiredRule,
     DxRangeRule,
+    DxExport,
     // FrequencyPopup,
     // AddRowPopup,
   },
@@ -398,12 +392,18 @@ export default {
       },
     ];
     const infoColumns = [
-      { dataField: "Ý kiến", caption: "Ý kiến", dataType: "string" },
-      { dataField: "#", caption: "#", dataType: "string" },
+      {
+        dataField: "Ý kiến",
+        caption: "Ý kiến",
+        dataType: "string",
+        fixed: "true",
+      },
+      { dataField: "#", caption: "#", dataType: "string", fixed: "true" },
       {
         dataField: "Điểm lấy mẫu",
         caption: "Điểm lấy mẫu",
         dataType: "string",
+        fixed: "true",
       },
       { dataField: "Phân xưởng", caption: "Phân xưởng", dataType: "string" },
       { dataField: "Tên mẫu", caption: "Tên mẫu", dataType: "string" },
