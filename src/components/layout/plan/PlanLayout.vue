@@ -59,6 +59,16 @@
               />
             </template>
           </DxItem>
+<DxItem location="after">
+            <template #default>
+              <DxButton
+                text="Export Excel"
+                icon="exportxlsx"
+                @click="onExporting"
+                style="font-weight: bold"
+              />
+            </template>
+          </DxItem> -->
           <DxItem name="searchPanel" />
         </DxToolbar>
         <DxHeaderFilter :visible="true" />
